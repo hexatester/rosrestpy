@@ -18,18 +18,15 @@ class System:
 
     @property
     def health(self) -> Identity:
-        url = self.url + "/" + "health"
-        return self.rospy.get_as(url, Identity)
+        return self.rospy.get_as(self.url + "/health", Identity)
 
     @property
     def identity(self) -> Identity:
-        url = self.url + "/" + "identity"
-        return self.rospy.get_as(url, Identity)
+        return self.rospy.get_as(self.url + "/identity", Identity)
 
     @property
     def resource(self) -> Resource:
-        url = self.url + "/" + "resource"
-        return self.rospy.get_as(url, Resource)
+        return self.rospy.get_as(self.url + "/resource", Resource)
 
 
 __all__ = ["Identity", "Resource", "System"]
