@@ -232,6 +232,25 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "types-requests"
+version = "2.28.0"
+description = "Typing stubs for requests"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+types-urllib3 = "<1.27"
+
+[[package]]
+name = "types-urllib3"
+version = "1.26.15"
+description = "Typing stubs for urllib3"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "4.2.0"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -263,7 +282,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "7f7d6c43c7c0d32b8264cb62bfa34d3620a0f9f05ad6d03c101eaae82c539389"
+content-hash = "83024cfb50b45ef40184802a6ab9ca65a32ae7c65c8a5d4cd506596b98a5b578"
 
 [metadata.files]
 atomicwrites = [
@@ -387,6 +406,14 @@ requests = [
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
+]
+types-requests = [
+    {file = "types-requests-2.28.0.tar.gz", hash = "sha256:9863d16dfbb3fa55dcda64fa3b989e76e8859033b26c1e1623e30465cfe294d3"},
+    {file = "types_requests-2.28.0-py3-none-any.whl", hash = "sha256:85383b4ef0535f639c3f06c5bbb6494bbf59570c4cd88bbcf540f0b2ac1b49ab"},
+]
+types-urllib3 = [
+    {file = "types-urllib3-1.26.15.tar.gz", hash = "sha256:c89283541ef92e344b7f59f83ea9b5a295b16366ceee3f25ecfc5593c79f794e"},
+    {file = "types_urllib3-1.26.15-py3-none-any.whl", hash = "sha256:6011befa13f901fc934f59bb1fd6973be6f3acf4ebfce427593a27e7f492918f"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.2.0-py3-none-any.whl", hash = "sha256:6657594ee297170d19f67d55c05852a874e7eb634f4f753dbd667855e07c1708"},
