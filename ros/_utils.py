@@ -1,4 +1,5 @@
-from typing import Any, Dict
+from cattrs import Converter
+from typing import Any, Dict, Union
 
 
 def clean_key(d: Dict[str, Any]) -> dict:
@@ -9,3 +10,15 @@ def clean_key(d: Dict[str, Any]) -> dict:
             k = "id"
         nd[k] = v
     return nd
+
+
+def _union_str_int(v: str) -> Union[str, int]:
+    if v.isdigit():
+        return int(v)
+    return v
+
+
+def make_converter() -> Converter:
+    c = Converter()
+    c.register_structure_hook(Union[int, str], _union_str_int)
+    return c
