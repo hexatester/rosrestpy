@@ -1,8 +1,8 @@
-# rospy
+# rosrestpy
 
-[![PyPi Package Version](https://img.shields.io/pypi/v/rospy)](https://pypi.org/project/rospy/)
-[![Supported Python versions](https://img.shields.io/pypi/pyversions/rospy)](https://pypi.org/project/rospy/)
-[![LICENSE](https://img.shields.io/github/license/hexatester/rospy)](https://github.com/hexatester/rospy/blob/main/LICENSE)
+[![PyPi Package Version](https://img.shields.io/pypi/v/rosrestpy)](https://pypi.org/project/rosrestpy/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/rosrestpy)](https://pypi.org/project/rosrestpy/)
+[![LICENSE](https://img.shields.io/github/license/hexatester/rosrestpy)](https://github.com/hexatester/rosrestpy/blob/main/LICENSE)
 
 RouterOS v7 REST API python module
 
