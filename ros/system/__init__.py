@@ -1,8 +1,6 @@
-from attr import define
-from typing import TYPE_CHECKING, List
+from typing import List
 
-if TYPE_CHECKING:
-    from ros.ros import Ros
+from ros.base import BaseModule
 
 from .health import Health
 from .history import History
@@ -13,14 +11,7 @@ from .resource import Resource
 from .routerboard import RouterBOARD
 
 
-@define
-class System:
-    ros: "Ros"
-    url: str = ""
-
-    def __attrs_post_init__(self) -> None:
-        self.url = "/" + self.__class__.__name__.lower()
-
+class System(BaseModule):
     @property
     def health(self) -> List[Health]:
         return self.ros.get_as(self.url + "/health", List[Health])
