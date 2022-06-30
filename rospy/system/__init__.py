@@ -5,6 +5,7 @@ if TYPE_CHECKING:
     from rospy.rospy import Rospy
 
 from .identity import Identity
+from .license import License
 from .resource import Resource
 
 
@@ -23,6 +24,10 @@ class System:
     @property
     def identity(self) -> Identity:
         return self.rospy.get_as(self.url + "/identity", Identity)
+
+    @property
+    def license(self) -> License:
+        return self.rospy.get_as(self.url + "/license", License)
 
     @property
     def resource(self) -> Resource:
