@@ -13,7 +13,7 @@ T = TypeVar("T", bound=object)
 
 
 @define
-class Rospy:
+class Ros:
     server: str
     username: str
     password: str

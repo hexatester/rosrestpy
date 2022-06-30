@@ -1,8 +1,11 @@
 [tool.poetry]
-name = "rospy"
+name = "rosrestpy"
 version = "0.1.0"
 description = ""
 authors = ["hexatester <hexatester@protonmail.com>"]
+packages = [
+    { include = "ros" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"

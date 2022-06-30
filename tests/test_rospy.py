@@ -1,4 +1,4 @@
-from rospy import __version__
+from ros import __version__
 
 
 def test_version():

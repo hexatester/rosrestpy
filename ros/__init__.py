@@ -4,6 +4,6 @@ from .system import System
 
 from .log import Log
 
-from .rospy import Rospy
+from .ros import Rospy
 
 __all__ = ["Log", "Rospy", "System"]
