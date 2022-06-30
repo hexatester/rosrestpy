@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "rospy"
+name = "rosrestpy"
 version = "0.1.0"
 description = ""
 authors = ["hexatester <hexatester@protonmail.com>"]
