@@ -12,7 +12,7 @@ def clean_key(d: Dict[str, Any]) -> dict:
     return nd
 
 
-def _union_str_int(v: str) -> Union[str, int]:
+def _union_str_int(v: str, t: Any) -> Union[str, int]:
     if v.isdigit():
         return int(v)
     return v
@@ -20,5 +20,6 @@ def _union_str_int(v: str) -> Union[str, int]:
 
 def make_converter() -> Converter:
     c = Converter()
+    # Main
     c.register_structure_hook(Union[int, str], _union_str_int)
     return c
