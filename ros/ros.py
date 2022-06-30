@@ -5,6 +5,7 @@ from requests.auth import HTTPBasicAuth
 from typing import Any, List, Optional, Type, TypeVar
 
 from . import Interface
+from . import IP
 from . import System
 
 from . import Log
@@ -25,6 +26,7 @@ class Ros:
     filename: str = "rest"
     url: str = ""
     _interface: Optional[Interface] = None
+    _ip: Optional[IP] = None
     _system: Optional[System] = None
 
     def __attrs_post_init__(self) -> None:
@@ -52,6 +54,12 @@ class Ros:
         if not self._interface:
             self._interface = Interface(self)
         return self._interface
+
+    @property
+    def ip(self):
+        if not self._ip:
+            self._ip = IP(self)
+        return self._ip
 
     @property
     def system(self):
