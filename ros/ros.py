@@ -1,15 +1,18 @@
-import cattr
 import json
 from attr import define
 from requests import Session
 from requests.auth import HTTPBasicAuth
-from typing import Any, Dict, List, Optional, Type, TypeVar
+from typing import Any, List, Optional, Type, TypeVar
 
+from . import Interface
 from . import System
 
 from . import Log
 
+from ._utils import clean_key, make_converter
+
 T = TypeVar("T", bound=object)
+_converter = make_converter()
 
 
 @define
@@ -21,6 +24,7 @@ class Ros:
     secure: bool = False
     filename: str = "rest"
     url: str = ""
+    _interface: Optional[Interface] = None
     _system: Optional[System] = None
 
     def __attrs_post_init__(self) -> None:
@@ -33,25 +37,21 @@ class Ros:
         odata = json.loads(res.text)
         data: Any = None
         if isinstance(odata, dict):
-            data = self.clean_key(odata)
+            data = clean_key(odata)
         elif isinstance(odata, list):
             data = list()
             for val in odata:
                 if isinstance(val, dict):
-                    data.append(self.clean_key(val))
+                    data.append(clean_key(val))
                 else:
                     data.append(val)
-        return cattr.structure(data, cl)
+        return _converter.structure(data, cl)
 
-    @staticmethod
-    def clean_key(d: Dict[str, Any]) -> dict:
-        nd = dict()
-        for k, v in d.items():
-            k = k.replace("-", "_")
-            if k == ".id":
-                k = "id"
-            nd[k] = v
-        return nd
+    @property
+    def interface(self):
+        if not self._interface:
+            self._interface = Interface(self)
+        return self._interface
 
     @property
     def system(self):
