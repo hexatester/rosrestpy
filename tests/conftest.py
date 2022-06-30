@@ -14,7 +14,7 @@ def server():
 
 @fixture
 def username():
-    return os.getenv("username")
+    return os.getenv("rosuser")
 
 
 @fixture
