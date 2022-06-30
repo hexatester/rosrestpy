@@ -3,7 +3,7 @@ from ros import __version__, Log
 
 class TestRos:
     def test_version(self):
-        assert __version__ == "0.1.1"
+        assert __version__ == "0.1.2"
 
     def test_log(self, ros):
         for log in ros.log:
