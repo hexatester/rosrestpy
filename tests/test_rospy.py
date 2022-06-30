@@ -1,5 +1,6 @@
 from ros import __version__
 
 
-def test_version():
-    assert __version__ == "0.1.1"
+class TestRos:
+    def test_version(self):
+        assert __version__ == "0.1.1"
