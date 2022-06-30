@@ -5,7 +5,7 @@ from .item import InterfaceItem
 
 
 class Interface(BaseModule):
-    def items(self) -> List[InterfaceItem]:
+    def print(self) -> List[InterfaceItem]:
         return self.ros.get_as(self.url, List[InterfaceItem])
 
 
