@@ -4,6 +4,7 @@ from ros.base import BaseModule
 from .address import Address
 from .arp import ARP
 from .cloud import Cloud
+from .dhcp_client import DHCPClient
 
 
 class IP(BaseModule):
@@ -19,5 +20,9 @@ class IP(BaseModule):
     def cloud(self) -> Cloud:
         return self.ros.get_as(self.url + "/cloud", Cloud)
 
+    @property
+    def dhcp_client(self) -> List[DHCPClient]:
+        return self.ros.get_as(self.url + "/dhcp-client", List[DHCPClient])
 
-__all__ = ["Address", "ARP", "IP", "Cloud"]
+
+__all__ = ["Address", "ARP", "IP", "Cloud", "DHCPClient"]
