@@ -2,6 +2,7 @@ from typing import List
 
 from ros.base import BaseSubModule
 from .item import DHCPServerItem
+from .network import DHCPNetwork
 
 
 class DHCPServer(BaseSubModule):
@@ -11,5 +12,9 @@ class DHCPServer(BaseSubModule):
     def print(self) -> List[DHCPServerItem]:
         return self.module.ros.get_as(self.url, List[DHCPServerItem])
 
+    @property
+    def network(self) -> List[DHCPNetwork]:
+        return self.module.ros.get_as(self.url + "/network", List[DHCPNetwork])
 
-__all__ = ["DHCPServer", "DHCPServerItem"]
+
+__all__ = ["DHCPNetwork", "DHCPServer", "DHCPServerItem"]
