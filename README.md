@@ -26,3 +26,7 @@ from ros import Ros
 ros = Ros("https://192.168.88.1/", "admin", "")
 print(ros.system.resource.cpu_load)
 ```
+
+## Resources
+
+The [RouterOS REST API](https://help.mikrotik.com/docs/display/ROS/REST+API) is the technical reference for `rosrestpy`.
