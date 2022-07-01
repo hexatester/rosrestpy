@@ -30,6 +30,8 @@ class Ros:
     _system: Optional[System] = None
 
     def __attrs_post_init__(self) -> None:
+        if not self.server.endswith("/"):
+            self.server += "/"
         self.session.auth = HTTPBasicAuth(self.username, self.password)
         self.password = ""
         self.url = self.server + self.filename
