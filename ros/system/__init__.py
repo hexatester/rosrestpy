@@ -6,6 +6,7 @@ from .health import Health
 from .history import History
 from .identity import Identity
 from .license import License
+from .logging import Logging
 from .note import Note
 from .resource import Resource
 from .routerboard import RouterBOARD
@@ -29,6 +30,10 @@ class System(BaseModule):
         return self.ros.get_as(self.url + "/license", License)
 
     @property
+    def logging(self) -> List[Logging]:
+        return self.ros.get_as(self.url + "/logging", List[Logging])
+
+    @property
     def note(self) -> Note:
         return self.ros.get_as(self.url + "/note", Note)
 
@@ -46,6 +51,7 @@ __all__ = [
     "History",
     "Identity",
     "License",
+    "Logging",
     "Note",
     "Resource",
     "RouterBOARD",
