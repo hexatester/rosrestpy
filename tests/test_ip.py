@@ -1,5 +1,5 @@
 from ros import IP
-from ros.ip import Address, ARP, Cloud, DHCPClient, DHCPRelay, DHCPServer
+from ros.ip import Address, ARP, Cloud, DHCPClient, DHCPRelay, DHCPServer, DNS
 from ros.ip.dhcp_server import DHCPServerItem, DHCPNetwork
 
 
@@ -28,6 +28,9 @@ class TestIP:
 
     def test_dhcp_server(self, ros):
         assert isinstance(ros.ip.dhcp_server, DHCPServer)
+
+    def test_dns(self, ros):
+        assert isinstance(ros.ip.dns, DNS)
 
 
 class TestDHCPServer:

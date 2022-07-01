@@ -9,6 +9,7 @@ from .cloud import Cloud
 from .dhcp_client import DHCPClient
 from .dhcp_relay import DHCPRelay
 from .dhcp_server import DHCPServer
+from .dns import DNS
 
 
 @define
@@ -44,5 +45,18 @@ class IP(BaseModule):
             self._dhcp_server = DHCPServer(self, "dhcp-server")
         return self._dhcp_server
 
+    @property
+    def dns(self) -> DNS:
+        return self.ros.get_as(self.url + "/dns", DNS)
 
-__all__ = ["Address", "ARP", "IP", "Cloud", "DHCPClient", "DHCPRelay", "DHCPServer"]
+
+__all__ = [
+    "Address",
+    "ARP",
+    "IP",
+    "Cloud",
+    "DHCPClient",
+    "DHCPRelay",
+    "DHCPServer",
+    "DNS",
+]
