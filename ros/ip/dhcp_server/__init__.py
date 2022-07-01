@@ -8,7 +8,6 @@ from .network import DHCPNetwork
 class DHCPServer(BaseSubModule):
     url: str = "dhcp-server"
 
-    @property
     def print(self) -> List[DHCPServerItem]:
         return self.module.ros.get_as(self.url, List[DHCPServerItem])
 
