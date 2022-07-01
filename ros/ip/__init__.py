@@ -10,6 +10,7 @@ from .dhcp_client import DHCPClient
 from .dhcp_relay import DHCPRelay
 from .dhcp_server import DHCPServer
 from .dns import DNS
+from .route import Route
 
 
 @define
@@ -49,6 +50,10 @@ class IP(BaseModule):
     def dns(self) -> DNS:
         return self.ros.get_as(self.url + "/dns", DNS)
 
+    @property
+    def route(self) -> List[Route]:
+        return self.ros.get_as(self.url + "/route", List[Route])
+
 
 __all__ = [
     "Address",
@@ -59,4 +64,5 @@ __all__ = [
     "DHCPRelay",
     "DHCPServer",
     "DNS",
+    "Route",
 ]
