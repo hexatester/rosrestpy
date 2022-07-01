@@ -41,7 +41,7 @@ class IP(BaseModule):
     @property
     def dhcp_server(self) -> DHCPServer:
         if not self._dhcp_server:
-            self._dhcp_server = DHCPServer(self)
+            self._dhcp_server = DHCPServer(self, "dhcp-server")
         return self._dhcp_server
 
 

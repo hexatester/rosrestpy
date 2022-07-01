@@ -9,7 +9,7 @@ class DHCPServer(BaseSubModule):
 
     @property
     def print(self) -> List[DHCPServerItem]:
-        return self.ros.get_as(self.url, List[DHCPServerItem])
+        return self.module.ros.get_as(self.url, List[DHCPServerItem])
 
 
 __all__ = ["DHCPServer", "DHCPServerItem"]
