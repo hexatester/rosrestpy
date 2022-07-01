@@ -12,7 +12,7 @@ Not all types and methods of the RouterOS v7 REST API are supported, yet.
 
 ## Installing
 
-You can install or upgrade python-telegram-bot with:
+You can install or upgrade rosrestpy with:
 
 ```bash
 pip install rosrestpy --upgrade
