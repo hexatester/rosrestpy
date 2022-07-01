@@ -11,4 +11,7 @@ class BaseModule:
     url: str = ""
 
     def __attrs_post_init__(self) -> None:
+        if self.url:
+            self.url = "/" + self.url
+        else:
         self.url = "/" + self.__class__.__name__.lower()
