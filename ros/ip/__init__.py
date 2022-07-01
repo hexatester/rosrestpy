@@ -11,6 +11,7 @@ from .dhcp_relay import DHCPRelay
 from .dhcp_server import DHCPServer
 from .dns import DNS
 from .route import Route
+from .setting import Setting
 
 
 @define
@@ -54,6 +55,10 @@ class IP(BaseModule):
     def route(self) -> List[Route]:
         return self.ros.get_as(self.url + "/route", List[Route])
 
+    @property
+    def setting(self) -> Setting:
+        return self.ros.get_as(self.url + "/setting", Setting)
+
 
 __all__ = [
     "Address",
@@ -65,4 +70,5 @@ __all__ = [
     "DHCPServer",
     "DNS",
     "Route",
+    "Setting",
 ]
