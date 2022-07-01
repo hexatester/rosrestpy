@@ -14,6 +14,7 @@ class DHCPClient:
     use_peer_dns: bool
     use_peer_ntp: bool
     address: Optional[str] = None
+    comment: Optional[str] = None
     default_route_distance: Optional[int] = None
     dhcp_server: Optional[str] = None
     expires_after: Optional[str] = None

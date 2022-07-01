@@ -1,4 +1,5 @@
 from attr import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -11,3 +12,4 @@ class Address:
     interface: str
     invalid: bool
     network: str
+    comment: Optional[str] = None

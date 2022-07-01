@@ -1,4 +1,5 @@
 from attr import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -13,3 +14,4 @@ class ARP:
     invalid: bool
     mac_address: str
     published: bool
+    comment: Optional[str] = None

@@ -1,4 +1,5 @@
 from attr import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -17,6 +18,7 @@ class DHCPServerItem:
     name: str
     parent_queue: str
     use_radius: str
+    comment: Optional[str] = None
 
     def __str__(self) -> str:
         return self.name
