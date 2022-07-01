@@ -5,6 +5,7 @@ from .address import Address
 from .arp import ARP
 from .cloud import Cloud
 from .dhcp_client import DHCPClient
+from .dhcp_relay import DHCPRelay
 
 
 class IP(BaseModule):
@@ -24,5 +25,9 @@ class IP(BaseModule):
     def dhcp_client(self) -> List[DHCPClient]:
         return self.ros.get_as(self.url + "/dhcp-client", List[DHCPClient])
 
+    @property
+    def dhcp_relay(self) -> List[DHCPRelay]:
+        return self.ros.get_as(self.url + "/dhcp-relay", List[DHCPRelay])
 
-__all__ = ["Address", "ARP", "IP", "Cloud", "DHCPClient"]
+
+__all__ = ["Address", "ARP", "IP", "Cloud", "DHCPClient", "DHCPRelay"]
