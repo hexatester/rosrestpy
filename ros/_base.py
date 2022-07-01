@@ -1,5 +1,5 @@
 from attr import define
-from typing import TYPE_CHECKING, Type, TypeVar
+from typing import TYPE_CHECKING, TypeVar
 
 if TYPE_CHECKING:
     from ros.ros import Ros
@@ -12,7 +12,7 @@ class BaseModule:
 
     def __attrs_post_init__(self) -> None:
         if self.url:
-            self.url = "/" + self.url
+            self.url = self.url
         else:
             self.url = "/" + self.__class__.__name__.lower()
 
@@ -27,6 +27,6 @@ class BaseSubModule:
 
     def __attrs_post_init__(self) -> None:
         if self.url:
-            self.url = self.module.url + "/" + self.url
+            self.url = self.module.url + self.url
         else:
             self.url = self.module.url + "/" + self.__class__.__name__.lower()

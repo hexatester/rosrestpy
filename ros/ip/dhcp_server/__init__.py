@@ -1,6 +1,6 @@
 from typing import List
 
-from ros.base import BaseSubModule
+from ros._base import BaseSubModule
 from .item import DHCPServerItem
 from .network import DHCPNetwork
 

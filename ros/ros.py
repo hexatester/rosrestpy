@@ -56,7 +56,7 @@ class Ros:
     @property
     def bridge(self):
         if not self._bridge:
-            self._bridge = Bridge(self)
+            self._bridge = Bridge(self, "/interface/bridge")
         return self._bridge
 
     @property

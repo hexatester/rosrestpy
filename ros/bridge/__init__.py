@@ -1,7 +1,7 @@
 from typing import List
 from attrs import define
 
-from ros.base import BaseModule
+from ros._base import BaseModule
 
 from .interface import BridgeInterface
 

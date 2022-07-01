@@ -1,7 +1,7 @@
 from attrs import define
 from typing import List, Optional
 
-from ros.base import BaseModule
+from ros._base import BaseModule
 
 from .address import Address
 from .arp import ARP
@@ -44,7 +44,7 @@ class IP(BaseModule):
     @property
     def dhcp_server(self) -> DHCPServer:
         if not self._dhcp_server:
-            self._dhcp_server = DHCPServer(self, "dhcp-server")
+            self._dhcp_server = DHCPServer(self, "/dhcp-server")
         return self._dhcp_server
 
     @property

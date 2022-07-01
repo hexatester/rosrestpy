@@ -1,6 +1,6 @@
 from typing import List
 
-from ros.base import BaseModule
+from ros._base import BaseModule
 
 from .health import Health
 from .history import History
