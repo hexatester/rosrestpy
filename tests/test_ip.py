@@ -35,7 +35,7 @@ class TestIP:
 
 class TestDHCPServer:
     def test_item(self, ros):
-        for item in ros.ip.dhcp_server.print:
+        for item in ros.ip.dhcp_server.print():
             assert isinstance(item, DHCPServerItem)
 
     def test_network(self, ros):
