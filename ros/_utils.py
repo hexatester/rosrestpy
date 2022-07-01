@@ -23,3 +23,13 @@ def make_converter() -> Converter:
     # Main
     c.register_structure_hook(Union[int, str], _union_str_int)
     return c
+
+
+def setter(self, value):
+    # TODO: Implement setter
+    pass
+
+
+def deleter(self, value):
+    # TODO: Implement deleter
+    pass
