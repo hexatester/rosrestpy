@@ -4,6 +4,7 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from typing import Any, List, Optional, Type, TypeVar
 
+from . import Bridge
 from . import Interface
 from . import IP
 from . import System
@@ -25,6 +26,7 @@ class Ros:
     secure: bool = False
     filename: str = "rest"
     url: str = ""
+    _bridge: Optional[Bridge] = None
     _interface: Optional[Interface] = None
     _ip: Optional[IP] = None
     _system: Optional[System] = None
@@ -50,6 +52,12 @@ class Ros:
                 else:
                     data.append(val)
         return _converter.structure(data, cl)
+
+    @property
+    def bridge(self):
+        if not self._bridge:
+            self._bridge = Bridge(self)
+        return self._bridge
 
     @property
     def interface(self):
