@@ -1,4 +1,4 @@
-# rosrestpy
+# RosRestPy
 
 [![PyPi Package Version](https://img.shields.io/pypi/v/rosrestpy)](https://pypi.org/project/rosrestpy/)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/rosrestpy)](https://pypi.org/project/rosrestpy/)
@@ -24,7 +24,8 @@ pip install rosrestpy --upgrade
 from ros import Ros
 
 ros = Ros("https://192.168.88.1/", "admin", "")
-print(ros.system.resource.cpu_load)
+if ros.system.resource.cpu_load > 90:
+    print(f"{ros.system.identity}'s CPU > 90%")
 ```
 
 ## Resources
