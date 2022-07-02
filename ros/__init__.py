@@ -1,4 +1,4 @@
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 from .inteface import InterfaceModule
 from .ip import IPModule
