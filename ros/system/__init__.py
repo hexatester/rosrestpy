@@ -12,7 +12,7 @@ from .resource import Resource
 from .routerboard import RouterBOARD
 
 
-class System(BaseModule):
+class SystemModule(BaseModule):
     @property
     def health(self) -> List[Health]:
         return self.ros.get_as(self.url + "/health", List[Health])
@@ -55,5 +55,5 @@ __all__ = [
     "Note",
     "Resource",
     "RouterBOARD",
-    "System",
+    "SystemModule",
 ]

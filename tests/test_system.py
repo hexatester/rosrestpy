@@ -1,11 +1,11 @@
-from ros import System
+from ros import SystemModule
 from ros.system import Health, History, Identity, License, Note, Resource, RouterBOARD
 from typing import List
 
 
 class TestSystem:
     def test_system(self, ros):
-        assert isinstance(ros.system, System)
+        assert isinstance(ros.system, SystemModule)
 
     def test_health(self, ros):
         for health in ros.system.health:

@@ -3,7 +3,7 @@ from typing import Optional, Union
 
 
 @dataclass
-class InterfaceItem:
+class Interface:
     id: str
     actual_mtu: int
     disabled: bool

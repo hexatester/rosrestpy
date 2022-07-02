@@ -4,8 +4,8 @@ from ros._base import BaseModule
 
 
 @define
-class PPP(BaseModule):
+class PPPModule(BaseModule):
     pass
 
 
-__all__ = ["PPP"]
+__all__ = ["PPPModule"]

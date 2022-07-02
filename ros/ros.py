@@ -4,10 +4,10 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from typing import Any, List, Optional, Type, TypeVar
 
-from . import Bridge
-from . import Interface
-from . import IP
-from . import System
+from . import BridgeModule
+from . import InterfaceModule
+from . import IPModule
+from . import SystemModule
 
 from . import Log
 
@@ -26,10 +26,10 @@ class Ros:
     secure: bool = False
     filename: str = "rest"
     url: str = ""
-    _bridge: Optional[Bridge] = None
-    _interface: Optional[Interface] = None
-    _ip: Optional[IP] = None
-    _system: Optional[System] = None
+    _bridge: Optional[BridgeModule] = None
+    _interface: Optional[InterfaceModule] = None
+    _ip: Optional[IPModule] = None
+    _system: Optional[SystemModule] = None
 
     def __attrs_post_init__(self) -> None:
         if not self.server.endswith("/"):
@@ -56,25 +56,25 @@ class Ros:
     @property
     def bridge(self):
         if not self._bridge:
-            self._bridge = Bridge(self, "/interface/bridge")
+            self._bridge = BridgeModule(self, "/interface/bridge")
         return self._bridge
 
     @property
     def interface(self):
         if not self._interface:
-            self._interface = Interface(self)
+            self._interface = InterfaceModule(self)
         return self._interface
 
     @property
     def ip(self):
         if not self._ip:
-            self._ip = IP(self)
+            self._ip = IPModule(self)
         return self._ip
 
     @property
     def system(self):
         if not self._system:
-            self._system = System(self)
+            self._system = SystemModule(self)
         return self._system
 
     @property

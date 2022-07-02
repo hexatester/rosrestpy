@@ -2,7 +2,7 @@ from attr import dataclass
 
 
 @dataclass
-class BridgeInterface:
+class Bridge:
     id: str
     actual_mtu: int
     ageing_time: str

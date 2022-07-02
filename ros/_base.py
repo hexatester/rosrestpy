@@ -14,7 +14,8 @@ class BaseModule:
         if self.url:
             self.url = self.url
         else:
-            self.url = "/" + self.__class__.__name__.lower()
+            cname = self.__class__.__name__.lower()
+            self.url = "/" + cname.strip("module")
 
 
 BM = TypeVar("BM", bound=BaseModule)
@@ -29,4 +30,5 @@ class BaseSubModule:
         if self.url:
             self.url = self.module.url + self.url
         else:
-            self.url = self.module.url + "/" + self.__class__.__name__.lower()
+            cname = self.__class__.__name__.lower()
+            self.url = self.module.url + "/" + cname.strip("module")

@@ -1,12 +1,12 @@
 from typing import List
 from ros._base import BaseModule
 
-from .item import InterfaceItem
+from .interface import Interface
 
 
-class Interface(BaseModule):
-    def print(self) -> List[InterfaceItem]:
-        return self.ros.get_as(self.url, List[InterfaceItem])
+class InterfaceModule(BaseModule):
+    def print(self) -> List[Interface]:
+        return self.ros.get_as(self.url, List[Interface])
 
 
-__all__ = ["Interface", "InterfaceItem"]
+__all__ = ["InterfaceModule", "Interface"]

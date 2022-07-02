@@ -8,15 +8,15 @@ from .arp import ARP
 from .cloud import Cloud
 from .dhcp_client import DHCPClient
 from .dhcp_relay import DHCPRelay
-from .dhcp_server import DHCPServer
+from .dhcp_server import DHCPServerModule
 from .dns import DNS
 from .route import Route
 from .setting import Setting
 
 
 @define
-class IP(BaseModule):
-    _dhcp_server: Optional[DHCPServer] = None
+class IPModule(BaseModule):
+    _dhcp_server: Optional[DHCPServerModule] = None
 
     def __attrs_post_init__(self) -> None:
         return super().__attrs_post_init__()
@@ -42,9 +42,9 @@ class IP(BaseModule):
         return self.ros.get_as(self.url + "/dhcp-relay", List[DHCPRelay])
 
     @property
-    def dhcp_server(self) -> DHCPServer:
+    def dhcp_server(self) -> DHCPServerModule:
         if not self._dhcp_server:
-            self._dhcp_server = DHCPServer(self, "/dhcp-server")
+            self._dhcp_server = DHCPServerModule(self, "/dhcp-server")
         return self._dhcp_server
 
     @property
@@ -63,7 +63,7 @@ class IP(BaseModule):
 __all__ = [
     "Address",
     "ARP",
-    "IP",
+    "IPModule",
     "Cloud",
     "DHCPClient",
     "DHCPRelay",

@@ -3,7 +3,7 @@ from typing import Optional
 
 
 @dataclass
-class DHCPServerItem:
+class DHCPServer:
     id: str
     add_arp: bool
     address_pool: str

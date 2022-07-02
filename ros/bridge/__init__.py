@@ -3,13 +3,13 @@ from attrs import define
 
 from ros._base import BaseModule
 
-from .interface import BridgeInterface
+from .bridge import Bridge
 
 
 @define
-class Bridge(BaseModule):
-    def print(self) -> List[BridgeInterface]:
-        return self.ros.get_as(self.url, List[BridgeInterface])
+class BridgeModule(BaseModule):
+    def print(self) -> List[Bridge]:
+        return self.ros.get_as(self.url, List[Bridge])
 
 
-__all__ = ["Bridge", "BridgeInterface"]
+__all__ = ["BridgeModule", "BridgeInterface"]
