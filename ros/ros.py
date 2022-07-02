@@ -4,13 +4,13 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from typing import Any, List, Optional, Type, TypeVar
 
-from . import BridgeModule
 from . import InterfaceModule
 from . import IPModule
 from . import SystemModule
 
 from . import Log
 
+from .inteface import BridgeModule
 from ._utils import clean_key, make_converter
 
 T = TypeVar("T", bound=object)
@@ -26,7 +26,6 @@ class Ros:
     secure: bool = False
     filename: str = "rest"
     url: str = ""
-    _bridge: Optional[BridgeModule] = None
     _interface: Optional[InterfaceModule] = None
     _ip: Optional[IPModule] = None
     _system: Optional[SystemModule] = None
@@ -54,10 +53,8 @@ class Ros:
         return _converter.structure(data, cl)
 
     @property
-    def bridge(self):
-        if not self._bridge:
-            self._bridge = BridgeModule(self, "/interface/bridge")
-        return self._bridge
+    def bridge(self) -> BridgeModule:
+        return self.interface.bridge
 
     @property
     def interface(self):
