@@ -26,6 +26,10 @@ from ros import Ros
 ros = Ros("https://192.168.88.1/", "admin", "")
 if ros.system.resource.cpu_load > 90:
     print(f"{ros.system.identity}'s CPU > 90%")
+
+for interface in ros.interface.print():
+    print(interface.name)
+
 ```
 
 ## Resources
