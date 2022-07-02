@@ -9,7 +9,7 @@ from .bridge import Bridge
 @define
 class BridgeModule(BaseSubModule):
     def print(self) -> List[Bridge]:
-        return self.ros.get_as(self.url, List[Bridge])
+        return self.module.ros.get_as(self.url, List[Bridge])
 
 
 __all__ = ["BridgeModule", "BridgeInterface"]
