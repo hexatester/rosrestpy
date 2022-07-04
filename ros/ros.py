@@ -6,10 +6,12 @@ from typing import Any, List, Optional, Type, TypeVar
 
 from . import InterfaceModule, IPModule, SystemModule, ToolModule
 
-from . import Error, Log, _converter
+from . import Error, Log
 
 from .inteface import BridgeModule
-from ._utils import clean_data
+from ._utils import clean_data, make_converter
+
+_converter = make_converter()
 
 T = TypeVar("T", bound=object)
 

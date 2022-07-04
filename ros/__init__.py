@@ -1,8 +1,4 @@
 __version__ = "0.1.5"
-from ._utils import make_converter
-
-_converter = make_converter()
-
 from .inteface import InterfaceModule
 from .ip import IPModule
 from .system import SystemModule
@@ -23,5 +19,4 @@ __all__ = [
     "Ros",
     "SystemModule",
     "ToolModule",
-    "_converter",
 ]
