@@ -17,7 +17,7 @@ T = TypeVar("T", bound=object)
 
 
 @define
-class Ros:
+class BaseRos:
     server: str
     username: str
     password: str
@@ -25,10 +25,6 @@ class Ros:
     secure: bool = False
     filename: str = "rest"
     url: str = ""
-    _interface: Optional[InterfaceModule] = None
-    _ip: Optional[IPModule] = None
-    _system: Optional[SystemModule] = None
-    _tool: Optional[ToolModule] = None
 
     def __attrs_post_init__(self) -> None:
         if not self.server.endswith("/"):
@@ -63,6 +59,13 @@ class Ros:
         if data and "error" in data:
             raise _converter.structure(data, Error)
         return _converter.structure(data, cl)
+
+
+class Ros(BaseRos):
+    _interface: Optional[InterfaceModule] = None
+    _ip: Optional[IPModule] = None
+    _system: Optional[SystemModule] = None
+    _tool: Optional[ToolModule] = None
 
     @property
     def bridge(self) -> BridgeModule:
