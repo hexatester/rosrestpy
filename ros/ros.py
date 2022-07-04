@@ -6,7 +6,7 @@ from typing import Any, List, Optional, Type, TypeVar
 
 from . import InterfaceModule, IPModule, SystemModule
 
-from . import Log, Ping
+from . import Error, Log, Ping
 
 from .inteface import BridgeModule
 from ._utils import clean_data, make_converter
@@ -39,6 +39,8 @@ class Ros:
         res = self.session.get(self.url + filename, verify=self.secure)
         odata = json.loads(res.text)
         data: Any = clean_data(odata)
+        if data and "error" in data:
+            raise _converter.structure(data, Error)
         return _converter.structure(data, cl)
 
     @property
@@ -72,4 +74,6 @@ class Ros:
         res = self.session.post(self.url + "/ping", json=data, verify=self.secure)
         odata = json.loads(res.text)
         data = clean_data(odata)
+        if data and "error" in data:
+            raise _converter.structure(data, Error)
         return _converter.structure(data, List[Ping])
