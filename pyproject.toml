@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rosrestpy"
-version = "0.1.4"
+version = "0.1.5"
 description = "RouterOS v7 REST API python module"
 authors = ["hexatester <hexatester@protonmail.com>"]
 license = "GPL-3.0-only"
