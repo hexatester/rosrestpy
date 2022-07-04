@@ -1,4 +1,7 @@
-import json
+try:
+    import ujson as json
+except ImportError:
+    import json  # type: ignore[no-redef]
 from attr import define
 from requests import Session
 from requests.auth import HTTPBasicAuth
