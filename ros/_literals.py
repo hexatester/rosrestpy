@@ -48,7 +48,6 @@ MACProtocol = Literal[
     "activision",
     "afpovertcp",
     "agentx",
-    "any",
     "aol",
     "apple-licman",
     "appleqtc",
