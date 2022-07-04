@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Literal, Union
 
 from ros._base import BaseModule
 from ros._literals import AnyLiteral, IPProtocol, MACProtocol, PortLiteral
@@ -44,8 +44,8 @@ class ToolModule(BaseModule):
         duration: str,
         user: str = None,
         password: str = None,
-        protocol: str = "udp",
-        direction: str = "receive",
+        protocol: Literal["tcp", "udp"] = "udp",
+        direction: Literal["receive", "send", "both"] = "receive",
         random_data: bool = False,
     ) -> List[BandwithTest]:
         data = {
