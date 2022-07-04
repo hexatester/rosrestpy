@@ -30,6 +30,10 @@ if ros.system.resource.cpu_load > 90:
 for interface in ros.interface.print():
     print(interface.name)
 
+bw_tests = ros.tool.bandwith_test("172.16.0.1", "3s", "admin", direction="both")
+result_bw_test = bw_tests[-1]
+print(f"Download {result_bw_tests.rx_total_average}")
+print(f"Upload {result_bw_tests.tx_total_average}")
 ```
 
 ## Resources
