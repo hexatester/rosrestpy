@@ -6,10 +6,10 @@ _converter = make_converter()
 from .inteface import InterfaceModule
 from .ip import IPModule
 from .system import SystemModule
+from .tool import ToolModule
 
 from .error import Error
 from .log import Log
-from .ping import Ping
 
 
 from .ros import Ros
@@ -22,4 +22,6 @@ __all__ = [
     "Ping",
     "Ros",
     "SystemModule",
+    "ToolModule",
+    "_converter",
 ]

@@ -4,15 +4,14 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from typing import Any, List, Optional, Type, TypeVar
 
-from . import InterfaceModule, IPModule, SystemModule
+from . import InterfaceModule, IPModule, SystemModule, ToolModule
 
-from . import Error, Log, Ping
+from . import Error, Log, _converter
 
 from .inteface import BridgeModule
-from ._utils import clean_data, make_converter
+from ._utils import clean_data
 
 T = TypeVar("T", bound=object)
-_converter = make_converter()
 
 
 @define
@@ -27,6 +26,7 @@ class Ros:
     _interface: Optional[InterfaceModule] = None
     _ip: Optional[IPModule] = None
     _system: Optional[SystemModule] = None
+    _tool: Optional[ToolModule] = None
 
     def __attrs_post_init__(self) -> None:
         if not self.server.endswith("/"):
@@ -66,14 +66,14 @@ class Ros:
         return self._system
 
     @property
+    def tool(self):
+        if not self._tool:
+            self._tool = ToolModule(self)
+        return self._tool
+
+    @property
     def log(self):
         return self.get_as("/log", List[Log])
 
     def ping(self, address: str, count: int = 4):
-        data = {"address": address, "count": count}
-        res = self.session.post(self.url + "/ping", json=data, verify=self.secure)
-        odata = json.loads(res.text)
-        data = clean_data(odata)
-        if data and "error" in data:
-            raise _converter.structure(data, Error)
-        return _converter.structure(data, List[Ping])
+        return self.tool.ping(address, count)
