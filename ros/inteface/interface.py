@@ -30,3 +30,6 @@ class Interface:
     default_name: Optional[str] = None
     max_l2mtu: Optional[int] = None
     slave: Optional[bool] = None
+
+    def __str__(self) -> str:
+        return self.name

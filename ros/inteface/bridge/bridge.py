@@ -24,3 +24,6 @@ class Bridge:
     running: bool
     transmit_hold_count: int
     vlan_filtering: bool
+
+    def __str__(self) -> str:
+        return self.name

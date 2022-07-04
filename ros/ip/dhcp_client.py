@@ -23,3 +23,6 @@ class DHCPClient:
     primary_ntp: Optional[str] = None
     secondary_dns: Optional[str] = None
     status: Optional[str] = None
+
+    def __str__(self) -> str:
+        return self.interface
