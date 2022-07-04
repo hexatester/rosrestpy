@@ -43,6 +43,25 @@ class Ros:
             raise _converter.structure(data, Error)
         return _converter.structure(data, cl)
 
+    def post_as(
+        self,
+        filename: str,
+        cl: Type[T],
+        json: Any = None,
+        data: Any = None,
+    ) -> T:
+        res = self.session.post(
+            self.url + filename,
+            data=data,
+            json=json,
+            verify=self.secure,
+        )
+        odata = json.loads(res.text)
+        data = clean_data(odata)
+        if data and "error" in data:
+            raise _converter.structure(data, Error)
+        return _converter.structure(data, cl)
+
     @property
     def bridge(self) -> BridgeModule:
         return self.interface.bridge
