@@ -1,5 +1,6 @@
 from attr import dataclass
 
+
 @dataclass(slots=True)
 class Health:
     id: str
