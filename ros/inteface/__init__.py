@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from ros._base import BaseModule
 
-from .bridge import BridgeModule, Bridge, BridgePort, BridgeVlan
+from .bridge import BridgeModule, Bridge, BridgeMsti, BridgePort, BridgeVlan
 from .interface import Interface
 
 
@@ -22,6 +22,7 @@ class InterfaceModule(BaseModule):
 __all__ = [
     "BridgeModule",
     "Bridge",
+    "BridgeMsti",
     "BridgePort",
     "BridgeVlan",
     "InterfaceModule",

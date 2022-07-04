@@ -4,6 +4,7 @@ from attrs import define
 from ros._base import BaseSubModule
 
 from .bridge import Bridge
+from .msti import BridgeMsti
 from .port import BridgePort
 from .vlan import BridgeVlan
 
@@ -12,6 +13,10 @@ from .vlan import BridgeVlan
 class BridgeModule(BaseSubModule):
     def print(self) -> List[Bridge]:
         return self.module.ros.get_as(self.url, List[Bridge])
+
+    @property
+    def msti(self) -> List[BridgeMsti]:
+        return self.module.ros.get_as(self.url + "/msti", List[BridgeMsti])
 
     @property
     def port(self) -> List[BridgePort]:
