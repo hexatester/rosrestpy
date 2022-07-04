@@ -4,11 +4,9 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from typing import Any, List, Optional, Type, TypeVar
 
-from . import InterfaceModule
-from . import IPModule
-from . import SystemModule
+from . import InterfaceModule, IPModule, SystemModule
 
-from . import Log
+from . import Log, Ping
 
 from .inteface import BridgeModule
 from ._utils import clean_key, make_converter
@@ -77,3 +75,15 @@ class Ros:
     @property
     def log(self):
         return self.get_as("/log", List[Log])
+
+    def ping(self, address: str, count: int = 4):
+        data = {"address": address, "count": count}
+        res = self.session.post(self.url + "/ping", json=data, verify=self.secure)
+        odata = json.loads(res.text)
+        data = list()
+        for val in odata:
+            if isinstance(val, dict):
+                data.append(clean_key(val))
+            else:
+                data.append(val)
+        return _converter.structure(data, List[Ping])

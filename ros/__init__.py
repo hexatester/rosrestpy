@@ -5,6 +5,7 @@ from .ip import IPModule
 from .system import SystemModule
 
 from .log import Log
+from .ping import Ping
 
 from .ros import Ros
 
@@ -12,6 +13,7 @@ __all__ = [
     "InterfaceModule",
     "IPModule",
     "Log",
+    "Ping",
     "Ros",
     "SystemModule",
 ]
