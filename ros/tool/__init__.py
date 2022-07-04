@@ -1,9 +1,11 @@
-from typing import List
+from typing import List, Union
 
 from ros._base import BaseModule
+from ros._literals import AnyLiteral, IPProtocol, MACProtocol, PortLiteral
 
 from .bandwith_test import BandwithTest
 from .ping import Ping
+from .torch import Torch
 from .traceroute import Traceroute
 
 
@@ -32,6 +34,47 @@ class ToolModule(BaseModule):
             "random-data": random_data,
         }
         return self.ros.post_as(self.url + "/bandwidth-test", List[BandwithTest], data)
+
+    def torch(
+        self,
+        interface: str,
+        duration: str = "5s",
+        src_address: str = "0.0.0.0/0",
+        dst_address: str = "0.0.0.0/0",
+        src_address6: str = "::/0",
+        dst_address6: str = "::/0",
+        mac_protocol: Union[AnyLiteral, MACProtocol] = None,
+        port: Union[AnyLiteral, PortLiteral] = None,
+        ip_protocol: Union[AnyLiteral, IPProtocol] = None,
+        vlan_id: Union[AnyLiteral, int] = None,
+        dscp: Union[AnyLiteral, int] = None,
+        cpu: str = None,
+        freeze_frame_interval: str = None,
+    ):
+        data = {"interface": interface, "duration": duration}
+        if src_address:
+            data["src-address"] = src_address
+        if dst_address:
+            data["dst-address"] = dst_address
+        if src_address6:
+            data["src-address6"] = src_address6
+        if dst_address6:
+            data["dst-address6"] = dst_address6
+        if mac_protocol:
+            data["mac-protocol"] = mac_protocol
+        if port:
+            data["port"] = port
+        if ip_protocol:
+            data["ip-protocol"] = ip_protocol
+        if vlan_id:
+            data["vlan-id"] = vlan_id
+        if dscp:
+            data["dscp"] = dscp
+        if cpu:
+            data["cpu"] = cpu
+        if freeze_frame_interval:
+            data["freeze-frame-interval"] = freeze_frame_interval
+        return self.ros.post_as(self.url + "/torch", List[Torch], data)
 
     def traceroute(
         self,
@@ -75,4 +118,4 @@ class ToolModule(BaseModule):
         return self.ros.post_as(self.url + "/wol", List[dict], data)
 
 
-__all__ = ["BandwithTest", "Ping", "ToolModule", "Traceroute"]
+__all__ = ["BandwithTest", "Ping", "ToolModule", "Torch", "Traceroute"]
