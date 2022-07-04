@@ -12,7 +12,9 @@ from .ping import Ping
 class ToolModule(BaseModule):
     def ping(self, address: str, count: int = 4):
         data = {"address": address, "count": count}
-        res = self.ros.session.post(self.url + "/ping", json=data, verify=self.secure)
+        res = self.ros.session.post(
+            self.ros.url + self.url + "/ping", json=data, verify=self.ros.secure
+        )
         odata = json.loads(res.text)
         data = clean_data(odata)
         if data and "error" in data:

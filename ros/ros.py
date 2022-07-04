@@ -68,7 +68,7 @@ class Ros:
     @property
     def tool(self):
         if not self._tool:
-            self._tool = ToolModule(self)
+            self._tool = ToolModule(self, "/tool")
         return self._tool
 
     @property
