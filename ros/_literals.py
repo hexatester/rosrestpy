@@ -1,5 +1,6 @@
-from typing import Literal, Union
+from typing import Literal
 
+AllLiteral = Literal["all"]
 AnyLiteral = Literal["any"]
 IPProtocol = (
     Literal[
