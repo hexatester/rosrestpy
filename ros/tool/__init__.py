@@ -70,5 +70,9 @@ class ToolModule(BaseModule):
             data["src-address"] = src_address
         return self.ros.post_as(self.url + "/traceroute", List[Traceroute], data)
 
+    def wol(self, interface: str, mac: str) -> List[dict]:
+        data = {"interface": interface, "mac": mac}
+        return self.ros.post_as(self.url + "/wol", List[dict], data)
+
 
 __all__ = ["BandwithTest", "Ping", "ToolModule", "Traceroute"]
