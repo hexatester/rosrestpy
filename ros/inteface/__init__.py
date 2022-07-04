@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from ros._base import BaseModule
 
-from .bridge import BridgeModule, Bridge
+from .bridge import BridgeModule, Bridge, BridgePort
 from .interface import Interface
 
 
@@ -19,4 +19,4 @@ class InterfaceModule(BaseModule):
         return self.ros.get_as(self.url, List[Interface])
 
 
-__all__ = ["BridgeModule", "Bridge", "InterfaceModule", "Interface"]
+__all__ = ["BridgeModule", "Bridge", "BridgePort", "InterfaceModule", "Interface"]
