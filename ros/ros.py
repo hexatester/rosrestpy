@@ -49,13 +49,13 @@ class Ros:
         self,
         filename: str,
         cl: Type[T],
-        json: Any = None,
+        json_: Any = None,
         data: Any = None,
     ) -> T:
         res = self.session.post(
             self.url + filename,
             data=data,
-            json=json,
+            json=json_,
             verify=self.secure,
         )
         odata = json.loads(res.text)
