@@ -10,8 +10,32 @@ from .traceroute import Traceroute
 
 
 class ToolModule(BaseModule):
-    def ping(self, address: str, count: int = 4):
-        data = {"address": address, "count": count}
+    def ping(
+        self,
+        address: str,
+        count: int = 4,
+        interface: str = None,
+        arp_ping: bool = False,
+        src_address: str = None,
+        size: int = 56,
+        dscp: int = 0,
+        ttl: int = 0,
+        vrf: str = "main",
+    ):
+        data = {
+            "address": address,
+            "count": count,
+            "arp-ping": arp_ping,
+            "size": size,
+            "dscp": dscp,
+            "vrf": vrf,
+        }
+        if interface:
+            data["interface"] = interface
+        if src_address:
+            data["src-address"] = src_address
+        if ttl > 0:
+            data["ttl"] = ttl
         return self.ros.post_as("/ping", List[Ping], data)
 
     def bandwith_test(
