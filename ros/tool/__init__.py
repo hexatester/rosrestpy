@@ -4,6 +4,7 @@ from ros._base import BaseModule
 
 from .bandwith_test import BandwithTest
 from .ping import Ping
+from .traceroute import Traceroute
 
 
 class ToolModule(BaseModule):
@@ -32,5 +33,42 @@ class ToolModule(BaseModule):
         }
         return self.ros.post_as(self.url + "/bandwidth-test", List[BandwithTest], data)
 
+    def traceroute(
+        self,
+        address: str,
+        duration: str = "5s",
+        size: int = 56,
+        timeout: str = "1000ms",
+        protocol: str = "icmp",
+        port: int = "33434",
+        use_dns: bool = False,
+        count: int = None,
+        max_hops: int = None,
+        src_address: str = None,
+        interface: str = None,
+        dscp: int = 0,
+        vrf: str = "main",
+    ) -> List[Traceroute]:
+        data = {
+            "address": address,
+            "duration": duration,
+            "size": size,
+            "timeout": timeout,
+            "protocol": protocol,
+            "port": port,
+            "use-dns": use_dns,
+            "dscp": dscp,
+            "vrf": vrf,
+        }
+        if count and count > 0:
+            data["count"] = count
+        if max_hops and max_hops > 0:
+            data["max-hops"] = max_hops
+        if interface:
+            data["interface"] = interface
+        if src_address:
+            data["src-address"] = src_address
+        return self.ros.post_as(self.url + "/traceroute", List[Traceroute], data)
 
-__all__ = ["BandwithTest", "Ping", "ToolModule"]
+
+__all__ = ["BandwithTest", "Ping", "ToolModule", "Traceroute"]
