@@ -11,6 +11,20 @@ def clean_key(d: Dict[str, Any]) -> dict:
     return nd
 
 
+def clean_data(d: Dict[str, Any]) -> dict:
+    data: Any = None
+    if isinstance(d, dict):
+        data = clean_key(d)
+    elif isinstance(d, list):
+        data = list()
+        for val in d:
+            if isinstance(val, dict):
+                data.append(clean_key(val))
+            else:
+                data.append(val)
+    return data
+
+
 def _union_str_int(v: str, t: Any) -> Union[str, int]:
     if v.isdigit():
         return int(v)

@@ -9,7 +9,7 @@ from . import InterfaceModule, IPModule, SystemModule
 from . import Log, Ping
 
 from .inteface import BridgeModule
-from ._utils import clean_key, make_converter
+from ._utils import clean_data, make_converter
 
 T = TypeVar("T", bound=object)
 _converter = make_converter()
@@ -38,16 +38,7 @@ class Ros:
     def get_as(self, filename: str, cl: Type[T]) -> T:
         res = self.session.get(self.url + filename, verify=self.secure)
         odata = json.loads(res.text)
-        data: Any = None
-        if isinstance(odata, dict):
-            data = clean_key(odata)
-        elif isinstance(odata, list):
-            data = list()
-            for val in odata:
-                if isinstance(val, dict):
-                    data.append(clean_key(val))
-                else:
-                    data.append(val)
+        data: Any = clean_data(odata)
         return _converter.structure(data, cl)
 
     @property
@@ -80,10 +71,5 @@ class Ros:
         data = {"address": address, "count": count}
         res = self.session.post(self.url + "/ping", json=data, verify=self.secure)
         odata = json.loads(res.text)
-        data = list()
-        for val in odata:
-            if isinstance(val, dict):
-                data.append(clean_key(val))
-            else:
-                data.append(val)
+        data = clean_data(odata)
         return _converter.structure(data, List[Ping])
