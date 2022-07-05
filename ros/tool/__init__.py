@@ -4,6 +4,7 @@ from ros._base import BaseModule
 from ros._literals import AnyLiteral, IPProtocol, MACProtocol, PortLiteral
 
 from .bandwith_test import BandwithTest
+from .ip_scan import IPScan
 from .ping import Ping
 from .torch import Torch
 from .traceroute import Traceroute
@@ -58,6 +59,17 @@ class ToolModule(BaseModule):
             "random-data": random_data,
         }
         return self.ros.post_as(self.url + "/bandwidth-test", List[BandwithTest], data)
+
+    def ip_scan(
+        self,
+        interface: str,
+        duration: str,
+        address_range: str = None,
+    ) -> List[IPScan]:
+        data = {"interface": interface, "duration": duration}
+        if address_range:
+            data["address-range"] = address_range
+        return self.ros.post_as(self.url + "/ip-scan", List[IPScan], data)
 
     def torch(
         self,
@@ -142,4 +154,4 @@ class ToolModule(BaseModule):
         return self.ros.post_as(self.url + "/wol", List[dict], data)
 
 
-__all__ = ["BandwithTest", "Ping", "ToolModule", "Torch", "Traceroute"]
+__all__ = ["BandwithTest", "IPScan", "Ping", "ToolModule", "Torch", "Traceroute"]
