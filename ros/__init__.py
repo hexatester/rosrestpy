@@ -1,6 +1,7 @@
 __version__ = "0.1.7"
 from .inteface import InterfaceModule
 from .ip import IPModule
+from .ppp import PPPModule
 from .system import SystemModule
 from .tool import ToolModule
 
@@ -14,6 +15,7 @@ __all__ = [
     "Error",
     "InterfaceModule",
     "IPModule",
+    "PPPModule",
     "Log",
     "Ping",
     "Ros",
