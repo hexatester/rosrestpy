@@ -3,6 +3,7 @@ from typing import List, Literal, Union
 from ros._base import BaseModule
 from ros._literals import AnyLiteral, IPProtocol, MACProtocol, PortLiteral
 
+from .bandwith_server import BandwithServer
 from .bandwith_test import BandwithTest
 from .ip_scan import IPScan
 from .ping import Ping
@@ -11,6 +12,10 @@ from .traceroute import Traceroute
 
 
 class ToolModule(BaseModule):
+    @property
+    def bandwith_server(self) -> BandwithServer:
+        return self.ros.get_as(self.url + "/bandwidth-server", BandwithServer)
+
     def ping(
         self,
         address: str,
@@ -154,4 +159,12 @@ class ToolModule(BaseModule):
         return self.ros.post_as(self.url + "/wol", List[dict], data)
 
 
-__all__ = ["BandwithTest", "IPScan", "Ping", "ToolModule", "Torch", "Traceroute"]
+__all__ = [
+    "BandwithServer",
+    "BandwithTest",
+    "IPScan",
+    "Ping",
+    "ToolModule",
+    "Torch",
+    "Traceroute",
+]
