@@ -25,6 +25,7 @@ class Interface:
     tx_packet: int
     tx_queue_drop: int
     type: str
+    comment: Optional[str] = None
     l2mtu: Optional[int] = None
     mac_address: Optional[str] = None
     default_name: Optional[str] = None

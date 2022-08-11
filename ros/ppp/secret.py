@@ -18,6 +18,7 @@ class PPPSecret:
     profile: str
     routes: str
     service: PPPService
+    comment: Optional[str] = None
     local_address: Optional[str] = None
     remote_address: Optional[str] = None
     remote_ipv6_prefix: Optional[str] = None

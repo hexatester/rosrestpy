@@ -24,6 +24,7 @@ class PPPProfile:
     bridge_horizon: Optional[int] = None
     bridge_path_cost: Optional[int] = None
     bridge_port_priority: Optional[str] = None
+    comment: Optional[str] = None
     dhcpv6_pd_pool: Optional[str] = None
     dns_server: Optional[str] = None
     idle_timeout: Optional[str] = None

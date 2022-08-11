@@ -1,4 +1,5 @@
 from attr import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -24,6 +25,7 @@ class Bridge:
     running: bool
     transmit_hold_count: int
     vlan_filtering: bool
+    comment: Optional[str] = None
 
     def __str__(self) -> str:
         return self.name

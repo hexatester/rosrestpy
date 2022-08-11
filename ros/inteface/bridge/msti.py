@@ -1,4 +1,5 @@
 from attr import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -9,3 +10,4 @@ class BridgeMsti:
     identifier: int
     priority: str
     vlan_mapping: int
+    comment: Optional[str] = None

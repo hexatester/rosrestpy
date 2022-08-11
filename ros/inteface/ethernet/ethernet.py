@@ -68,6 +68,7 @@ class EthernetList:
     tx_single_collision: int
     tx_too_long: int
     tx_underrun: int
+    comment: Optional[str] = None
     slave: Optional[bool] = None
 
     def __str__(self) -> str:

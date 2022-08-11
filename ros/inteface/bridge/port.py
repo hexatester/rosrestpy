@@ -1,4 +1,5 @@
 from attr import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -32,3 +33,4 @@ class BridgePort:
     trusted: bool
     unknown_multicast_flood: bool
     unknown_unicast_flood: bool
+    comment: Optional[str] = None
