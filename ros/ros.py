@@ -7,7 +7,14 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from typing import Any, List, Optional, Type, TypeVar
 
-from . import InterfaceModule, IPModule, PPPModule, SystemModule, ToolModule
+from . import (
+    InterfaceModule,
+    IPModule,
+    PPPModule,
+    RoutingModule,
+    SystemModule,
+    ToolModule,
+)
 
 from . import Error, Log
 
@@ -71,6 +78,7 @@ class Ros(BaseRos):
     _interface: Optional[InterfaceModule] = None
     _ip: Optional[IPModule] = None
     _ppp: Optional[PPPModule] = None
+    _routing: Optional[RoutingModule] = None
     _system: Optional[SystemModule] = None
     _tool: Optional[ToolModule] = None
 
@@ -95,6 +103,12 @@ class Ros(BaseRos):
         if not self._ppp:
             self._ppp = PPPModule(self)
         return self._ppp
+
+    @property
+    def routing(self):
+        if not self._routing:
+            self._routing = RoutingModule(self)
+        return self._routing
 
     @property
     def system(self):
