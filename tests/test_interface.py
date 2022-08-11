@@ -1,5 +1,6 @@
 from ros import InterfaceModule
 from ros.inteface.bridge import BridgeModule, Bridge, BridgeMsti, BridgePort, BridgeVlan
+from ros.inteface.ethernet import EthernetModule, EthernetList
 from ros.inteface.list import InterfaceListModule, InterfaceList, InterfaceListMember
 
 
@@ -27,6 +28,15 @@ class TestBridge:
     def test_bridge_vlan(self, ros):
         for item in ros.bridge.vlan:
             assert isinstance(item, BridgeVlan)
+
+
+class TestEthernet:
+    def test_ethernet(self, ros):
+        assert isinstance(ros.interface.ethernet, EthernetModule)
+
+    def test_ethernet_list(self, ros):
+        for item in ros.interface.ethernet.print():
+            assert isinstance(item, EthernetList)
 
 
 class TestList:

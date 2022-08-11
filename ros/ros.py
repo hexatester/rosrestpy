@@ -42,7 +42,10 @@ class BaseRos:
         data: Any = clean_data(odata)
         if data and "error" in data:
             raise _converter.structure(data, Error)
-        return _converter.structure(data, cl)
+        try:
+            return _converter.structure(data, cl)
+        except Exception as e:
+            raise e
 
     def post_as(
         self,
