@@ -12,6 +12,6 @@ class ARP:
     dynamic: bool
     interface: str
     invalid: bool
-    mac_address: str
     published: bool
+    mac_address: Optional[str] = None
     comment: Optional[str] = None
