@@ -49,7 +49,9 @@ class IPModule(BaseModule):
 
     @property
     def dns(self) -> DNS:
-        return self.ros.get_as(self.url + "/dns", DNS)
+        dns = self.ros.get_as(self.url + "/dns", DNS)
+        dns._mod = self
+        return dns
 
     @property
     def route(self) -> List[Route]:
