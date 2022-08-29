@@ -8,11 +8,14 @@ from .identity import Identity
 from .license import License
 from .logging import Logging
 from .note import Note
+from .package import Package, PackageModule
 from .resource import Resource
 from .routerboard import RouterBOARD
 
 
 class SystemModule(BaseModule):
+    _package: Package = None
+
     @property
     def health(self) -> List[Health]:
         return self.ros.get_as(self.url + "/health", List[Health])
@@ -36,6 +39,12 @@ class SystemModule(BaseModule):
     @property
     def note(self) -> Note:
         return self.ros.get_as(self.url + "/note", Note)
+
+    @property
+    def package(self) -> PackageModule:
+        if not self._package:
+            self._package = PackageModule(self, "/package")
+        return self._package
 
     @property
     def resource(self) -> Resource:
