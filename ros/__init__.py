@@ -1,4 +1,4 @@
-__version__ = "0.1.10"
+__version__ = "0.1.11"
 from .inteface import InterfaceModule
 from .ip import IPModule
 from .ppp import PPPModule
