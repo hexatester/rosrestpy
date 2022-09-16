@@ -11,6 +11,7 @@ from . import (
     InterfaceModule,
     IPModule,
     PPPModule,
+    QueueModule,
     RoutingModule,
     SystemModule,
     ToolModule,
@@ -97,6 +98,7 @@ class Ros(BaseRos):
     _interface: Optional[InterfaceModule] = None
     _ip: Optional[IPModule] = None
     _ppp: Optional[PPPModule] = None
+    _queue: Optional[QueueModule] = None
     _routing: Optional[RoutingModule] = None
     _system: Optional[SystemModule] = None
     _tool: Optional[ToolModule] = None
@@ -122,6 +124,12 @@ class Ros(BaseRos):
         if not self._ppp:
             self._ppp = PPPModule(self)
         return self._ppp
+
+    @property
+    def queue(self):
+        if not self._queue:
+            self._queue = QueueModule(self)
+        return self._queue
 
     @property
     def routing(self):
