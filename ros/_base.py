@@ -13,7 +13,7 @@ class BaseModule:
     def __attrs_post_init__(self) -> None:
         if not self.url:
             cname = self.__class__.__name__.lower()
-            self.url = "/" + cname.strip("module")
+            self.url = "/" + cname.replace("module", "")
 
 
 BM = TypeVar("BM", bound=BaseModule)
