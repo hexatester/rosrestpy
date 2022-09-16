@@ -23,10 +23,17 @@ BM = TypeVar("BM", bound=BaseModule)
 class BaseSubModule:
     module: BM
     url: str = ""
+    _ros: "Ros" = None
+
+    @property
+    def ros(self) -> "Ros":
+        if not self._ros:
+            self._ros = self.module.ros
+        return self._ros
 
     def __attrs_post_init__(self) -> None:
         if self.url:
             self.url = self.module.url + self.url
         else:
             cname = self.__class__.__name__.lower()
-            self.url = self.module.url + "/" + cname.strip("module")
+            self.url = self.module.url + "/" + cname.replace("module", "")
