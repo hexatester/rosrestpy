@@ -327,7 +327,7 @@ ujson = ["ujson"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "8bf338ef8bf1dfda71a9a0d583618aaea17a9c0d4c170d2a25622065829d7baa"
+content-hash = "ac48dcecb2fb3e25ffd248674d67a97ee96b30e46413f0f86bfcc4e59bfe2b82"
 
 [metadata.files]
 atomicwrites = []
