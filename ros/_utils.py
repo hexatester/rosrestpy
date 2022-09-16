@@ -1,5 +1,7 @@
 from cattrs import Converter
-from typing import Any, Dict, Union
+from typing import Any, Dict, List, Type, Union, TypeVar
+
+from ._base import BM
 
 
 def clean_key(d: Dict[str, Any]) -> dict:
@@ -29,6 +31,16 @@ def _union_str_int(v: str, t: Any) -> Union[str, int]:
     if v.isdigit():
         return int(v)
     return v
+
+
+T = TypeVar("T", bound=object)
+
+
+def make_setters(url: str, cls: Type[T]):
+    def setters(self: BM, values: List[T]):
+        pass
+
+    return setters
 
 
 def make_converter() -> Converter:
