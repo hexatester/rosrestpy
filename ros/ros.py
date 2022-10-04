@@ -102,6 +102,19 @@ class Ros(BaseRos):
     _routing: Optional[RoutingModule] = None
     _system: Optional[SystemModule] = None
     _tool: Optional[ToolModule] = None
+    """
+    Ros class that represent a routeros device.
+
+    Attributes
+    ----------
+    :param str server: The device's Rest API url, example https://192.168.88.1/
+    :param str username: Username
+    :param str password: Password
+    :param requests.Session session: A requests.Session instance
+    :param bool secure: Valdiate ssl cert
+    :param str filename: Base filename of the rest API, default to `rest`
+    :param str url: The device's Rest API url with base filename, default to https://server/rest
+    """
 
     @property
     def bridge(self) -> BridgeModule:
