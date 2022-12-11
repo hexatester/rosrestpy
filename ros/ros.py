@@ -92,6 +92,24 @@ class BaseRos:
             raise _converter.structure(data, Error)
         return _converter.structure(data, cl)
 
+    def put_as(
+        self,
+        filename: str,
+        cl: Type[T],
+        json_: Any = None,
+        data: Any = None,
+    ) -> T:
+        res = self.session.put(
+            self.url + filename,
+            data=data,
+            json=json_,
+        )
+        odata = json.loads(res.text)
+        data = clean_data(odata)
+        if data and "error" in data:
+            raise _converter.structure(data, Error)
+        return _converter.structure(data, cl)
+
 
 class Ros(BaseRos):
     _interface: Optional[InterfaceModule] = None
