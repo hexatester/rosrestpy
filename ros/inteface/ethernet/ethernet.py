@@ -3,7 +3,7 @@ from typing import Optional
 
 
 @dataclass
-class EthernetList:
+class InterfaceEthernet:
     id: str
     advertise: str
     arp: str
@@ -29,7 +29,6 @@ class EthernetList:
     running: bool
     rx_1024_1518: int
     rx_128_255: int
-    rx_1519_max: int
     rx_256_511: int
     rx_512_1023: int
     rx_64: int
@@ -40,8 +39,9 @@ class EthernetList:
     rx_fcs_error: int
     rx_flow_control: str
     rx_fragment: int
+    rx_jabber: int
     rx_multicast: int
-    rx_overflow: int
+    rx_packet: int
     rx_pause: int
     rx_too_long: int
     rx_too_short: int
@@ -49,7 +49,6 @@ class EthernetList:
     switch: str
     tx_1024_1518: int
     tx_128_255: int
-    tx_1519_max: int
     tx_256_511: int
     tx_512_1023: int
     tx_64: int
@@ -58,16 +57,16 @@ class EthernetList:
     tx_bytes: int
     tx_collision: int
     tx_deferred: int
+    tx_drop: int
     tx_excessive_collision: int
-    tx_excessive_deferred: int
+    tx_fcs_error: int
     tx_flow_control: str
     tx_late_collision: int
     tx_multicast: int
     tx_multiple_collision: int
+    tx_packet: int
     tx_pause: int
     tx_single_collision: int
-    tx_too_long: int
-    tx_underrun: int
     comment: Optional[str] = None
     slave: Optional[bool] = None
 

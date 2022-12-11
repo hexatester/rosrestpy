@@ -3,13 +3,13 @@ from attr import define
 
 from ros._base import BaseSubModule
 
-from .ethernet import EthernetList
+from .ethernet import InterfaceEthernet
 
 
 @define
 class EthernetModule(BaseSubModule):
-    def print(self) -> List[EthernetList]:
-        return self.module.ros.get_as(self.url, List[EthernetList])
+    def print(self) -> List[InterfaceEthernet]:
+        return self.module.ros.get_as(self.url, List[InterfaceEthernet])
 
 
-__all__ = ["EthernetList", "EthernetModule"]
+__all__ = ["InterfaceEthernet", "EthernetModule"]
