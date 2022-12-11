@@ -1,5 +1,6 @@
+from attrs import asdict
 from cattrs import Converter
-from typing import Any, Dict, List, Type, Union, TypeVar
+from typing import Any, Dict, List, Tuple, Type, Union, TypeVar
 
 from ._base import BM
 
@@ -49,8 +50,35 @@ T = TypeVar("T", bound=object)
 
 def make_setters(url: str, cls: Type[T]):
     def setters(self: BM, values: List[T]):
-        pass
-
+        idattr = "id"
+        existed = self.simple
+        updated: List[Tuple[T, ...]] = list()
+        news: List[T] = list()
+        results: List[T] = list()
+        for queue in values:
+            exist = filter(lambda x: getattr(x, idattr) == getattr(queue, id), existed)
+            if exist:
+                e: T = set(exist)[0]
+                assert e
+                if e != queue:
+                    updated.append((e, queue))
+            else:
+                news.append(queue)
+        for update in updated:
+            old, new = update
+            _id = getattr(old, idattr)
+            data = asdict(new, True)
+            newdata = dict_diff(asdict(old), asdict(new))
+            res = self.ros.patch_as(self.url + f"{url}/{_id}", cls, newdata)
+            if res:
+                results.append(res)
+        for new in news:
+            data = asdict(new)
+            data.pop(idattr)
+            res = self.ros.put_as(self.url + f"{url}", cls, data)
+            if res:
+                results.append(res)
+        return results
     return setters
 
 
