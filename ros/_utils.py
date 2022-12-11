@@ -79,6 +79,7 @@ def make_setters(url: str, cls: Type[T]):
             if res:
                 results.append(res)
         return results
+
     return setters
 
 
