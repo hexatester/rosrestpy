@@ -33,6 +33,17 @@ def _union_str_int(v: str, t: Any) -> Union[str, int]:
     return v
 
 
+def dict_diff(old: Dict[str, Any], new: Dict[str, Any]) -> Dict[str, Any]:
+    results: Dict[str, Any] = dict()
+    for o, ov in old.items():
+        nv = new.get(o)
+        if nv is None:
+            continue
+        if nv == ov:
+            results[o] = nv
+    return results
+
+
 T = TypeVar("T", bound=object)
 
 
