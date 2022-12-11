@@ -41,6 +41,7 @@ class BaseRos:
         if not self.server.endswith("/"):
             self.server += "/"
         self.session.auth = HTTPBasicAuth(self.username, self.password)
+        self.session.verify = self.secure
         self.password = ""
         self.url = self.server + self.filename
 
@@ -66,7 +67,6 @@ class BaseRos:
             self.url + filename,
             data=data,
             json=json_,
-            verify=self.secure,
         )
         odata = json.loads(res.text)
         data = clean_data(odata)
@@ -85,7 +85,6 @@ class BaseRos:
             self.url + filename,
             data=data,
             json=json_,
-            verify=self.secure,
         )
         odata = json.loads(res.text)
         data = clean_data(odata)
