@@ -5,7 +5,7 @@ except ImportError:
 from attr import define
 from requests import Session
 from requests.auth import HTTPBasicAuth
-from typing import Any, List, Optional, Type, TypeVar
+from typing import Any, Dict, List, Optional, Type, TypeVar
 
 from . import (
     InterfaceModule,
@@ -45,8 +45,8 @@ class BaseRos:
         self.password = ""
         self.url = self.server + self.filename
 
-    def get_as(self, filename: str, cl: Type[T]) -> T:
-        res = self.session.get(self.url + filename, verify=self.secure)
+    def get_as(self, filename: str, cl: Type[T], filters: Dict[str, Any] = None) -> T:
+        res = self.session.get(self.url + filename, params=filters, verify=self.secure)
         odata = json.loads(res.text)
         data: Any = clean_data(odata)
         if data and "error" in data:
