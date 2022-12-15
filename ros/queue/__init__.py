@@ -14,5 +14,3 @@ class QueueModule(BaseModule):
 
     def simple(self, **kwds: Any) -> List[SimpleQueue]:
         return self.ros.get_as(self.url + "/simple", List[SimpleQueue], kwds)
-
-    simple.setter(make_setters("/queue/simple", SimpleQueue))
