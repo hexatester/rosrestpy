@@ -179,9 +179,8 @@ class Ros(BaseRos):
             self._tool = ToolModule(self, "/tool")
         return self._tool
 
-    @property
-    def log(self):
-        return self.get_as("/log", List[Log])
+    def log(self, **kwds: Any):
+        return self.get_as("/log", List[Log], kwds)
 
     def ping(self, address: str, count: int = 4):
         return self.tool.ping(address, count)
