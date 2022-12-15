@@ -1,6 +1,6 @@
 from ros import InterfaceModule
 from ros.inteface.bridge import BridgeModule, Bridge, BridgeMsti, BridgePort, BridgeVlan
-from ros.inteface.ethernet import EthernetModule, EthernetList
+from ros.inteface.ethernet import EthernetModule, InterfaceEthernet
 from ros.inteface.list import InterfaceListModule, InterfaceList, InterfaceListMember
 
 
@@ -14,7 +14,7 @@ class TestBridge:
         assert isinstance(ros.bridge, BridgeModule)
 
     def test_bridge_bridge(self, ros):
-        for item in ros.bridge.print():
+        for item in ros.bridge():
             assert isinstance(item, Bridge)
 
     def test_bridge_msti(self, ros):
@@ -35,8 +35,8 @@ class TestEthernet:
         assert isinstance(ros.interface.ethernet, EthernetModule)
 
     def test_ethernet_list(self, ros):
-        for item in ros.interface.ethernet.print():
-            assert isinstance(item, EthernetList)
+        for item in ros.interface.ethernet():
+            assert isinstance(item, InterfaceEthernet)
 
 
 class TestList:
@@ -48,5 +48,5 @@ class TestList:
             assert isinstance(item, InterfaceList)
 
     def test_list_member(self, ros):
-        for item in ros.interface.list.member:
+        for item in ros.interface.list.member():
             assert isinstance(item, InterfaceListMember)

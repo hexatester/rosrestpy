@@ -27,13 +27,6 @@ class InterfaceEthernet:
     name: str
     orig_mac_address: str
     running: bool
-    rx_1024_1518: int
-    rx_128_255: int
-    rx_256_511: int
-    rx_512_1023: int
-    rx_64: int
-    rx_65_127: int
-    rx_align_error: int
     rx_broadcast: int
     rx_bytes: int
     rx_fcs_error: int
@@ -41,34 +34,46 @@ class InterfaceEthernet:
     rx_fragment: int
     rx_jabber: int
     rx_multicast: int
-    rx_packet: int
     rx_pause: int
-    rx_too_long: int
-    rx_too_short: int
     speed: str
-    switch: str
-    tx_1024_1518: int
-    tx_128_255: int
-    tx_256_511: int
-    tx_512_1023: int
-    tx_64: int
-    tx_65_127: int
     tx_broadcast: int
     tx_bytes: int
-    tx_collision: int
-    tx_deferred: int
-    tx_drop: int
-    tx_excessive_collision: int
-    tx_fcs_error: int
     tx_flow_control: str
-    tx_late_collision: int
     tx_multicast: int
-    tx_multiple_collision: int
-    tx_packet: int
     tx_pause: int
-    tx_single_collision: int
     comment: Optional[str] = None
+    fec_mode: Optional[str] = None
+    rx_1024_1518: Optional[int] = None
+    rx_128_255: Optional[int] = None
+    rx_1519_max: Optional[int] = None
+    rx_256_511: Optional[int] = None
+    rx_512_1023: Optional[int] = None
+    rx_64: Optional[int] = None
+    rx_65_127: Optional[int] = None
+    rx_align_error: Optional[int] = None
+    rx_drop: Optional[int] = None
+    rx_length_error: Optional[int] = None
+    rx_packet: Optional[int] = None
+    rx_too_long: Optional[int] = None
+    rx_too_short: Optional[int] = None
+    sfp_rate_select: Optional[str] = None
     slave: Optional[bool] = None
+    switch: Optional[str] = None
+    tx_1024_1518: Optional[int] = None
+    tx_128_255: Optional[int] = None
+    tx_256_511: Optional[int] = None
+    tx_512_1023: Optional[int] = None
+    tx_64: Optional[int] = None
+    tx_65_127: Optional[int] = None
+    tx_collision: Optional[int] = None
+    tx_deferred: Optional[int] = None
+    tx_drop: Optional[int] = None
+    tx_excessive_collision: Optional[int] = None
+    tx_fcs_error: Optional[int] = None
+    tx_late_collision: Optional[int] = None
+    tx_multiple_collision: Optional[int] = None
+    tx_packet: Optional[int] = None
+    tx_single_collision: Optional[int] = None
 
     def __str__(self) -> str:
         return self.name
