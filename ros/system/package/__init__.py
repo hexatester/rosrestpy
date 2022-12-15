@@ -12,8 +12,11 @@ class PackageModule(BaseSubModule):
     def downgrade(self):
         self.module.ros.post_as(self.url + "/downgrade", None)
 
-    def print(self) -> List[Package]:
-        return self.module.ros.get_as(self.url, List[Package])
+    def __call__(self, **kwds) -> List[Package]:
+        return self.print(**kwds)
+
+    def print(self, **kwds) -> List[Package]:
+        return self.module.ros.get_as(self.url, List[Package], kwds)
 
     @property
     def update(self) -> UpdateModule:
