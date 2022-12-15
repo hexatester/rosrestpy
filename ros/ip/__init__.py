@@ -21,25 +21,21 @@ class IPModule(BaseModule):
     def __attrs_post_init__(self) -> None:
         return super().__attrs_post_init__()
 
-    @property
-    def address(self) -> List[Address]:
-        return self.ros.get_as(self.url + "/address", List[Address])
+    def address(self, **kwds) -> List[Address]:
+        return self.ros.get_as(self.url + "/address", List[Address], kwds)
 
-    @property
-    def arp(self) -> List[ARP]:
-        return self.ros.get_as(self.url + "/arp", List[ARP])
+    def arp(self, **kwds) -> List[ARP]:
+        return self.ros.get_as(self.url + "/arp", List[ARP], kwds)
 
     @property
     def cloud(self) -> Cloud:
         return self.ros.get_as(self.url + "/cloud", Cloud)
 
-    @property
-    def dhcp_client(self) -> List[DHCPClient]:
-        return self.ros.get_as(self.url + "/dhcp-client", List[DHCPClient])
+    def dhcp_client(self, **kwds) -> List[DHCPClient]:
+        return self.ros.get_as(self.url + "/dhcp-client", List[DHCPClient], kwds)
 
-    @property
-    def dhcp_relay(self) -> List[DHCPRelay]:
-        return self.ros.get_as(self.url + "/dhcp-relay", List[DHCPRelay])
+    def dhcp_relay(self, **kwds) -> List[DHCPRelay]:
+        return self.ros.get_as(self.url + "/dhcp-relay", List[DHCPRelay], kwds)
 
     @property
     def dhcp_server(self) -> DHCPServerModule:
@@ -53,9 +49,8 @@ class IPModule(BaseModule):
         dns._mod = self
         return dns
 
-    @property
-    def route(self) -> List[Route]:
-        return self.ros.get_as(self.url + "/route", List[Route])
+    def route(self, **kwds) -> List[Route]:
+        return self.ros.get_as(self.url + "/route", List[Route], kwds)
 
     @property
     def setting(self) -> Setting:

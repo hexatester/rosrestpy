@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 
 from ros._base import BaseModule
 
@@ -16,13 +16,11 @@ from .routerboard import RouterBOARD
 class SystemModule(BaseModule):
     _package: Package = None
 
-    @property
-    def health(self) -> List[Health]:
-        return self.ros.get_as(self.url + "/health", List[Health])
+    def health(self, **kwds: Any) -> List[Health]:
+        return self.ros.get_as(self.url + "/health", List[Health], kwds)
 
-    @property
-    def history(self) -> List[History]:
-        return self.ros.get_as(self.url + "/history", List[History])
+    def history(self, **kwds: Any) -> List[History]:
+        return self.ros.get_as(self.url + "/history", List[History], kwds)
 
     @property
     def identity(self) -> Identity:
@@ -32,9 +30,8 @@ class SystemModule(BaseModule):
     def license(self) -> License:
         return self.ros.get_as(self.url + "/license", License)
 
-    @property
-    def logging(self) -> List[Logging]:
-        return self.ros.get_as(self.url + "/logging", List[Logging])
+    def logging(self, **kwds: Any) -> List[Logging]:
+        return self.ros.get_as(self.url + "/logging", List[Logging], kwds)
 
     @property
     def note(self) -> Note:

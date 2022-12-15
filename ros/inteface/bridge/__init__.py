@@ -1,5 +1,5 @@
-from typing import List
 from attrs import define
+from typing import Any, List
 
 from ros._base import BaseSubModule
 
@@ -11,8 +11,11 @@ from .vlan import BridgeVlan
 
 @define
 class BridgeModule(BaseSubModule):
-    def print(self) -> List[Bridge]:
-        return self.module.ros.get_as(self.url, List[Bridge])
+    def __call__(self, **kwds: Any) -> List[Bridge]:
+        return self.print(**kwds)
+
+    def print(self, **kwds: Any) -> List[Bridge]:
+        return self.module.ros.get_as(self.url, List[Bridge], kwds)
 
     @property
     def msti(self) -> List[BridgeMsti]:

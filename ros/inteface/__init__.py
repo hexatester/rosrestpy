@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from ros._base import BaseModule
 
@@ -12,6 +12,9 @@ class InterfaceModule(BaseModule):
     _brigde: Optional[BridgeModule] = None
     _ethernet: Optional[EthernetModule] = None
     _list: Optional[InterfaceListModule] = None
+
+    def __call__(self, **kwds: Any):
+        return self.print(**kwds)
 
     @property
     def bridge(self) -> BridgeModule:
@@ -31,8 +34,8 @@ class InterfaceModule(BaseModule):
             self._ethernet = EthernetModule(self, "/ethernet")
         return self._ethernet
 
-    def print(self) -> List[Interface]:
-        return self.ros.get_as(self.url, List[Interface])
+    def print(self, **kwds: Any) -> List[Interface]:
+        return self.ros.get_as(self.url, List[Interface], kwds)
 
 
 __all__ = [

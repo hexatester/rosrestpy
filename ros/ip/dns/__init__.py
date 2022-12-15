@@ -25,15 +25,13 @@ class DNS:
     verify_doh_cert: bool
     _mod: "BaseModule" = None
 
-    @property
-    def cache(self) -> List[DNSCache]:
+    def cache(self, **kwds) -> List[DNSCache]:
         assert self._mod is not None
-        return self._mod.ros.get_as(self._mod.url + "/dns/cache", List[DNSCache])
+        return self._mod.ros.get_as(self._mod.url + "/dns/cache", List[DNSCache], kwds)
 
-    @property
-    def static(self) -> List[DNSStatic]:
+    def static(self, **kwds) -> List[DNSStatic]:
         assert self._mod is not None
-        return self._mod.ros.get_as(self._mod.url + "/dns/static", List[DNSStatic])
+        return self._mod.ros.get_as(self._mod.url + "/dns/static", List[DNSStatic], kwds)
 
     def flush(self):
         assert self._mod is not None

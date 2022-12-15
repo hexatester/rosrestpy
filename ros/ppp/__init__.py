@@ -14,13 +14,11 @@ class PPPModule(BaseModule):
     def aaa(self) -> PPPAAA:
         return self.ros.get_as(self.url + "/aaa", PPPAAA)
 
-    @property
-    def profile(self) -> List[PPPProfile]:
-        return self.ros.get_as(self.url + "/profile", List[PPPProfile])
+    def profile(self, **kwds) -> List[PPPProfile]:
+        return self.ros.get_as(self.url + "/profile", List[PPPProfile], kwds)
 
-    @property
-    def secret(self) -> List[PPPSecret]:
-        return self.ros.get_as(self.url + "/secret", List[PPPSecret])
+    def secret(self, **kwds) -> List[PPPSecret]:
+        return self.ros.get_as(self.url + "/secret", List[PPPSecret], kwds)
 
 
 __all__ = ["PPPAAA", "PPPModule", "PPPProfile", "PPPSecret"]

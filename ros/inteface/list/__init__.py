@@ -1,5 +1,5 @@
-from typing import List
 from attr import define
+from typing import Any, List
 
 from ros._base import BaseSubModule
 
@@ -9,8 +9,11 @@ from .member import InterfaceListMember
 
 @define
 class InterfaceListModule(BaseSubModule):
-    def print(self) -> List[InterfaceList]:
-        return self.module.ros.get_as(self.url, List[InterfaceList])
+    def __call__(self, **kwds: Any) -> Any:
+        return self.print(**kwds)
+
+    def print(self, **kwds) -> List[InterfaceList]:
+        return self.module.ros.get_as(self.url, List[InterfaceList], kwds)
 
     @property
     def member(self) -> List[InterfaceListMember]:
