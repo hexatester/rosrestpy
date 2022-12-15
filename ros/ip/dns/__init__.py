@@ -1,8 +1,7 @@
 from attr import dataclass
-from typing import TYPE_CHECKING, List
+from typing import List
 
-if TYPE_CHECKING:
-    from ros._base import BaseModule
+from ros._base import BM
 
 from .cache import DNSCache
 from .static import DNSStatic
@@ -23,7 +22,7 @@ class DNS:
     servers: str
     use_doh_server: str
     verify_doh_cert: bool
-    _mod: "BaseModule" = None
+    _mod: BM = None
 
     def cache(self, **kwds) -> List[DNSCache]:
         assert self._mod is not None
