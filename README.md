@@ -27,8 +27,13 @@ ros = Ros("https://192.168.88.1/", "admin", "")
 if ros.system.resource.cpu_load > 90:
     print(f"{ros.system.identity}'s CPU > 90%")
 
-for interface in ros.interface.print():
+for interface in ros.interface():
     print(interface.name)
+
+queues = ros.queue.simple(name="Hotspot")
+if len(queues) == 1:
+    queue = queues[0]
+    print(f"Usage {queue.bytes}")
 
 bw_tests = ros.tool.bandwith_test("172.16.0.1", "3s", "admin", direction="both")
 result_bw_test = bw_tests[-1]
