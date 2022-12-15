@@ -8,8 +8,11 @@ from .network import DHCPNetwork
 class DHCPServerModule(BaseSubModule):
     url: str = "dhcp-server"
 
-    def print(self) -> List[DHCPServer]:
-        return self.module.ros.get_as(self.url, List[DHCPServer])
+    def __call__(self, **kwds) -> List[DHCPServer]:
+        return self.print(**kwds)
+
+    def print(self, **kwds) -> List[DHCPServer]:
+        return self.module.ros.get_as(self.url, List[DHCPServer], kwds)
 
     @property
     def network(self) -> List[DHCPNetwork]:
