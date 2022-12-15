@@ -6,6 +6,6 @@ from attr import dataclass
 class Cloud:
     ddns_enabled: bool
     ddns_update_interval: Optional[str]
-    public_address: str
     update_time: bool
+    public_address: Optional[str] = None
     status: Optional[str] = None
