@@ -7,9 +7,9 @@ class TestQueue:
         assert isinstance(ros.queue, QueueModule)
 
     def test_queue_interface(self, ros):
-        for i in ros.queue.interface:
+        for i in ros.queue.interface():
             assert isinstance(i, InterfaceQueue)
 
     def test_queue_simple(self, ros):
-        for i in ros.queue.simple:
+        for i in ros.queue.simple():
             assert isinstance(i, SimpleQueue)

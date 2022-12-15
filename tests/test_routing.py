@@ -9,5 +9,5 @@ class TestRouting:
 
 class TestRoutingTable:
     def test_routing(self, ros):
-        for i in ros.routing.table:
+        for i in ros.routing.table():
             assert isinstance(i, RoutingTable)

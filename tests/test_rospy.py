@@ -6,5 +6,5 @@ class TestRos:
         assert __version__ == "0.2.0"
 
     def test_log(self, ros):
-        for log in ros.log:
+        for log in ros.log():
             assert isinstance(log, Log)

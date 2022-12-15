@@ -8,11 +8,11 @@ class TestSystem:
         assert isinstance(ros.system, SystemModule)
 
     def test_health(self, ros):
-        for health in ros.system.health:
+        for health in ros.system.health():
             assert isinstance(health, Health)
 
     def test_history(self, ros):
-        for history in ros.system.history:
+        for history in ros.system.history():
             assert isinstance(history, History)
 
     def test_identity(self, ros):
@@ -36,7 +36,7 @@ class TestPackage:
         assert isinstance(ros.system.package, PackageModule)
 
     def test_package_print(self, ros):
-        for i in ros.system.package.print():
+        for i in ros.system.package():
             assert isinstance(i, Package)
 
 
