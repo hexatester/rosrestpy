@@ -1,7 +1,7 @@
 from attr import dataclass
 
 
-@dataclass
+@dataclass(slots=True)
 class Logging:
     id: str
     action: str

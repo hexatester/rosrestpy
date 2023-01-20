@@ -1,7 +1,7 @@
 from attr import dataclass
 
 
-@dataclass
+@dataclass(slots=True)
 class RouterBOARD:
     current_firmware: str
     factory_firmware: str
