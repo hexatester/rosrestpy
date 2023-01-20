@@ -70,10 +70,13 @@ class ToolModule(BaseModule):
         interface: str,
         duration: str,
         address_range: str = None,
+        freeze_frame_interval: str = None,
     ) -> List[IPScan]:
         data = {"interface": interface, "duration": duration}
         if address_range:
             data["address-range"] = address_range
+        if freeze_frame_interval:
+            data["freeze-frame-interval"] = freeze_frame_interval
         return self.ros.post_as(self.url + "/ip-scan", List[IPScan], data)
 
     def torch(
