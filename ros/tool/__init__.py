@@ -154,6 +154,40 @@ class ToolModule(BaseModule):
             data["src-address"] = src_address
         return self.ros.post_as(self.url + "/traceroute", List[Traceroute], data)
 
+    def torch(
+        self,
+        interface: str,
+        duration: str = "3s",
+        src_address: str = "0.0.0.0/0",
+        dst_address: str = "0.0.0.0/0",
+        src_address6: str = "::/0",
+        dst_address6: str = "::/0",
+        mac_protocol: Union[AnyLiteral, MACProtocol] = "any",
+        ip_protocol: Union[AnyLiteral, IPProtocol] = "any",
+        port: PortLiteral = "any",
+        vlan_id: Union[AnyLiteral, int] = "any",
+        dscp: Union[AnyLiteral, int] = "any",
+        cpu: Union[AnyLiteral, int] = "any",
+        freeze_frame_interval: str = None,
+    ) -> List[Torch]:
+        data = {
+            "interface": interface,
+            "dst-address": dst_address,
+            "mac-protocol": mac_protocol,
+            "src-address6": src_address6,
+            "cpu": cpu,
+            "dst-address6": dst_address6,
+            "port": port,
+            "vlan-id": vlan_id,
+            "dscp": dscp,
+            "duration": duration,
+            "ip-protocol": ip_protocol,
+            "src-address": src_address,
+        }
+        if freeze_frame_interval:
+            data["freeze-frame-interval"] = freeze_frame_interval
+        return self.ros.post_as(self.url + "/torch", List[Torch], data)
+
     def wol(self, interface: str, mac: str) -> List[dict]:
         data = {"interface": interface, "mac": mac}
         return self.ros.post_as(self.url + "/wol", List[dict], data)
