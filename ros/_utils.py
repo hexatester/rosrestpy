@@ -28,6 +28,14 @@ def clean_data(d: Dict[str, Any]) -> dict:
     return data
 
 
+def clean_filters(d: Dict[str, Any]) -> dict:
+    nd = dict()
+    for k, v in d.items():
+        k = k.replace("_", "-")
+        nd[k] = v
+    return nd
+
+
 def _union_str_int(v: str, t: Any) -> Union[str, int]:
     if v.isdigit():
         return int(v)

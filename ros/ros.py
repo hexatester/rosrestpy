@@ -20,7 +20,7 @@ from . import (
 from . import Error, Log
 
 from .inteface import BridgeModule
-from ._utils import clean_data, make_converter
+from ._utils import clean_data, clean_filters, make_converter
 
 _converter = make_converter()
 
@@ -46,7 +46,11 @@ class BaseRos:
         self.url = self.server + self.filename
 
     def get_as(self, filename: str, cl: Type[T], filters: Dict[str, Any] = None) -> T:
-        res = self.session.get(self.url + filename, params=filters, verify=self.secure)
+        res = self.session.get(
+            self.url + filename,
+            params=clean_filters(filters),
+            verify=self.secure,
+        )
         odata = json.loads(res.text)
         data: Any = clean_data(odata)
         if data and "error" in data:
