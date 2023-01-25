@@ -10,6 +10,7 @@ from .dhcp_client import DHCPClient
 from .dhcp_relay import DHCPRelay
 from .dhcp_server import DHCPServerModule
 from .dns import DNS
+from .firewall import IPFirewallModule
 from .route import Route
 from .setting import Setting
 
@@ -17,6 +18,7 @@ from .setting import Setting
 @define
 class IPModule(BaseModule):
     _dhcp_server: Optional[DHCPServerModule] = None
+    _firewall: Optional[IPFirewallModule] = None
 
     def __attrs_post_init__(self) -> None:
         return super().__attrs_post_init__()
@@ -48,6 +50,12 @@ class IPModule(BaseModule):
         dns = self.ros.get_as(self.url + "/dns", DNS)
         dns._mod = self
         return dns
+
+    @property
+    def firewall(self) -> IPFirewallModule:
+        if not self._firewall:
+            self._firewall = IPFirewallModule(self, "/firewall")
+        return self._firewall
 
     def route(self, **kwds) -> List[Route]:
         return self.ros.get_as(self.url + "/route", List[Route], kwds)

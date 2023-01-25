@@ -2,6 +2,16 @@ from ros import IPModule
 from ros.ip import Address, ARP, Cloud, DHCPClient, DHCPRelay, DHCPServerModule
 from ros.ip.dhcp_server import DHCPServer, DHCPNetwork
 from ros.ip.dns import DNS, DNSCache, DNSStatic
+from ros.ip.firewall import (
+    IPFirewallModule,
+    IPFirewallConnectionModule,
+    IPFirewallFilterModule,
+    IPFirewallLayer7ProtocolModule,
+    IPFirewallMangleModule,
+    IPFirewallNatModule,
+    IPFirewallRawModule,
+    IPFirewallServicePortModule,
+)
 
 
 class TestIP:
@@ -55,3 +65,31 @@ class TestDNS:
     def test_static(self, ros):
         for i in ros.ip.dns.static():
             assert isinstance(i, DNSStatic)
+
+
+class TestIPFirewall:
+    def test_firewall(self, ros):
+        assert isinstance(ros.ip.firewall, IPFirewallModule)
+
+    def test_connection(self, ros):
+        assert isinstance(ros.ip.firewall.connection, IPFirewallConnectionModule)
+
+    def test_filter(self, ros):
+        assert isinstance(ros.ip.firewall.filter, IPFirewallFilterModule)
+
+    def test_layer7_protocol(self, ros):
+        assert isinstance(
+            ros.ip.firewall.layer7_protocol, IPFirewallLayer7ProtocolModule
+        )
+
+    def test_mangle(self, ros):
+        assert isinstance(ros.ip.firewall.mangle, IPFirewallMangleModule)
+
+    def test_nat(self, ros):
+        assert isinstance(ros.ip.firewall.nat, IPFirewallNatModule)
+
+    def test_raw(self, ros):
+        assert isinstance(ros.ip.firewall.raw, IPFirewallRawModule)
+
+    def test_service_port(self, ros):
+        assert isinstance(ros.ip.firewall.service_port, IPFirewallServicePortModule)
