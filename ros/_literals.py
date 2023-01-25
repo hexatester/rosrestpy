@@ -294,3 +294,16 @@ PortLiteral = Literal[
     "yahoo",
     "z39.50",
 ]
+
+TCPState = Literal[
+    "close",
+    "close-wait",
+    "established",
+    "fin-wait",
+    "last-ack",
+    "listen",
+    "none",
+    "syn-recv",
+    "syn-sent",
+    "time-wait",
+]
