@@ -33,7 +33,8 @@ class BaseSubModule:
 
     def __attrs_post_init__(self) -> None:
         if self.url:
-            self.url = self.module.url + self.url
+            if not self.url.startswith(self.module.url):
+                self.url = self.module.url + self.url
         else:
             cname = self.__class__.__name__.lower()
             self.url = self.module.url + "/" + cname.replace("module", "")
