@@ -1,5 +1,5 @@
 from attr import define
-from typing import TYPE_CHECKING, TypeVar
+from typing import TYPE_CHECKING, Any, Generic, List, Type, TypeVar, Union
 
 if TYPE_CHECKING:
     from ros.ros import Ros
@@ -38,3 +38,19 @@ class BaseSubModule:
         else:
             cname = self.__class__.__name__.lower()
             self.url = self.module.url + "/" + cname.replace("module", "")
+
+
+PR = TypeVar("PR", bound=object)
+
+
+@define
+class BaseProp(Generic[PR]):
+    mod: Union[BaseModule, BaseSubModule]
+    url: str
+    cl: Type[PR]
+
+    def __call__(self, **kwds: Any) -> List[PR]:
+        return self.print(**kwds)
+
+    def print(self, **kwds: Any) -> List[PR]:
+        return self.mod.ros.get_as(self.url, List[self.cl], kwds)
