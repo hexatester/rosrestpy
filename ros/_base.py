@@ -49,6 +49,19 @@ class BaseProp(Generic[PR]):
     url: str
     cl: Type[PR]
 
+    def __call__(self, **kwds: Any) -> PR:
+        return self.print(**kwds)
+
+    def print(self, **kwds: Any) -> PR:
+        return self.mod.ros.get_as(self.url, self.cl, kwds)
+
+
+@define
+class BaseProps(Generic[PR]):
+    mod: Union[BaseModule, BaseSubModule]
+    url: str
+    cl: Type[PR]
+
     def __call__(self, **kwds: Any) -> List[PR]:
         return self.print(**kwds)
 
