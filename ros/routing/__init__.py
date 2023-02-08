@@ -1,13 +1,16 @@
-from typing import Any, List
-
-from ros._base import BaseModule
+from ros._base import BaseModule, BaseProps
 
 from .table import RoutingTable
 
 
 class RoutingModule(BaseModule):
-    def table(self, **kwds: Any) -> List[RoutingTable]:
-        return self.ros.get_as(self.url + "/table", List[RoutingTable], kwds)
+    _table: BaseProps[RoutingTable] = None
+
+    @property
+    def table(self):
+        if not self._table:
+            self._table = BaseProps(self, self.url + "/table", RoutingTable)
+        return self._table
 
 
 __all__ = ["RoutingModule", "RoutingTable"]

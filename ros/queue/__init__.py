@@ -1,16 +1,21 @@
-from attrs import define
-from typing import Any, List
+from ros._base import BaseModule, BaseProps
 
-from ros._base import BaseModule
-from ros._utils import make_setters
 from .interface import InterfaceQueue
 from .simple import SimpleQueue
 
 
-@define
 class QueueModule(BaseModule):
-    def interface(self, **kwds: Any) -> List[InterfaceQueue]:
-        return self.ros.get_as(self.url + "/interface", List[InterfaceQueue], kwds)
+    _interface: BaseProps[InterfaceQueue] = None
+    _simple: BaseProps[SimpleQueue] = None
 
-    def simple(self, **kwds: Any) -> List[SimpleQueue]:
-        return self.ros.get_as(self.url + "/simple", List[SimpleQueue], kwds)
+    @property
+    def interface(self):
+        if not self._interface:
+            self._interface = BaseProps(self, self.url + "/interface", InterfaceQueue)
+        return self._interface
+
+    @property
+    def simple(self):
+        if not self._simple:
+            self._simple = BaseProps(self, self.url + "/simple", SimpleQueue)
+        return self._simple

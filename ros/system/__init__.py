@@ -1,6 +1,4 @@
-from typing import Any, List
-
-from ros._base import BaseModule
+from ros._base import BaseModule, BaseProps
 
 from .health import Health
 from .history import History
@@ -14,13 +12,22 @@ from .routerboard import RouterBOARD
 
 
 class SystemModule(BaseModule):
+    _health: BaseProps[Health] = None
+    _history: BaseProps[History] = None
+    _logging: BaseProps[Logging] = None
     _package: Package = None
 
-    def health(self, **kwds: Any) -> List[Health]:
-        return self.ros.get_as(self.url + "/health", List[Health], kwds)
+    @property
+    def health(self):
+        if not self._health:
+            self._health = BaseProps(self, self.url + "/health", Health)
+        return self._health
 
-    def history(self, **kwds: Any) -> List[History]:
-        return self.ros.get_as(self.url + "/history", List[History], kwds)
+    @property
+    def history(self):
+        if not self._history:
+            self._history = BaseProps(self, self.url + "/history", History)
+        return self._history
 
     @property
     def identity(self) -> Identity:
@@ -30,8 +37,11 @@ class SystemModule(BaseModule):
     def license(self) -> License:
         return self.ros.get_as(self.url + "/license", License)
 
-    def logging(self, **kwds: Any) -> List[Logging]:
-        return self.ros.get_as(self.url + "/logging", List[Logging], kwds)
+    @property
+    def logging(self):
+        if not self._logging:
+            self._logging = BaseProps(self, self.url + "/logging", Logging)
+        return self._logging
 
     @property
     def note(self) -> Note:

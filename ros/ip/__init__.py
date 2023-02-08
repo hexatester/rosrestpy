@@ -1,7 +1,6 @@
-from attrs import define
-from typing import List, Optional
+from typing import Optional
 
-from ros._base import BaseModule
+from ros._base import BaseModule, BaseProps
 
 from .address import Address
 from .arp import ARP
@@ -15,29 +14,46 @@ from .route import Route
 from .setting import Setting
 
 
-@define
 class IPModule(BaseModule):
     _dhcp_server: Optional[DHCPServerModule] = None
     _firewall: Optional[IPFirewallModule] = None
 
+    _address: BaseProps[Address] = None
+    _arp: BaseProps[ARP] = None
+    _dhcp_client: BaseProps[DHCPClient] = None
+    _dhcp_relay: BaseProps[DHCPRelay] = None
+    _route: BaseProps[Route] = None
+
     def __attrs_post_init__(self) -> None:
         return super().__attrs_post_init__()
 
-    def address(self, **kwds) -> List[Address]:
-        return self.ros.get_as(self.url + "/address", List[Address], kwds)
+    @property
+    def address(self):
+        if not self._address:
+            self._address = BaseProps(self, self.url + "/address", Address)
+        return self._address
 
-    def arp(self, **kwds) -> List[ARP]:
-        return self.ros.get_as(self.url + "/arp", List[ARP], kwds)
+    @property
+    def arp(self):
+        if not self._arp:
+            self._arp = BaseProps(self, self.url + "/arp", ARP)
+        return self._arp
 
     @property
     def cloud(self) -> Cloud:
         return self.ros.get_as(self.url + "/cloud", Cloud)
 
-    def dhcp_client(self, **kwds) -> List[DHCPClient]:
-        return self.ros.get_as(self.url + "/dhcp-client", List[DHCPClient], kwds)
+    @property
+    def dhcp_client(self):
+        if not self._dhcp_client:
+            self._dhcp_client = BaseProps(self, self.url + "/dhcp-client", DHCPClient)
+        return self._dhcp_client
 
-    def dhcp_relay(self, **kwds) -> List[DHCPRelay]:
-        return self.ros.get_as(self.url + "/dhcp-relay", List[DHCPRelay], kwds)
+    @property
+    def dhcp_relay(self):
+        if not self._dhcp_relay:
+            self._dhcp_relay = BaseProps(self, self.url + "/dhcp-relay", DHCPRelay)
+        return self._dhcp_relay
 
     @property
     def dhcp_server(self) -> DHCPServerModule:
@@ -57,8 +73,11 @@ class IPModule(BaseModule):
             self._firewall = IPFirewallModule(self, "/firewall")
         return self._firewall
 
-    def route(self, **kwds) -> List[Route]:
-        return self.ros.get_as(self.url + "/route", List[Route], kwds)
+    @property
+    def route(self):
+        if not self._route:
+            self._route = BaseProps(self, self.url + "/route", Route)
+        return self._route
 
     @property
     def setting(self) -> Setting:
