@@ -16,7 +16,9 @@ class InterfaceListModule(BaseSubModule):
         return self.module.ros.get_as(self.url, List[InterfaceList], kwds)
 
     def member(self, **kwds) -> List[InterfaceListMember]:
-        return self.module.ros.get_as(self.url + "/member", List[InterfaceListMember], kwds)
+        return self.module.ros.get_as(
+            self.url + "/member", List[InterfaceListMember], kwds
+        )
 
 
 __all__ = ["InterfaceList", "InterfaceListMember", "InterfaceListModule"]

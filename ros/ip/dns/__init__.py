@@ -30,7 +30,9 @@ class DNS:
 
     def static(self, **kwds) -> List[DNSStatic]:
         assert self._mod is not None
-        return self._mod.ros.get_as(self._mod.url + "/dns/static", List[DNSStatic], kwds)
+        return self._mod.ros.get_as(
+            self._mod.url + "/dns/static", List[DNSStatic], kwds
+        )
 
     def flush(self):
         assert self._mod is not None
