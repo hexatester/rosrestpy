@@ -5,7 +5,6 @@ from typing import Optional
 @dataclass
 class Bridge:
     id: str
-    actual_mtu: int
     ageing_time: str
     arp: str
     arp_timeout: str
@@ -15,7 +14,6 @@ class Bridge:
     fast_forward: bool
     forward_delay: str
     igmp_snooping: bool
-    l2mtu: int
     mac_address: str
     max_message_age: str
     mtu: str
@@ -25,6 +23,8 @@ class Bridge:
     running: bool
     transmit_hold_count: int
     vlan_filtering: bool
+    actual_mtu: Optional[int] = None
+    l2mtu: Optional[int] = None
     comment: Optional[str] = None
 
     def __str__(self) -> str:
