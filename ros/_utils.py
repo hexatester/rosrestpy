@@ -29,6 +29,8 @@ def clean_data(d: Dict[str, Any]) -> dict:
 
 
 def clean_filters(d: Dict[str, Any]) -> dict:
+    if not d:
+        return d
     nd = dict()
     for k, v in d.items():
         k = k.replace("_", "-")
