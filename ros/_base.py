@@ -1,5 +1,5 @@
 from attr import define
-from typing import TYPE_CHECKING, Any, Generic, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Dict, Generic, List, Type, TypeVar, Union
 
 if TYPE_CHECKING:
     from ros.ros import Ros
@@ -61,9 +61,43 @@ class BaseProps(Generic[PR]):
     mod: Union[BaseModule, BaseSubModule]
     url: str
     cl: Type[PR]
+    _write: bool = True
 
     def __call__(self, **kwds: Any) -> List[PR]:
         return self.print(**kwds)
 
+    @staticmethod
+    def _getid(o: PR):
+        assert hasattr(o, "id")
+        return getattr(o, "id")
+
+    def delete(self, *kwd: PR):
+        assert self._write, "Not writeable"
+        return self.remove(*kwd)
+
+    def _disabled(self, o: PR, s: bool) -> PR:
+        assert self._write, "Not writeable"
+        return self.mod.ros.patch_as(
+            self.url + f"/{self._getid(o)}", self.cl, {"disabled": s}
+        )
+
+    def disable(self, o: PR) -> PR:
+        return self._disabled(o, True)
+
+    def enable(self, o: PR) -> PR:
+        return self._disabled(o, False)
+
     def print(self, **kwds: Any) -> List[PR]:
         return self.mod.ros.get_as(self.url, List[self.cl], kwds)
+
+    def remove(self, o: PR):
+        assert self._write, "Not writeable"
+        self.mod.ros.session.delete(self.url + f"/{self._getid(o)}")
+
+    def set(self, o: PR, nw: Dict[str, Any]):
+        assert self._write, "Not writeable"
+        return self.mod.ros.patch_as(self.url + f"/{self._getid(o)}", self.cl, nw)
+
+    def unset(self):
+        # assert self._write, "Not writeable"
+        raise NotImplementedError("/unset function has not been implemented")
