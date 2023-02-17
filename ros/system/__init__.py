@@ -21,12 +21,14 @@ class SystemModule(BaseModule):
     def health(self):
         if not self._health:
             self._health = BaseProps(self, self.url + "/health", Health)
+            self._health._write = False
         return self._health
 
     @property
     def history(self):
         if not self._history:
             self._history = BaseProps(self, self.url + "/history", History)
+            self._history._write = False
         return self._history
 
     @property
@@ -41,6 +43,7 @@ class SystemModule(BaseModule):
     def logging(self):
         if not self._logging:
             self._logging = BaseProps(self, self.url + "/logging", Logging)
+            self._logging._write = False
         return self._logging
 
     @property
