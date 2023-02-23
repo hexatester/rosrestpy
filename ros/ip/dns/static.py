@@ -8,8 +8,8 @@ from ._literals import DNSType
 class DNSStatic:
     id: str
     disabled: bool
-    dynamic: bool
     ttl: str
+    dynamic: bool = False
     address: Optional[str] = None
     cname: Optional[str] = None
     comment: Optional[str] = None
