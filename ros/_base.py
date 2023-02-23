@@ -32,7 +32,10 @@ class BaseProp(Generic[PR]):
         return self.print(**kwds)
 
     def print(self, **kwds: Any) -> PR:
-        return self.ros.get_as(self.url, self.cl, kwds)
+        o = self.ros.get_as(self.url, self.cl, kwds)
+        if hasattr(o, "_ros"):
+            setattr(o, "_ros", self.ros)
+        return o
 
     def set(self, **kwds: Any) -> PR:
         return self.ros.post_as(self.url + "/set", None, kwds)
