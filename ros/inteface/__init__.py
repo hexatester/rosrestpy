@@ -25,7 +25,7 @@ class InterfaceModule(BaseModule):
     @property
     def list(self) -> InterfaceListModule:
         if not self._list:
-            self._list = InterfaceListModule(self, "/list")
+            self._list = InterfaceListModule(self, "/list", InterfaceList)
         return self._list
 
     @property
