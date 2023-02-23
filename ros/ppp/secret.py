@@ -6,18 +6,18 @@ from ._literals import PPPService
 
 @dataclass
 class PPPSecret:
-    id: str
-    caller_id: str
-    disabled: bool
-    ipv6_routes: str
-    last_logged_out: str
-    limit_bytes_in: int
-    limit_bytes_out: int
     name: str
-    password: str
     profile: str
-    routes: str
-    service: PPPService
+    id: Optional[str] = None
+    caller_id: Optional[str] = None
+    disabled: Optional[bool] = None
+    ipv6_routes: Optional[str] = None
+    last_logged_out: Optional[str] = None
+    limit_bytes_in: Optional[int] = None
+    limit_bytes_out: Optional[int] = None
+    password: Optional[str] = None
+    routes: Optional[str] = None
+    service: PPPService = "any"
     comment: Optional[str] = None
     local_address: Optional[str] = None
     remote_address: Optional[str] = None
