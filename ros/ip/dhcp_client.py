@@ -1,28 +1,33 @@
-from attr import dataclass
-from typing import Optional
+from attr import dataclass, field
+from typing import Literal, Optional
+
+AddDefaultRoute = Literal["yes", "no", "special-classless"]
+Status = Literal[
+    "bound", "error", "rebinding...", "requesting...", "searching...", "stopped"
+]
 
 
 @dataclass
 class DHCPClient:
-    id: str
-    add_default_route: str
-    dhcp_options: str
-    disabled: bool
-    dynamic: bool
     interface: str
-    invalid: bool
-    use_peer_dns: bool
-    use_peer_ntp: bool
-    address: Optional[str] = None
+    add_default_route: AddDefaultRoute = "yes"
+    dhcp_options: str = "hostname,clientid"
+    disabled: bool = False
+    use_peer_dns: bool = True
+    use_peer_ntp: bool = True
+    default_route_distance: int = 1
     comment: Optional[str] = None
-    default_route_distance: Optional[int] = None
-    dhcp_server: Optional[str] = None
-    expires_after: Optional[str] = None
-    gateway: Optional[str] = None
-    primary_dns: Optional[str] = None
-    primary_ntp: Optional[str] = None
-    secondary_dns: Optional[str] = None
-    status: Optional[str] = None
+    address: Optional[str] = None
+    dhcp_server: Optional[str] = field(on_setattr=None, default=None)
+    expires_after: Optional[str] = field(on_setattr=None, default=None)
+    gateway: Optional[str] = field(on_setattr=None, default=None)
+    primary_dns: Optional[str] = field(on_setattr=None, default=None)
+    primary_ntp: Optional[str] = field(on_setattr=None, default=None)
+    secondary_dns: Optional[str] = field(on_setattr=None, default=None)
+    status: Status = field(on_setattr=None, default=None)
+    dynamic: bool = field(on_setattr=None, default=None)
+    invalid: bool = field(on_setattr=None, default=None)
+    id: str = field(on_setattr=None, default=None)
 
     def __str__(self) -> str:
         return self.interface
