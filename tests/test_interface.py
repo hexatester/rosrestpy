@@ -18,15 +18,15 @@ class TestBridge:
             assert isinstance(item, Bridge)
 
     def test_bridge_msti(self, ros: Ros):
-        for item in ros.bridge.msti:
+        for item in ros.bridge.msti():
             assert isinstance(item, BridgeMsti)
 
     def test_bridge_port(self, ros: Ros):
-        for item in ros.bridge.port:
+        for item in ros.bridge.port():
             assert isinstance(item, BridgePort)
 
     def test_bridge_vlan(self, ros: Ros):
-        for item in ros.bridge.vlan:
+        for item in ros.bridge.vlan():
             assert isinstance(item, BridgeVlan)
 
 

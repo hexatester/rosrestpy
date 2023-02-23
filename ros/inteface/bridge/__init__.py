@@ -1,5 +1,4 @@
 from attrs import define
-from typing import Any, List
 
 from ros._base import BaseProps
 
@@ -11,17 +10,27 @@ from .vlan import BridgeVlan
 
 @define
 class BridgeModule(BaseProps[Bridge]):
-    @property
-    def msti(self) -> List[BridgeMsti]:
-        return self.ros.get_as(self.url + "/msti", List[BridgeMsti])
+    _msti: BaseProps[BridgeMsti] = None
+    _port: BaseProps[BridgePort] = None
+    _vlan: BaseProps[BridgeVlan] = None
 
     @property
-    def port(self) -> List[BridgePort]:
-        return self.ros.get_as(self.url + "/port", List[BridgePort])
+    def msti(self) -> BaseProps[BridgeMsti]:
+        if not self._msti:
+            self._msti = BaseProps(self, self.url + "/msti", BridgeMsti)
+        return self._msti
 
     @property
-    def vlan(self) -> List[BridgeVlan]:
-        return self.ros.get_as(self.url + "/vlan", List[BridgeVlan])
+    def port(self) -> BaseProps[BridgePort]:
+        if not self._port:
+            self._port = BaseProps(self, self.url + "/port", BridgePort)
+        return self._port
+
+    @property
+    def vlan(self) -> BaseProps[BridgeVlan]:
+        if not self._vlan:
+            self._vlan = BaseProps(self, self.url + "/vlan", BridgeVlan)
+        return self._vlan
 
 
 __all__ = ["BridgeModule", "BridgeInterface", "BridgePort", "Bridge"]
