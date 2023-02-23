@@ -1,8 +1,9 @@
 from attrs import asdict
 from cattrs import Converter
-from typing import Any, Dict, List, Tuple, Type, Union, TypeVar
+from typing import TYPE_CHECKING, Any, Dict, List, Tuple, Type, Union, TypeVar
 
-from ._base import BM
+if TYPE_CHECKING:
+    from ._base import BM
 
 
 def clean_key(d: Dict[str, Any]) -> dict:
@@ -38,6 +39,17 @@ def clean_filters(d: Dict[str, Any]) -> dict:
     return nd
 
 
+def clean_before_put(d: Dict[str, Any]) -> dict:
+    if not d:
+        return d
+    d.pop("id")
+    nd = dict()
+    for k, v in d.items():
+        if v != None:
+            nd[k] = v
+    return nd
+
+
 def _union_str_int(v: str, t: Any) -> Union[str, int]:
     if v.isdigit():
         return int(v)
@@ -59,7 +71,7 @@ T = TypeVar("T", bound=object)
 
 
 def make_setters(url: str, cls: Type[T]):
-    def setters(self: BM, values: List[T]):
+    def setters(self: "BM", values: List[T]):
         idattr = "id"
         existed = self.simple
         updated: List[Tuple[T, ...]] = list()

@@ -1,8 +1,11 @@
-from attr import define
+from attr import define, asdict
+from cattrs import unstructure
 from typing import TYPE_CHECKING, Any, Dict, Generic, List, Type, TypeVar, Union
 
 if TYPE_CHECKING:
     from ros.ros import Ros
+
+from ._utils import clean_before_put
 
 
 @define
@@ -70,6 +73,12 @@ class BaseProps(Generic[PR]):
     def _getid(o: PR):
         assert hasattr(o, "id")
         return getattr(o, "id")
+
+    def add(self, o: PR) -> PR:
+        assert self._write, "Not writeable"
+        data = unstructure(o)
+        data = clean_before_put(data)
+        return self.mod.ros.put_as(self.url, self.cl, data)
 
     def delete(self, o: PR):
         assert self._write, "Not writeable"
