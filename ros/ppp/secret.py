@@ -8,7 +8,7 @@ from ._literals import PPPService
 class PPPSecret:
     name: str
     profile: str
-    id: Optional[str] = None
+    id: str = None
     caller_id: Optional[str] = None
     disabled: Optional[bool] = None
     ipv6_routes: Optional[str] = None
