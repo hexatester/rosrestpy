@@ -4,9 +4,9 @@ from typing import Optional
 
 @dataclass
 class InterfaceListMember:
-    id: str
-    disabled: bool
-    dynamic: bool
     interface: str
     list: str
+    disabled: bool
+    dynamic: bool
+    id: str
     comment: Optional[str] = None

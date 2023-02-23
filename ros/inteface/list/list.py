@@ -4,12 +4,12 @@ from typing import Optional
 
 @dataclass
 class InterfaceList:
-    id: str
-    builtin: bool
-    dynamic: bool
+    name: str
     exclude: str
     include: str
-    name: str
+    builtin: bool
+    dynamic: bool
+    id: str = None
     comment: Optional[str] = None
 
     def __str__(self) -> str:
