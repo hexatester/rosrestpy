@@ -71,9 +71,9 @@ class BaseProps(Generic[PR]):
         assert hasattr(o, "id")
         return getattr(o, "id")
 
-    def delete(self, *kwd: PR):
+    def delete(self, o: PR):
         assert self._write, "Not writeable"
-        return self.remove(*kwd)
+        return self.remove(o)
 
     def _disabled(self, o: PR, s: bool) -> PR:
         assert self._write, "Not writeable"
