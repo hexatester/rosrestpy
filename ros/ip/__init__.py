@@ -7,7 +7,7 @@ from .arp import ARP
 from .cloud import Cloud
 from .dhcp_client import DHCPClient
 from .dhcp_relay import DHCPRelay
-from .dhcp_server import DHCPServerModule
+from .dhcp_server import DHCPServerModule, DHCPServer
 from .dns import DNS
 from .firewall import IPFirewallModule
 from .route import Route
@@ -58,7 +58,9 @@ class IPModule(BaseModule):
     @property
     def dhcp_server(self) -> DHCPServerModule:
         if not self._dhcp_server:
-            self._dhcp_server = DHCPServerModule(self, "/dhcp-server")
+            self._dhcp_server = DHCPServerModule(
+                self, self.url + "/dhcp-server", DHCPServer
+            )
         return self._dhcp_server
 
     @property
@@ -70,7 +72,7 @@ class IPModule(BaseModule):
     @property
     def firewall(self) -> IPFirewallModule:
         if not self._firewall:
-            self._firewall = IPFirewallModule(self, "/firewall")
+            self._firewall = IPFirewallModule(self, self.url + "/firewall")
         return self._firewall
 
     @property

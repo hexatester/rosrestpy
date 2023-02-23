@@ -15,7 +15,7 @@ class SystemModule(BaseModule):
     _health: BaseProps[Health] = None
     _history: BaseProps[History] = None
     _logging: BaseProps[Logging] = None
-    _package: Package = None
+    _package: PackageModule = None
 
     @property
     def health(self):
@@ -53,7 +53,7 @@ class SystemModule(BaseModule):
     @property
     def package(self) -> PackageModule:
         if not self._package:
-            self._package = PackageModule(self, "/package")
+            self._package = PackageModule(self, self.url + "/package", Package)
         return self._package
 
     @property

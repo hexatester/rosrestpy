@@ -19,7 +19,7 @@ class InterfaceModule(BaseModule):
     @property
     def bridge(self) -> BridgeModule:
         if not self._brigde:
-            self._brigde = BridgeModule(self, "/bridge")
+            self._brigde = BridgeModule(self, "/interface/bridge", Bridge)
         return self._brigde
 
     @property

@@ -3,8 +3,6 @@ from ros.inteface.bridge import BridgeModule, Bridge, BridgeMsti, BridgePort, Br
 from ros.inteface.ethernet import InterfaceEthernet
 from ros.inteface.list import InterfaceListModule, InterfaceList, InterfaceListMember
 
-from ros._base import BaseProps
-
 
 class TestInterface:
     def test_interface(self, ros: Ros):

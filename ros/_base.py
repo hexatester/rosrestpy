@@ -22,55 +22,41 @@ class BaseModule:
 BM = TypeVar("BM", bound=BaseModule)
 
 
-@define
-class BaseSubModule:
-    module: BM
-    url: str = ""
-    _ros: "Ros" = None
-
-    @property
-    def ros(self) -> "Ros":
-        if not self._ros:
-            self._ros = self.module.ros
-        return self._ros
-
-    def __attrs_post_init__(self) -> None:
-        if self.url:
-            if not self.url.startswith(self.module.url):
-                self.url = self.module.url + self.url
-        else:
-            cname = self.__class__.__name__.lower()
-            self.url = self.module.url + "/" + cname.replace("module", "")
-
-
 PR = TypeVar("PR", bound=object)
 
 
 @define
 class BaseProp(Generic[PR]):
-    mod: Union[BaseModule, BaseSubModule]
+    ros: "Ros"
     url: str
     cl: Type[PR]
-
-    def __attrs_post_init__(self) -> None:
-        if not self.url.startswith(self.mod.url):
-            self.url = self.mod.url.rstrip("/") + self.url
 
     def __call__(self, **kwds: Any) -> PR:
         return self.print(**kwds)
 
     def print(self, **kwds: Any) -> PR:
-        return self.mod.ros.get_as(self.url, self.cl, kwds)
+        return self.ros.get_as(self.url, self.cl, kwds)
+
+    def set(self, **kwds: Any) -> PR:
+        return self.ros.post_as(self.url + "/set", None, kwds)
 
 
 @define
 class BaseProps(Generic[PR]):
-    mod: Union[BaseModule, BaseSubModule]
+    mod: BaseModule
     url: str
     cl: Type[PR]
     _create: bool = True
     _delete: bool = True
     _write: bool = True
+
+    @property
+    def ros(self):
+        return self.mod.ros
+
+    @property
+    def filename(self):
+        return self.url
 
     def __attrs_post_init__(self) -> None:
         if not self.url.startswith(self.mod.url):
