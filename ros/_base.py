@@ -52,6 +52,10 @@ class BaseProp(Generic[PR]):
     url: str
     cl: Type[PR]
 
+    def __attrs_post_init__(self) -> None:
+        if not self.url.startswith(self.mod.url):
+            self.url = self.mod.url.rstrip("/") + self.url
+
     def __call__(self, **kwds: Any) -> PR:
         return self.print(**kwds)
 
@@ -65,6 +69,10 @@ class BaseProps(Generic[PR]):
     url: str
     cl: Type[PR]
     _write: bool = True
+
+    def __attrs_post_init__(self) -> None:
+        if not self.url.startswith(self.mod.url):
+            self.url = self.mod.url.rstrip("/") + self.url
 
     def __call__(self, **kwds: Any) -> List[PR]:
         return self.print(**kwds)
