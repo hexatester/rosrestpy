@@ -66,7 +66,7 @@ class IPModule(BaseModule):
     @property
     def dns(self) -> DNS:
         dns = self.ros.get_as(self.url + "/dns", DNS)
-        dns._mod = self
+        dns._ros = self.ros
         return dns
 
     @property

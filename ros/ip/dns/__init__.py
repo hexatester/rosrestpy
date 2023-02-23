@@ -1,7 +1,8 @@
 from attr import dataclass
-from typing import List
+from typing import List, Optional, TYPE_CHECKING
 
-from ros._base import BM
+if TYPE_CHECKING:
+    from ros.ros import Ros
 
 from .cache import DNSCache
 from .static import DNSStatic
@@ -22,21 +23,19 @@ class DNS:
     servers: str
     use_doh_server: str
     verify_doh_cert: bool
-    _mod: BM = None
+    _ros: Optional["Ros"] = None
 
     def cache(self, **kwds) -> List[DNSCache]:
-        assert self._mod is not None
-        return self._mod.ros.get_as(self._mod.url + "/dns/cache", List[DNSCache], kwds)
+        assert self._ros
+        return self._ros.get_as("/ip/dns/cache", List[DNSCache], kwds)
 
     def static(self, **kwds) -> List[DNSStatic]:
-        assert self._mod is not None
-        return self._mod.ros.get_as(
-            self._mod.url + "/dns/static", List[DNSStatic], kwds
-        )
+        assert self._ros
+        return self._ros.get_as("/ip/dns/static", List[DNSStatic], kwds)
 
     def flush(self):
-        assert self._mod is not None
-        self._mod.ros.post_as(self._mod.url + "/dns/cache/flush", List[DNSCache])
+        assert self._ros
+        self._ros.post_as("/ip/dns/cache/flush", List[DNSCache])
 
 
 __all__ = ["DNSCache", "DNS", "DNSStatic"]

@@ -19,9 +19,6 @@ class BaseModule:
             self.url = "/" + cname.replace("module", "")
 
 
-BM = TypeVar("BM", bound=BaseModule)
-
-
 PR = TypeVar("PR", bound=object)
 
 
