@@ -2,6 +2,9 @@ from typing import Literal
 
 AllLiteral = Literal["all"]
 AnyLiteral = Literal["any"]
+ARPLiteral = Literal[
+    "disabled", "enabled", "local-proxy-arp", "proxy-arp", "reply-only"
+]
 IPProtocol = Literal[
     "dccp",
     "ddp",
