@@ -68,6 +68,8 @@ class BaseProps(Generic[PR]):
     mod: Union[BaseModule, BaseSubModule]
     url: str
     cl: Type[PR]
+    _create: bool = True
+    _delete: bool = True
     _write: bool = True
 
     def __attrs_post_init__(self) -> None:
@@ -83,13 +85,13 @@ class BaseProps(Generic[PR]):
         return getattr(o, "id")
 
     def add(self, o: PR) -> PR:
-        assert self._write, "Not writeable"
+        assert self._write and self._create, "Not writeable"
         data = unstructure(o)
         data = clean_before_put(data)
         return self.mod.ros.put_as(self.url, self.cl, data)
 
     def delete(self, o: PR):
-        assert self._write, "Not writeable"
+        assert self._write and self._delete, "Not writeable"
         return self.remove(o)
 
     def _disabled(self, o: PR, s: bool) -> PR:
