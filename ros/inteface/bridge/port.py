@@ -4,7 +4,6 @@ from typing import Optional
 
 @dataclass
 class BridgePort:
-    id: str
     nextid: str
     auto_isolate: bool
     bpdu_guard: bool
@@ -31,6 +30,7 @@ class BridgePort:
     status: str
     tag_stacking: bool
     trusted: bool
+    id: str
     unknown_multicast_flood: bool
     unknown_unicast_flood: bool
     comment: Optional[str] = None

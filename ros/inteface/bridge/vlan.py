@@ -4,7 +4,6 @@ from typing import Optional
 
 @dataclass
 class BridgeVlan:
-    id: str
     bridge: str
     current_tagged: str
     current_untagged: str
@@ -13,4 +12,5 @@ class BridgeVlan:
     tagged: str
     untagged: str
     vlan_ids: int
+    id: str
     comment: Optional[str] = None
