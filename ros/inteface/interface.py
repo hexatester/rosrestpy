@@ -4,7 +4,6 @@ from typing import Optional, Union
 
 @dataclass
 class Interface:
-    id: str
     actual_mtu: int
     disabled: bool
     fp_rx_byte: int
@@ -25,6 +24,7 @@ class Interface:
     tx_packet: int
     tx_queue_drop: int
     type: str
+    id: str
     comment: Optional[str] = None
     l2mtu: Optional[int] = None
     mac_address: Optional[str] = None

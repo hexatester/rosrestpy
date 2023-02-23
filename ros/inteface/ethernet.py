@@ -4,7 +4,6 @@ from typing import Optional
 
 @dataclass
 class InterfaceEthernet:
-    id: str
     advertise: str
     arp: str
     arp_timeout: str
@@ -41,6 +40,7 @@ class InterfaceEthernet:
     tx_flow_control: str
     tx_multicast: int
     tx_pause: int
+    id: str
     comment: Optional[str] = None
     fec_mode: Optional[str] = None
     rx_1024_1518: Optional[int] = None
