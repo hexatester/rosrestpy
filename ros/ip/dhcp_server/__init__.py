@@ -8,6 +8,7 @@ from .network import DHCPNetwork
 
 class DHCPServerModule(BaseProps[DHCPServer]):
     _lease: BaseProps[DHCPLease] = None
+    _network: BaseProps[DHCPNetwork] = None
 
     @property
     def lease(self) -> BaseProps[DHCPLease]:
@@ -16,8 +17,10 @@ class DHCPServerModule(BaseProps[DHCPServer]):
         return self._lease
 
     @property
-    def network(self) -> List[DHCPNetwork]:
-        return self.ros.get_as(self.filename + "/network", List[DHCPNetwork])
+    def network(self) -> BaseProps[DHCPNetwork]:
+        if not self._network:
+            self._network = BaseProps(self.ros, "/ip/dhcp-server/network", DHCPNetwork)
+        return self._network
 
 
 __all__ = ["DHCPNetwork", "DHCPServerModule", "DHCPServer", "DHCPLease"]
