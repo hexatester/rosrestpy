@@ -13,3 +13,6 @@ class Address:
     invalid: Optional[str] = None
     dynamic: Optional[bool] = None
     id: str = None
+
+    def __str__(self) -> str:
+        return self.address

@@ -40,3 +40,6 @@ class PPPProfile:
     remote_ipv6_prefix_pool: Optional[str] = None
     session_timeout: Optional[str] = None
     wins_server: Optional[str] = None
+
+    def __str__(self) -> str:
+        return self.name

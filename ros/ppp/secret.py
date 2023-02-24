@@ -22,3 +22,6 @@ class PPPSecret:
     local_address: Optional[str] = None
     remote_address: Optional[str] = None
     remote_ipv6_prefix: Optional[str] = None
+
+    def __str__(self) -> str:
+        return self.name

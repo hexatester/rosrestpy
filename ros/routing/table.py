@@ -11,6 +11,9 @@ class RoutingTable:
     fib: str = "no"
     comment: Optional[str] = None
 
+    def __str__(self) -> str:
+        return self.name
+
     def __attrs_post_init__(self):
         if self.fib == "":
             self.fib = "yes"
