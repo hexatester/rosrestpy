@@ -1,5 +1,3 @@
-from typing import List
-
 from ros._base import BaseModule, BaseProps
 
 from .aaa import PPPAAA
@@ -13,18 +11,18 @@ class PPPModule(BaseModule):
 
     @property
     def aaa(self) -> PPPAAA:
-        return self.ros.get_as(self.url + "/aaa", PPPAAA)
+        return self.ros.get_as("/ppp/aaa", PPPAAA)
 
     @property
     def profile(self):
         if not self._profile:
-            self._profile = BaseProps(self, self.url + "/profile", PPPProfile)
+            self._profile = BaseProps(self.ros, "/ppp/profile", PPPProfile)
         return self._profile
 
     @property
     def secret(self):
         if not self._secret:
-            self._secret = BaseProps(self, self.url + "/secret", PPPSecret)
+            self._secret = BaseProps(self.ros, "/ppp/secret", PPPSecret)
         return self._secret
 
 

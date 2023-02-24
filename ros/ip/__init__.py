@@ -24,66 +24,63 @@ class IPModule(BaseModule):
     _dhcp_relay: BaseProps[DHCPRelay] = None
     _route: BaseProps[Route] = None
 
-    def __attrs_post_init__(self) -> None:
-        return super().__attrs_post_init__()
-
     @property
     def address(self):
         if not self._address:
-            self._address = BaseProps(self, self.url + "/address", Address)
+            self._address = BaseProps(self.ros, "/ip/address", Address)
         return self._address
 
     @property
     def arp(self):
         if not self._arp:
-            self._arp = BaseProps(self, self.url + "/arp", ARP)
+            self._arp = BaseProps(self.ros, "/ip/arp", ARP)
         return self._arp
 
     @property
     def cloud(self) -> Cloud:
-        return self.ros.get_as(self.url + "/cloud", Cloud)
+        return self.ros.get_as("/ip/cloud", Cloud)
 
     @property
     def dhcp_client(self):
         if not self._dhcp_client:
-            self._dhcp_client = BaseProps(self, self.url + "/dhcp-client", DHCPClient)
+            self._dhcp_client = BaseProps(self.ros, "/ip/dhcp-client", DHCPClient)
         return self._dhcp_client
 
     @property
     def dhcp_relay(self):
         if not self._dhcp_relay:
-            self._dhcp_relay = BaseProps(self, self.url + "/dhcp-relay", DHCPRelay)
+            self._dhcp_relay = BaseProps(self.ros, "/ip/dhcp-relay", DHCPRelay)
         return self._dhcp_relay
 
     @property
     def dhcp_server(self) -> DHCPServerModule:
         if not self._dhcp_server:
             self._dhcp_server = DHCPServerModule(
-                self, self.url + "/dhcp-server", DHCPServer
+                self.ros, "/ip/dhcp-server", DHCPServer
             )
         return self._dhcp_server
 
     @property
     def dns(self) -> DNS:
-        dns = self.ros.get_as(self.url + "/dns", DNS)
+        dns = self.ros.get_as("/ip/dns", DNS)
         dns._ros = self.ros
         return dns
 
     @property
     def firewall(self) -> IPFirewallModule:
         if not self._firewall:
-            self._firewall = IPFirewallModule(self, self.url + "/firewall")
+            self._firewall = IPFirewallModule(self.ros, "/ip/firewall")
         return self._firewall
 
     @property
-    def route(self):
+    def route(self) -> BaseProps[Route]:
         if not self._route:
-            self._route = BaseProps(self, self.url + "/route", Route)
+            self._route = BaseProps(self.ros, "/ip/route", Route)
         return self._route
 
     @property
     def setting(self) -> Setting:
-        return self.ros.get_as(self.url + "/setting", Setting)
+        return self.ros.get_as("/ip/setting", Setting)
 
 
 __all__ = [

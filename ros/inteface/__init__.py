@@ -19,19 +19,21 @@ class InterfaceModule(BaseModule):
     @property
     def bridge(self) -> BridgeModule:
         if not self._brigde:
-            self._brigde = BridgeModule(self, "/interface/bridge", Bridge)
+            self._brigde = BridgeModule(self.ros, "/interface/bridge", Bridge)
         return self._brigde
 
     @property
     def list(self) -> InterfaceListModule:
         if not self._list:
-            self._list = InterfaceListModule(self, "/list", InterfaceList)
+            self._list = InterfaceListModule(self.ros, "/interface/list", InterfaceList)
         return self._list
 
     @property
     def ethernet(self) -> BaseProps[InterfaceEthernet]:
         if not self._ethernet:
-            self._ethernet = BaseProps(self, "/ethernet", InterfaceEthernet)
+            self._ethernet = BaseProps(
+                self.ros, "/interface/ethernet", InterfaceEthernet
+            )
             self._ethernet._create = False
             self._ethernet._delete = False
         return self._ethernet

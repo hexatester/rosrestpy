@@ -17,19 +17,19 @@ class BridgeModule(BaseProps[Bridge]):
     @property
     def msti(self) -> BaseProps[BridgeMsti]:
         if not self._msti:
-            self._msti = BaseProps(self, self.url + "/msti", BridgeMsti)
+            self._msti = BaseProps(self.ros, "/interface/bridge/msti", BridgeMsti)
         return self._msti
 
     @property
     def port(self) -> BaseProps[BridgePort]:
         if not self._port:
-            self._port = BaseProps(self, self.url + "/port", BridgePort)
+            self._port = BaseProps(self.ros, "/interface/bridge/port", BridgePort)
         return self._port
 
     @property
     def vlan(self) -> BaseProps[BridgeVlan]:
         if not self._vlan:
-            self._vlan = BaseProps(self, self.url + "/vlan", BridgeVlan)
+            self._vlan = BaseProps(self.ros, "/interface/bridge/vlan", BridgeVlan)
         return self._vlan
 
 

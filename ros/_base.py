@@ -1,6 +1,6 @@
-from attr import define, asdict
+from attr import define
 from cattrs import unstructure
-from typing import TYPE_CHECKING, Any, Dict, Generic, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Dict, Generic, List, Type, TypeVar
 
 if TYPE_CHECKING:
     from ros.ros import Ros
@@ -43,24 +43,12 @@ class BaseProp(Generic[PR]):
 
 @define
 class BaseProps(Generic[PR]):
-    mod: BaseModule
-    url: str
+    ros: "Ros"
+    filename: str
     cl: Type[PR]
     _create: bool = True
     _delete: bool = True
     _write: bool = True
-
-    @property
-    def ros(self):
-        return self.mod.ros
-
-    @property
-    def filename(self):
-        return self.url
-
-    def __attrs_post_init__(self) -> None:
-        if not self.url.startswith(self.mod.url):
-            self.url = self.mod.url.rstrip("/") + self.url
 
     def __call__(self, **kwds: Any) -> List[PR]:
         return self.print(**kwds)
@@ -74,7 +62,7 @@ class BaseProps(Generic[PR]):
         assert self._write and self._create, "Not writeable"
         data = unstructure(o)
         data = clean_before_put(data)
-        return self.mod.ros.put_as(self.url, self.cl, data)
+        return self.ros.put_as(self.filename, self.cl, data)
 
     def delete(self, o: PR):
         assert self._write and self._delete, "Not writeable"
@@ -82,8 +70,8 @@ class BaseProps(Generic[PR]):
 
     def _disabled(self, o: PR, s: bool) -> PR:
         assert self._write, "Not writeable"
-        return self.mod.ros.patch_as(
-            self.url + f"/{self._getid(o)}", self.cl, {"disabled": s}
+        return self.ros.patch_as(
+            self.filename + f"/{self._getid(o)}", self.cl, {"disabled": s}
         )
 
     def disable(self, o: PR) -> PR:
@@ -93,15 +81,15 @@ class BaseProps(Generic[PR]):
         return self._disabled(o, False)
 
     def print(self, **kwds: Any) -> List[PR]:
-        return self.mod.ros.get_as(self.url, List[self.cl], kwds)
+        return self.ros.get_as(self.filename, List[self.cl], kwds)
 
     def remove(self, o: PR):
         assert self._write, "Not writeable"
-        self.mod.ros.session.delete(self.url + f"/{self._getid(o)}")
+        self.ros.session.delete(self.filename + f"/{self._getid(o)}")
 
     def set(self, o: PR, nw: Dict[str, Any]):
         assert self._write, "Not writeable"
-        return self.mod.ros.patch_as(self.url + f"/{self._getid(o)}", self.cl, nw)
+        return self.ros.patch_as(self.filename + f"/{self._getid(o)}", self.cl, nw)
 
     def unset(self):
         # assert self._write, "Not writeable"

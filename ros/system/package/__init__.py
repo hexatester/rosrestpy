@@ -9,12 +9,12 @@ class PackageModule(BaseProps[Package]):
     _update: UpdateModule = None
 
     def downgrade(self):
-        self.ros.post_as(self.url + "/downgrade", None)
+        self.ros.post_as("/system/package/downgrade", None)
 
     @property
     def update(self) -> UpdateModule:
         if not self._update:
-            self._update = UpdateModule(self.ros, self.url + "/update", Update)
+            self._update = UpdateModule(self.ros, "/system/package/update", Update)
         return self._update
 
 

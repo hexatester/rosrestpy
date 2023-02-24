@@ -9,7 +9,7 @@ class RoutingModule(BaseModule):
     @property
     def table(self):
         if not self._table:
-            self._table = BaseProps(self, self.url + "/table", RoutingTable)
+            self._table = BaseProps(self.ros, "/routing/table", RoutingTable)
         return self._table
 
 
