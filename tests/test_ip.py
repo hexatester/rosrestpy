@@ -1,6 +1,6 @@
 from ros import Ros, IPModule
 from ros.ip import Address, ARP, Cloud, DHCPClient, DHCPRelay, DHCPServerModule
-from ros.ip.dhcp_server import DHCPServer, DHCPNetwork
+from ros.ip.dhcp_server import DHCPServer, DHCPNetwork, DHCPLease
 from ros.ip.dns import DNS, DNSCache, DNSStatic
 from ros.ip.firewall import (
     IPFirewallModule,
@@ -41,6 +41,10 @@ class TestDHCPServer:
     def test_item(self, ros: Ros):
         for item in ros.ip.dhcp_server():
             assert isinstance(item, DHCPServer)
+
+    def test_lease(self, ros: Ros):
+        for item in ros.ip.dhcp_server.lease():
+            assert isinstance(item, DHCPLease)
 
     def test_network(self, ros: Ros):
         for network in ros.ip.dhcp_server.network:
