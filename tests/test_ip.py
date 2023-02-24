@@ -2,7 +2,7 @@ from ros import Ros, IPModule
 from ros.ip import Address, ARP, Cloud, DHCPClient, DHCPRelay, DHCPServerModule
 from ros.ip.dhcp_server import DHCPServer, DHCPNetwork
 from ros.ip.dns import DNS, DNSCache, DNSStatic
-from ros.ip.firewall import IPFirewallModule, IPFirewallFilter
+from ros.ip.firewall import IPFirewallModule, IPFirewallFilter, IPFirewallNAT
 
 
 class TestIP:
@@ -65,3 +65,7 @@ class TestIPFirewall:
     def test_firewall_filter(self, ros: Ros):
         for i in ros.ip.firewall.filter():
             assert isinstance(i, IPFirewallFilter)
+
+    def test_firewall_nat(self, ros: Ros):
+        for i in ros.ip.firewall.nat():
+            assert isinstance(i, IPFirewallNAT)
