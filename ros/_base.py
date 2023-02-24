@@ -11,12 +11,12 @@ from ._utils import clean_before_put
 @define
 class BaseModule:
     ros: "Ros"
-    url: str = ""
+    filename: str = ""
 
     def __attrs_post_init__(self) -> None:
-        if not self.url:
+        if not self.filename:
             cname = self.__class__.__name__.lower()
-            self.url = "/" + cname.replace("module", "")
+            self.filename = "/" + cname.replace("module", "")
 
 
 PR = TypeVar("PR", bound=object)
@@ -25,20 +25,20 @@ PR = TypeVar("PR", bound=object)
 @define
 class BaseProp(Generic[PR]):
     ros: "Ros"
-    url: str
+    filename: str
     cl: Type[PR]
 
     def __call__(self, **kwds: Any) -> PR:
         return self.print(**kwds)
 
     def print(self, **kwds: Any) -> PR:
-        o = self.ros.get_as(self.url, self.cl, kwds)
+        o = self.ros.get_as(self.filename, self.cl, kwds)
         if hasattr(o, "_ros"):
             setattr(o, "_ros", self.ros)
         return o
 
     def set(self, **kwds: Any) -> PR:
-        return self.ros.post_as(self.url + "/set", None, kwds)
+        return self.ros.post_as(self.filename + "/set", None, kwds)
 
 
 @define

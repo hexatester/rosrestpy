@@ -16,16 +16,16 @@ class Update:
 
 class UpdateModule(BaseProp[Update]):
     def cancel(self):
-        self.ros.post_as(self.url + "/cancel", None)
+        self.ros.post_as(self.filename + "/cancel", None)
 
     def check_for_updates(self) -> Update:
-        return self.ros.post_as(self.url + "/check-for-updates", List[Update])
+        return self.ros.post_as(self.filename + "/check-for-updates", List[Update])
 
     def download(self):
-        self.ros.post_as(self.url + "/download", None)
+        self.ros.post_as(self.filename + "/download", None)
 
     def install(self):
-        self.ros.post_as(self.url + "/install", None)
+        self.ros.post_as(self.filename + "/install", None)
 
     def set(self, channel: UpdateChannel):
         return super().set(channel=channel)
