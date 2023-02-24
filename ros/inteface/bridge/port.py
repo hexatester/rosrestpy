@@ -34,3 +34,6 @@ class BridgePort:
     unknown_multicast_flood: bool
     unknown_unicast_flood: bool
     comment: Optional[str] = None
+
+    def __bool__(self) -> bool:
+        return not self.disabled

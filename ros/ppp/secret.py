@@ -10,7 +10,7 @@ class PPPSecret:
     profile: str
     id: str = None
     caller_id: Optional[str] = None
-    disabled: Optional[bool] = None
+    disabled: bool = False
     ipv6_routes: Optional[str] = None
     last_logged_out: Optional[str] = None
     limit_bytes_in: Optional[int] = None
@@ -25,3 +25,6 @@ class PPPSecret:
 
     def __str__(self) -> str:
         return self.name
+
+    def __bool__(self) -> bool:
+        return not self.disabled

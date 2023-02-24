@@ -16,3 +16,6 @@ class DHCPRelay:
 
     def __str__(self) -> str:
         return self.name
+
+    def __bool__(self) -> bool:
+        return not self.disabled

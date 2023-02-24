@@ -15,3 +15,6 @@ class ARP:
     complete: Optional[bool] = field(on_setattr=None, default=None)
     dynamic: Optional[bool] = field(on_setattr=None, default=None)
     invalid: Optional[bool] = field(on_setattr=None, default=None)
+
+    def __bool__(self) -> bool:
+        return not self.disabled

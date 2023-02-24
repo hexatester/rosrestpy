@@ -9,3 +9,6 @@ class Cloud:
     update_time: bool
     public_address: Optional[str] = None
     status: Optional[str] = None
+
+    def __bool__(self) -> bool:
+        return not self.ddns_enabled

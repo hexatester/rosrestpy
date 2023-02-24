@@ -16,6 +16,7 @@ class Route:
     pref_src: Optional[str] = None
     vpn: Optional[bool] = None
     comment: Optional[str] = None
+    disabled: Optional[bool] = None
     immediate_gw: str = field(on_setattr=None, default=None)
     active: bool = field(on_setattr=None, default=None)
     dynamic: bool = field(on_setattr=None, default=None)
@@ -25,3 +26,6 @@ class Route:
     static: bool = field(on_setattr=None, default=None)
     filtered: bool = field(on_setattr=None, default=None)
     id: str = field(on_setattr=None, default=None)
+
+    def __bool__(self) -> bool:
+        return not self.disabled

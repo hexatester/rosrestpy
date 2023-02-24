@@ -16,3 +16,6 @@ class Address:
 
     def __str__(self) -> str:
         return self.address
+
+    def __bool__(self) -> bool:
+        return not self.disabled

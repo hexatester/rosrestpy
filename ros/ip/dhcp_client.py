@@ -31,3 +31,6 @@ class DHCPClient:
 
     def __str__(self) -> str:
         return self.interface
+
+    def __bool__(self) -> bool:
+        return not self.disabled

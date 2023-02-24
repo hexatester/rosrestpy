@@ -14,3 +14,6 @@ class BridgeVlan:
     vlan_ids: int
     id: str
     comment: Optional[str] = None
+
+    def __bool__(self) -> bool:
+        return not self.disabled

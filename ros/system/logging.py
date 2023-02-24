@@ -10,3 +10,6 @@ class Logging:
     invalid: bool
     prefix: str
     topics: str
+
+    def __bool__(self) -> bool:
+        return not self.disabled

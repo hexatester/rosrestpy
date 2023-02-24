@@ -119,3 +119,6 @@ class IPFirewallMangle:
     place_before: Optional[str] = None
     p2p: str = None
     realm: str = None
+
+    def __bool__(self) -> bool:
+        return not self.disabled

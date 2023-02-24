@@ -107,3 +107,6 @@ class IPFirewallFilter:
     p2p: str = None
     hw_offload: bool = None
     realm: str = None
+
+    def __bool__(self) -> bool:
+        return not self.disabled

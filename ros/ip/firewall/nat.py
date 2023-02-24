@@ -95,3 +95,6 @@ class IPFirewallNAT:
     place_before: Optional[str] = None
     realm: str = None
     tls_host: str = None
+
+    def __bool__(self) -> bool:
+        return not self.disabled

@@ -11,3 +11,6 @@ class BridgeMsti:
     vlan_mapping: int
     id: str
     comment: Optional[str] = None
+
+    def __bool__(self) -> bool:
+        return not self.disabled
