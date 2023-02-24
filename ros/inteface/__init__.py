@@ -1,4 +1,4 @@
-from typing import Any, List, Optional
+from typing import Any, List
 
 from ros._base import BaseModule, BaseProps
 
@@ -9,9 +9,9 @@ from .list import InterfaceList, InterfaceListMember, InterfaceListModule
 
 
 class InterfaceModule(BaseModule):
-    _brigde: Optional[BridgeModule] = None
-    _ethernet: Optional[BaseProps[InterfaceEthernet]] = None
-    _list: Optional[InterfaceListModule] = None
+    _brigde: BridgeModule = None
+    _ethernet: BaseProps[InterfaceEthernet] = None
+    _list: InterfaceListModule = None
 
     def __call__(self, **kwds: Any):
         return self.print(**kwds)

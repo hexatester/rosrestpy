@@ -1,5 +1,3 @@
-from typing import Optional
-
 from ros._base import BaseModule, BaseProps
 
 from .address import Address
@@ -15,8 +13,8 @@ from .setting import Setting
 
 
 class IPModule(BaseModule):
-    _dhcp_server: Optional[DHCPServerModule] = None
-    _firewall: Optional[IPFirewallModule] = None
+    _dhcp_server: DHCPServerModule = None
+    _firewall: IPFirewallModule = None
 
     _address: BaseProps[Address] = None
     _arp: BaseProps[ARP] = None
