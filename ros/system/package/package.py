@@ -1,5 +1,4 @@
 from attr import dataclass
-from enum import Enum
 from typing import Literal
 
 
