@@ -1,7 +1,6 @@
 from attr import dataclass
 from typing import Literal, Optional
 
-from ros._literals import IPProtocol
 from ._literals import IPv4Options
 
 Action = Literal[
@@ -42,7 +41,7 @@ class IPFirewallMangle:
     dst_address: Optional[str] = None
     src_address_list: Optional[str] = None
     dst_address_list: Optional[str] = None
-    protocol: Optional[IPProtocol] = None
+    protocol: Optional[str] = None
     src_port: Optional[str] = None
     dst_port: Optional[str] = None
     port: Optional[str] = None
