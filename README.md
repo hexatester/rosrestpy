@@ -62,3 +62,7 @@ The [RouterOS REST API](https://help.mikrotik.com/docs/display/ROS/REST+API) is 
 ## Contributing
 
 Contributions of all sizes are welcome. Please review our [contribution guidelines](https://github.com/hexatester/rosrestpy/blob/main/CONTRIBUTING.md "How To Contribute") to get started. You can also help by [reporting bugs or feature requests](https://github.com/hexatester/rosrestpy/issues/new/choose).
+
+## Open Source Notice
+
+Big thanks to [attrs](https://www.attrs.org/) and [cattrs](https://catt.rs/) as the bases of rosrestpy, without them this module creation would be very tedious!
