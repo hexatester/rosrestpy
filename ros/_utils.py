@@ -41,6 +41,8 @@ def clean_before_put(d: Dict[str, Any]) -> dict:
     d.pop("id")
     nd = dict()
     for k, v in d.items():
+        if "_" in k:
+            k = k.replace("_", "-")
         if v != None:
             nd[k] = v
     return nd
