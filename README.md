@@ -9,6 +9,7 @@ RouterOS v7 REST API python module
 ## RouterOS v7 REST API Support
 
 Not all types and methods of the RouterOS v7 REST API are supported, yet.
+Finding any bugs? Please [Create Issue](https://github.com/hexatester/rosrestpy/issues)
 
 ## Installing
 
@@ -23,18 +24,31 @@ pip install rosrestpy --upgrade
 ```python
 from ros import Ros
 
+# Initiate Ros object
 ros = Ros("https://192.168.88.1/", "admin", "")
+
+
+# Check cpu load
 if ros.system.resource.cpu_load > 90:
     print(f"{ros.system.identity}'s CPU > 90%")
 
+# Print all interface name
 for interface in ros.interface():
     print(interface.name)
 
+# Finding specific queue
 queues = ros.queue.simple(name="Hotspot")
 if len(queues) == 1:
     queue = queues[0]
     print(f"Usage {queue.bytes}")
 
+# Adding new /simple/queue
+from ros.queue import SimpleQueue
+new_queue = SimpleQueue(name="Test", target="192.168.88.0/24", max_limit="10M/10M", disabled=True)
+new_queue = ros.queue.simple.add(new_queue)
+print(new_queue)
+
+# Using /tool/bandwith-test
 bw_tests = ros.tool.bandwith_test("172.16.0.1", "3s", "admin", direction="both")
 result_bw_test = bw_tests[-1]
 print(f"Download {result_bw_test.rx_total_average}")
