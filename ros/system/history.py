@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Any
 
 
 @dataclass(slots=True)
@@ -10,3 +9,6 @@ class History:
     policy: str
     redo: str
     undoable: bool
+
+    def __str__(self) -> str:
+        return self.action
