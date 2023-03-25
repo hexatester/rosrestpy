@@ -18,7 +18,7 @@ Every open source project lives from the generous help by contributors that sacr
 3. Add a track to the original repository:
 
     ```bash
-    git remote add upstream https://github.com/rosrestpy/rosrestpy
+    git remote add upstream https://github.com/hexatester/rosrestpy
     ```
 
 4. Install dependencies with [python-poetry](https://python-poetry.org/):
