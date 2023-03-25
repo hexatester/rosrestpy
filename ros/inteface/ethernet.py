@@ -4,7 +4,6 @@ from typing import Optional
 
 @dataclass
 class InterfaceEthernet:
-    advertise: str
     arp: str
     arp_timeout: str
     auto_negotiation: bool
@@ -15,7 +14,6 @@ class InterfaceEthernet:
     driver_rx_packet: int
     driver_tx_byte: int
     driver_tx_packet: int
-    full_duplex: bool
     l2mtu: int
     loop_protect: str
     loop_protect_disable_time: str
@@ -34,13 +32,15 @@ class InterfaceEthernet:
     rx_jabber: int
     rx_multicast: int
     rx_pause: int
-    speed: str
     tx_broadcast: int
     tx_bytes: int
     tx_flow_control: str
     tx_multicast: int
     tx_pause: int
-    id: str
+    id: str = None
+    advertise: Optional[str] = None
+    full_duplex: Optional[bool] = None
+    speed: Optional[str] = None
     comment: Optional[str] = None
     fec_mode: Optional[str] = None
     rx_1024_1518: Optional[int] = None
