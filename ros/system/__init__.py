@@ -64,6 +64,19 @@ class SystemModule(BaseModule):
     def routerboard(self) -> RouterBOARD:
         return self.ros.get_as("/system/routerboard", RouterBOARD)
 
+    def ssh_exec(
+        self,
+        address: str,
+        command: str,
+        output_to_file: str = None,
+        port: int = None,
+        src_address: str = None,
+        user: str = None,
+        vrf: str = None,
+    ) -> str:
+        data = {"address": address, "command": command}
+        return self.ros.post_as("/system/ssh-exec", str, data)
+
 
 __all__ = [
     "Health",
