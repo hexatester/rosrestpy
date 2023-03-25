@@ -146,7 +146,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "pathspec"
-version = "0.11.0"
+version = "0.11.1"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "dev"
 optional = false
@@ -235,7 +235,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "types-requests"
-version = "2.28.11.15"
+version = "2.28.11.16"
 description = "Typing stubs for requests"
 category = "dev"
 optional = false

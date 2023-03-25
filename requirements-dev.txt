@@ -11,14 +11,14 @@ iniconfig==2.0.0; python_version >= "3.7"
 mypy-extensions==1.0.0; python_version >= "3.7"
 mypy==0.961; python_version >= "3.6"
 packaging==23.0; python_version >= "3.7"
-pathspec==0.11.0; python_version >= "3.7"
+pathspec==0.11.1; python_version >= "3.7"
 platformdirs==3.1.1; python_version >= "3.7"
 pluggy==1.0.0; python_version >= "3.7"
 pytest==7.2.2; python_version >= "3.7"
 python-dotenv==0.20.0; python_version >= "3.5"
 requests==2.28.2; python_version >= "3.7" and python_version < "4"
 tomli==2.0.1; python_version < "3.11" and python_version >= "3.7" and python_full_version < "3.11.0a7"
-types-requests==2.28.11.15
+types-requests==2.28.11.16
 types-urllib3==1.26.25.8
 typing-extensions==4.5.0; python_version < "3.10" and python_version >= "3.7"
 urllib3==1.26.15; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4" or python_version >= "3.7" and python_version < "4" and python_full_version >= "3.6.0"
