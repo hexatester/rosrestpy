@@ -47,7 +47,7 @@ class TestDHCPServer:
             assert isinstance(item, DHCPLease)
 
     def test_network(self, ros: Ros):
-        for network in ros.ip.dhcp_server.network:
+        for network in ros.ip.dhcp_server.network():
             assert isinstance(network, DHCPNetwork)
 
 
