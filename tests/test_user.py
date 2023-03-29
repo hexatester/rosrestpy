@@ -1,5 +1,5 @@
 from ros import Ros, UserModule
-from ros.user import User, UserAAA, UserActive
+from ros.user import User, UserAAA, UserActive, UserGroup
 
 
 class TestUser:
@@ -20,3 +20,9 @@ class TestUserActive:
     def test_user_active(self, ros: Ros):
         for i in ros.user.active():
             assert isinstance(i, UserActive)
+
+
+class TestUserGroup:
+    def test_user_group(self, ros: Ros):
+        for i in ros.user.group():
+            assert isinstance(i, UserGroup)

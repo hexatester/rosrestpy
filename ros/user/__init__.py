@@ -3,12 +3,14 @@ from ros._base import BaseModule, BaseProp, BaseProps
 
 from .aaa import UserAAA
 from .active import UserActive
+from .group import UserGroup
 from .user import User
 
 
 class UserModule(BaseModule):
     _aaa: BaseProp[UserAAA] = None
     _active: BaseProps[UserActive] = None
+    _group: BaseProps[UserGroup] = None
     _user: BaseProps[User] = None
 
     @property
@@ -22,6 +24,12 @@ class UserModule(BaseModule):
         if not self._active:
             self._active = BaseProps(self.ros, "/user/active", UserActive)
         return self._active
+
+    @property
+    def group(self) -> BaseProps[UserGroup]:
+        if not self._group:
+            self._group = BaseProps(self.ros, "/user/group", UserGroup)
+        return self._group
 
     @property
     def user(self) -> BaseProps[User]:
