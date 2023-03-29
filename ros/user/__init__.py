@@ -2,11 +2,13 @@ from typing import Any, List
 from ros._base import BaseModule, BaseProp, BaseProps
 
 from .aaa import UserAAA
+from .active import UserActive
 from .user import User
 
 
 class UserModule(BaseModule):
     _aaa: BaseProp[UserAAA] = None
+    _active: BaseProps[UserActive] = None
     _user: BaseProps[User] = None
 
     @property
@@ -14,6 +16,12 @@ class UserModule(BaseModule):
         if not self._aaa:
             self._aaa = BaseProp(self.ros, "/user/aaa", UserAAA)
         return self._aaa
+
+    @property
+    def active(self) -> BaseProps[UserActive]:
+        if not self._active:
+            self._active = BaseProps(self.ros, "/user/active", UserActive)
+        return self._active
 
     @property
     def user(self) -> BaseProps[User]:
