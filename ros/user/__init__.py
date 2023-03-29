@@ -5,6 +5,7 @@ from .aaa import UserAAA
 from .active import UserActive
 from .group import UserGroup
 from .settings import UserSettings
+from .ssh_keys import UserSSHKey
 from .user import User
 
 
@@ -13,6 +14,7 @@ class UserModule(BaseModule):
     _active: BaseProps[UserActive] = None
     _group: BaseProps[UserGroup] = None
     _settings: BaseProp[UserSettings] = None
+    _ssh_keys: BaseProps[UserSSHKey] = None
     _user: BaseProps[User] = None
 
     @property
@@ -38,6 +40,12 @@ class UserModule(BaseModule):
         if not self._settings:
             self._settings = BaseProp(self.ros, "/user/settings", UserSettings)
         return self._settings
+
+    @property
+    def ssh_keys(self) -> BaseProps[UserSSHKey]:
+        if not self._ssh_keys:
+            self._ssh_keys = BaseProps(self.ros, "/user/ssh-keys", UserSSHKey)
+        return self._ssh_keys
 
     @property
     def user(self) -> BaseProps[User]:

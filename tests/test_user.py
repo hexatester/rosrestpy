@@ -1,5 +1,5 @@
 from ros import Ros, UserModule
-from ros.user import User, UserAAA, UserActive, UserGroup, UserSettings
+from ros.user import User, UserAAA, UserActive, UserGroup, UserSettings, UserSSHKey
 
 
 class TestUser:
@@ -31,3 +31,9 @@ class TestUserGroup:
 class TestUserSettings:
     def test_user_settings(self, ros: Ros):
         assert isinstance(ros.user.settings(), UserSettings)
+
+
+class TestUserSSHKey:
+    def test_ssh_keys(self, ros: Ros):
+        for i in ros.user.ssh_keys():
+            assert isinstance(i, UserSSHKey)
