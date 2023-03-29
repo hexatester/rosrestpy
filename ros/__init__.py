@@ -6,6 +6,7 @@ from .queue import QueueModule
 from .routing import RoutingModule
 from .system import SystemModule
 from .tool import ToolModule
+from .user import UserModule
 
 from .error import Error
 from .log import Log
@@ -25,4 +26,5 @@ __all__ = [
     "Ros",
     "SystemModule",
     "ToolModule",
+    "UserModule",
 ]

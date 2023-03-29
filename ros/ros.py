@@ -15,6 +15,7 @@ from . import (
     RoutingModule,
     SystemModule,
     ToolModule,
+    UserModule,
 )
 
 from . import Error, Log
@@ -123,6 +124,7 @@ class Ros(BaseRos):
     _routing: Optional[RoutingModule] = None
     _system: Optional[SystemModule] = None
     _tool: Optional[ToolModule] = None
+    _user: Optional[UserModule] = None
     """
     Ros class that represent a routeros device.
 
@@ -182,6 +184,12 @@ class Ros(BaseRos):
         if not self._tool:
             self._tool = ToolModule(self, "/tool")
         return self._tool
+
+    @property
+    def user(self):
+        if not self._user:
+            self._user = UserModule(self, "/user")
+        return self._user
 
     def log(self, **kwds: Any):
         return self.get_as("/log", List[Log], kwds)
