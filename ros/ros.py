@@ -198,57 +198,67 @@ class Ros(BaseRos):
 
     @property
     def bridge(self) -> BridgeModule:
+        """/interface/bridge"""
         return self.interface.bridge
 
     @property
     def interface(self):
+        """/interface"""
         if not self._interface:
             self._interface = InterfaceModule(self)
         return self._interface
 
     @property
     def ip(self):
+        """/ip"""
         if not self._ip:
             self._ip = IPModule(self)
         return self._ip
 
     @property
     def ppp(self):
+        """/ppp"""
         if not self._ppp:
             self._ppp = PPPModule(self)
         return self._ppp
 
     @property
     def queue(self):
+        """/queue"""
         if not self._queue:
             self._queue = QueueModule(self)
         return self._queue
 
     @property
     def routing(self):
+        """/routing"""
         if not self._routing:
             self._routing = RoutingModule(self)
         return self._routing
 
     @property
     def system(self):
+        """/system"""
         if not self._system:
             self._system = SystemModule(self)
         return self._system
 
     @property
     def tool(self):
+        """/tool"""
         if not self._tool:
             self._tool = ToolModule(self, "/tool")
         return self._tool
 
     @property
     def user(self):
+        """/user"""
         if not self._user:
             self._user = UserModule(self, "/user")
         return self._user
 
     def log(self, **kwds: Any):
+        """Get logs"""
         return self.get_as("/log", List[Log], kwds)
 
     def ping(self, address: str, count: int = 4):
