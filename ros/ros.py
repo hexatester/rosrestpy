@@ -41,12 +41,27 @@ class BaseRos:
     def __attrs_post_init__(self) -> None:
         if not self.server.endswith("/"):
             self.server += "/"
+        # Authentication to the REST API is performed via HTTP Basic Auth.
         self.session.auth = HTTPBasicAuth(self.username, self.password)
         self.session.verify = self.secure
         self.password = ""
         self.url = self.server + self.filename
 
     def get_as(self, filename: str, cl: Type[T], filters: Dict[str, Any] = None) -> T:
+        """To get the records.
+
+        Args:
+            filename (str): Path
+            cl (Type[T]): Class
+            filters (Dict[str, Any], optional): Query for specific obj. Defaults to None.
+
+        Raises:
+            _converter.structure: Error parser
+            e: Exception
+
+        Returns:
+            T: Object of cl
+        """
         res = self.session.get(
             self.url + filename,
             params=clean_filters(filters),
@@ -68,6 +83,20 @@ class BaseRos:
         json_: Any = None,
         data: Any = None,
     ) -> T:
+        """Universal method to get access to all console commands.
+
+        Args:
+            filename (str): Path
+            cl (Type[T]): Class of the should be returned object
+            json_ (Any, optional): data to be sent in json format. Defaults to None.
+            data (Any, optional): data to be sent in form format. Defaults to None.
+
+        Raises:
+            _converter.structure: Error parser
+
+        Returns:
+            T: Object of cl
+        """
         res = self.session.post(
             self.url + filename,
             data=data,
@@ -86,6 +115,20 @@ class BaseRos:
         json_: Any = None,
         data: Any = None,
     ) -> T:
+        """To update a single record.
+
+        Args:
+            filename (str): Path
+            cl (Type[T]): Class of object that should be returned
+            json_ (Any, optional): data to be sent in json format. Defaults to None.
+            data (Any, optional): data to be sent in form format. Defaults to None.
+
+        Raises:
+            _converter.structure: Error parser
+
+        Returns:
+            T: Object of cl
+        """
         res = self.session.patch(
             self.url + filename,
             data=data,
@@ -104,6 +147,20 @@ class BaseRos:
         json_: Any = None,
         data: Any = None,
     ) -> T:
+        """To create a new record.
+
+        Args:
+            filename (str): Path
+            cl (Type[T]): Class of object that should be returned
+            json_ (Any, optional): data to be sent in json format. Defaults to None.
+            data (Any, optional): data to be sent in form format. Defaults to None.
+
+        Raises:
+            _converter.structure: Error parser
+
+        Returns:
+            T: Object of cl
+        """
         res = self.session.put(
             self.url + filename,
             data=data,
