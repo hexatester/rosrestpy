@@ -1,5 +1,5 @@
 from attr import dataclass
-from typing import Optional, Union
+from typing import Union
 
 
 @dataclass
@@ -24,13 +24,13 @@ class Interface:
     tx_packet: int
     tx_queue_drop: int
     type: str
-    id: str
-    comment: Optional[str] = None
-    l2mtu: Optional[int] = None
-    mac_address: Optional[str] = None
-    default_name: Optional[str] = None
-    max_l2mtu: Optional[int] = None
-    slave: Optional[bool] = None
+    comment: str = None
+    l2mtu: int = None
+    mac_address: str = None
+    default_name: str = None
+    max_l2mtu: int = None
+    slave: bool = None
+    id: str = None
 
     def __str__(self) -> str:
         return self.name

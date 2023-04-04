@@ -1,5 +1,5 @@
 from attr import dataclass
-from typing import Optional, Union, Literal
+from typing import Literal
 
 from ._literals import Authoritative, UseRadius
 
@@ -18,20 +18,20 @@ class DHCPServer:
     conflict_detection: bool = True
     use_framed_as_classless: bool = True
     use_radius: bool = "no"
-    lease_script: Optional[str] = None
+    lease_script: str = None
     insert_queue_before: str = "first"
-    parent_queue: Optional[str] = None
+    parent_queue: str = None
     allow_dual_stack_queue: bool = True
-    comment: Optional[str] = None
-    relay: Optional[str] = None
-    client_mac_limit: Optional[str] = None
+    comment: str = None
+    relay: str = None
+    client_mac_limit: str = None
     bootp_lease_time: str = "forever"
-    delay_threshold: Optional[str] = None
-    dhcp_option_set: Optional[str] = None
-    server_address: Optional[str] = None
-    bootp_support: Optional[Literal["dynamic", "static"]] = None
-    invalid: Optional[bool] = None
-    dynamic: Optional[bool] = None
+    delay_threshold: str = None
+    dhcp_option_set: str = None
+    server_address: str = None
+    bootp_support: Literal["dynamic", "static"] = None
+    invalid: bool = None
+    dynamic: bool = None
     id: str = None
 
     def __str__(self) -> str:

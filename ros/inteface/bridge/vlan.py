@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -12,8 +11,8 @@ class BridgeVlan:
     tagged: str
     untagged: str
     vlan_ids: int
-    id: str
-    comment: Optional[str] = None
+    comment: str = None
+    id: str = None
 
     def __bool__(self) -> bool:
         return not self.disabled

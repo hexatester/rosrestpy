@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -13,10 +12,10 @@ class DHCPNetwork:
     ntp_server: str
     wins_server: str
     dns_none: bool = False
-    dhcp_option_set: Optional[str] = None
-    domain: Optional[str] = None
-    next_server: Optional[str] = None
-    boot_file_name: Optional[str] = None
-    netmask: Optional[int] = None
-    comment: Optional[str] = None
+    dhcp_option_set: str = None
+    domain: str = None
+    next_server: str = None
+    boot_file_name: str = None
+    netmask: int = None
+    comment: str = None
     id: str = None

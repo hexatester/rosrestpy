@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -8,8 +7,8 @@ class InterfaceListMember:
     list: str
     disabled: bool
     dynamic: bool
-    id: str
-    comment: Optional[str] = None
+    comment: str = None
+    id: str = None
 
     def __bool__(self) -> bool:
         return not self.disabled

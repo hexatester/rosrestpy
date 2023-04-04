@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -37,43 +36,43 @@ class InterfaceEthernet:
     tx_flow_control: str
     tx_multicast: int
     tx_pause: int
+    advertise: str = None
+    full_duplex: bool = None
+    speed: str = None
+    comment: str = None
+    fec_mode: str = None
+    rx_1024_1518: int = None
+    rx_128_255: int = None
+    rx_1519_max: int = None
+    rx_256_511: int = None
+    rx_512_1023: int = None
+    rx_64: int = None
+    rx_65_127: int = None
+    rx_align_error: int = None
+    rx_drop: int = None
+    rx_length_error: int = None
+    rx_packet: int = None
+    rx_too_long: int = None
+    rx_too_short: int = None
+    sfp_rate_select: str = None
+    slave: bool = None
+    switch: str = None
+    tx_1024_1518: int = None
+    tx_128_255: int = None
+    tx_256_511: int = None
+    tx_512_1023: int = None
+    tx_64: int = None
+    tx_65_127: int = None
+    tx_collision: int = None
+    tx_deferred: int = None
+    tx_drop: int = None
+    tx_excessive_collision: int = None
+    tx_fcs_error: int = None
+    tx_late_collision: int = None
+    tx_multiple_collision: int = None
+    tx_packet: int = None
+    tx_single_collision: int = None
     id: str = None
-    advertise: Optional[str] = None
-    full_duplex: Optional[bool] = None
-    speed: Optional[str] = None
-    comment: Optional[str] = None
-    fec_mode: Optional[str] = None
-    rx_1024_1518: Optional[int] = None
-    rx_128_255: Optional[int] = None
-    rx_1519_max: Optional[int] = None
-    rx_256_511: Optional[int] = None
-    rx_512_1023: Optional[int] = None
-    rx_64: Optional[int] = None
-    rx_65_127: Optional[int] = None
-    rx_align_error: Optional[int] = None
-    rx_drop: Optional[int] = None
-    rx_length_error: Optional[int] = None
-    rx_packet: Optional[int] = None
-    rx_too_long: Optional[int] = None
-    rx_too_short: Optional[int] = None
-    sfp_rate_select: Optional[str] = None
-    slave: Optional[bool] = None
-    switch: Optional[str] = None
-    tx_1024_1518: Optional[int] = None
-    tx_128_255: Optional[int] = None
-    tx_256_511: Optional[int] = None
-    tx_512_1023: Optional[int] = None
-    tx_64: Optional[int] = None
-    tx_65_127: Optional[int] = None
-    tx_collision: Optional[int] = None
-    tx_deferred: Optional[int] = None
-    tx_drop: Optional[int] = None
-    tx_excessive_collision: Optional[int] = None
-    tx_fcs_error: Optional[int] = None
-    tx_late_collision: Optional[int] = None
-    tx_multiple_collision: Optional[int] = None
-    tx_packet: Optional[int] = None
-    tx_single_collision: Optional[int] = None
 
     def __str__(self) -> str:
         return self.name

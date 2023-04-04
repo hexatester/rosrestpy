@@ -5,7 +5,7 @@ except ImportError:
 from attr import define
 from requests import Session
 from requests.auth import HTTPBasicAuth
-from typing import Any, Dict, List, Optional, Type, TypeVar
+from typing import Any, Dict, List, Type, TypeVar
 
 from . import (
     InterfaceModule,
@@ -174,14 +174,14 @@ class BaseRos:
 
 
 class Ros(BaseRos):
-    _interface: Optional[InterfaceModule] = None
-    _ip: Optional[IPModule] = None
-    _ppp: Optional[PPPModule] = None
-    _queue: Optional[QueueModule] = None
-    _routing: Optional[RoutingModule] = None
-    _system: Optional[SystemModule] = None
-    _tool: Optional[ToolModule] = None
-    _user: Optional[UserModule] = None
+    _interface: InterfaceModule = None
+    _ip: IPModule = None
+    _ppp: PPPModule = None
+    _queue: QueueModule = None
+    _routing: RoutingModule = None
+    _system: SystemModule = None
+    _tool: ToolModule = None
+    _user: UserModule = None
     """
     Ros class that represent a routeros device.
 

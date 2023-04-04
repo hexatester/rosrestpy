@@ -1,5 +1,5 @@
 from attr import dataclass, field
-from typing import Literal, Optional
+from typing import Literal
 
 AddDefaultRoute = Literal["yes", "no", "special-classless"]
 Status = Literal[
@@ -16,14 +16,14 @@ class DHCPClient:
     use_peer_dns: bool = True
     use_peer_ntp: bool = True
     default_route_distance: int = 1
-    comment: Optional[str] = None
-    address: Optional[str] = None
-    dhcp_server: Optional[str] = field(on_setattr=None, default=None)
-    expires_after: Optional[str] = field(on_setattr=None, default=None)
-    gateway: Optional[str] = field(on_setattr=None, default=None)
-    primary_dns: Optional[str] = field(on_setattr=None, default=None)
-    primary_ntp: Optional[str] = field(on_setattr=None, default=None)
-    secondary_dns: Optional[str] = field(on_setattr=None, default=None)
+    comment: str = None
+    address: str = None
+    dhcp_server: str = field(on_setattr=None, default=None)
+    expires_after: str = field(on_setattr=None, default=None)
+    gateway: str = field(on_setattr=None, default=None)
+    primary_dns: str = field(on_setattr=None, default=None)
+    primary_ntp: str = field(on_setattr=None, default=None)
+    secondary_dns: str = field(on_setattr=None, default=None)
     status: Status = field(on_setattr=None, default=None)
     dynamic: bool = field(on_setattr=None, default=None)
     invalid: bool = field(on_setattr=None, default=None)

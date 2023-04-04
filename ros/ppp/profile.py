@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 from ._literals import YesNoDefault, YesNoDefaultRequired
 
@@ -20,26 +19,26 @@ class PPPProfile:
     use_ipv6: YesNoDefaultRequired
     use_mpls: YesNoDefaultRequired
     use_upnp: YesNoDefault
-    bridge: Optional[str] = None
-    bridge_horizon: Optional[int] = None
-    bridge_path_cost: Optional[int] = None
-    bridge_port_priority: Optional[str] = None
-    comment: Optional[str] = None
-    dhcpv6_pd_pool: Optional[str] = None
-    dns_server: Optional[str] = None
-    idle_timeout: Optional[str] = None
-    incoming_filter: Optional[str] = None
-    insert_queue_before: Optional[str] = None
-    interface_list: Optional[str] = None
-    local_address: Optional[str] = None
-    outgoing_filter: Optional[str] = None
-    parent_queue: Optional[str] = None
-    queue_type: Optional[str] = None
-    rate_limit: Optional[str] = None
-    remote_address: Optional[str] = None
-    remote_ipv6_prefix_pool: Optional[str] = None
-    session_timeout: Optional[str] = None
-    wins_server: Optional[str] = None
+    bridge: str = None
+    bridge_horizon: int = None
+    bridge_path_cost: int = None
+    bridge_port_priority: str = None
+    comment: str = None
+    dhcpv6_pd_pool: str = None
+    dns_server: str = None
+    idle_timeout: str = None
+    incoming_filter: str = None
+    insert_queue_before: str = None
+    interface_list: str = None
+    local_address: str = None
+    outgoing_filter: str = None
+    parent_queue: str = None
+    queue_type: str = None
+    rate_limit: str = None
+    remote_address: str = None
+    remote_ipv6_prefix_pool: str = None
+    session_timeout: str = None
+    wins_server: str = None
 
     def __str__(self) -> str:
         return self.name

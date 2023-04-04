@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 from ros._literals import IPProtocol, MACProtocol
 
@@ -11,11 +10,11 @@ class Torch:
     rx_packets: int
     tx: int
     tx_packets: int
-    cpu: Optional[int] = None
-    dscp: Optional[int] = None
-    src_port: Optional[str] = None
-    dst_port: Optional[str] = None
-    ip_protocol: Optional[IPProtocol] = None
-    mac_protocol: Optional[MACProtocol] = None
-    src_address: Optional[str] = None
-    dst_address: Optional[str] = None
+    cpu: int = None
+    dscp: int = None
+    src_port: str = None
+    dst_port: str = None
+    ip_protocol: IPProtocol = None
+    mac_protocol: MACProtocol = None
+    src_address: str = None
+    dst_address: str = None

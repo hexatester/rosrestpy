@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 from ros._literals import ARPLiteral
 
@@ -24,10 +23,10 @@ class Bridge:
     running: bool
     transmit_hold_count: int
     vlan_filtering: bool
-    id: str
-    actual_mtu: Optional[int] = None
-    l2mtu: Optional[int] = None
-    comment: Optional[str] = None
+    actual_mtu: int = None
+    l2mtu: int = None
+    comment: str = None
+    id: str = None
 
     def __str__(self) -> str:
         return self.name

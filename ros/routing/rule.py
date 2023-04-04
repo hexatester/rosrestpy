@@ -1,5 +1,5 @@
 from attr import dataclass
-from typing import Optional, Literal
+from typing import Literal
 
 RuleActions = Literal["drop", "lookup", "lookup-only-in-table", "unreachable"]
 

@@ -1,12 +1,11 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass(slots=True)
 class Error(Exception):
     error: int
     message: str
-    detail: Optional[str] = None
+    detail: str = None
 
     def __str__(self) -> str:
         if self.detail:

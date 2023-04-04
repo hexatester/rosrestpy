@@ -1,5 +1,4 @@
 from attr import dataclass, field
-from typing import Optional
 
 
 @dataclass
@@ -7,8 +6,8 @@ class DHCPRelay:
     name: str
     interface: str
     dhcp_server: str
-    delay_threshold: Optional[str] = None
-    local_address: Optional[str] = None
+    delay_threshold: str = None
+    local_address: str = None
     add_relay_info: bool = False
     disabled: bool = False
     invalid: bool = field(on_setattr=None, default=None)

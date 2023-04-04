@@ -1,30 +1,29 @@
 from attr import dataclass, field
-from typing import Optional
 
 
 @dataclass
 class DHCPLease:
     # General
     address: str
-    mac_address: Optional[str] = None
+    mac_address: str = None
     use_src_mac: bool = False
-    client_id: Optional[str] = None
+    client_id: str = None
     server: str = "all"
-    lease_time: Optional[str] = None
+    lease_time: str = None
     block_access: bool = False
     allow_dual_stack_queue: bool = True
     always_broadcast: bool = False
-    dhcp_option: Optional[str] = None
-    dhcp_option_set: Optional[str] = None
-    rate_limit: Optional[str] = None
-    parent_queue: Optional[str] = None
-    queue_type: Optional[str] = None
-    routes: Optional[str] = None
-    insert_queue_before: Optional[str] = None
-    address_lists: Optional[str] = None
-    comment: Optional[str] = None
+    dhcp_option: str = None
+    dhcp_option_set: str = None
+    rate_limit: str = None
+    parent_queue: str = None
+    queue_type: str = None
+    routes: str = None
+    insert_queue_before: str = None
+    address_lists: str = None
+    comment: str = None
     disabled: bool = False
-    copy_from: Optional[str] = None
+    copy_from: str = None
     # Active
     active_address: str = field(on_setattr=None, default=None)
     active_client_id: str = field(on_setattr=None, default=None)

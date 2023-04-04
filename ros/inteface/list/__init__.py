@@ -1,5 +1,4 @@
 from attr import define
-from typing import Optional
 
 from ros._base import BaseProps
 
@@ -9,7 +8,7 @@ from .member import InterfaceListMember
 
 @define
 class InterfaceListModule(BaseProps[InterfaceList]):
-    _member: Optional[BaseProps[InterfaceListMember]] = None
+    _member: BaseProps[InterfaceListMember] = None
 
     @property
     def member(self) -> BaseProps[InterfaceListMember]:

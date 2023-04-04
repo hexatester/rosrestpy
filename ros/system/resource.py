@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass(slots=True)
@@ -17,7 +16,7 @@ class Resource:
     total_memory: int
     uptime: str
     version: str
-    bad_blocks: Optional[float] = None
-    cpu_frequency: Optional[int] = None
-    write_sect_since_reboot: Optional[int] = None
-    write_sect_total: Optional[int] = None
+    bad_blocks: float = None
+    cpu_frequency: int = None
+    write_sect_since_reboot: int = None
+    write_sect_total: int = None

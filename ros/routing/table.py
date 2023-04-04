@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass(slots=True)
@@ -9,7 +8,7 @@ class RoutingTable:
     invalid: bool
     dynamic: bool = False
     fib: str = "no"
-    comment: Optional[str] = None
+    comment: str = None
 
     def __str__(self) -> str:
         return self.name

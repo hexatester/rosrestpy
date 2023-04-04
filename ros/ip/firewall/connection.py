@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 from ros._literals import IPProtocol, TCPState
 
@@ -32,5 +31,5 @@ class IPConnection:
     src_address: str
     srcnat: bool
     timeout: str
-    connection_mark: Optional[str] = None
-    tcp_state: Optional[TCPState] = None
+    connection_mark: str = None
+    tcp_state: TCPState = None

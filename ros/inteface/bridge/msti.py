@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -9,8 +8,8 @@ class BridgeMsti:
     identifier: int
     priority: str
     vlan_mapping: int
-    id: str
-    comment: Optional[str] = None
+    comment: str = None
+    id: str = None
 
     def __bool__(self) -> bool:
         return not self.disabled

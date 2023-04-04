@@ -1,5 +1,5 @@
 from attr import dataclass
-from typing import List, Optional
+from typing import List
 
 from ros._base import BaseProp
 from . import UpdateChannel
@@ -9,9 +9,9 @@ from . import UpdateChannel
 class Update:
     channel: UpdateChannel
     installed_version: str
-    latest_version: Optional[str] = None
-    status: Optional[str] = None
-    section: Optional[int] = None
+    latest_version: str = None
+    status: str = None
+    section: int = None
 
 
 class UpdateModule(BaseProp[Update]):

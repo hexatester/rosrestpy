@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -30,10 +29,10 @@ class BridgePort:
     status: str
     tag_stacking: bool
     trusted: bool
-    id: str
     unknown_multicast_flood: bool
     unknown_unicast_flood: bool
-    comment: Optional[str] = None
+    comment: str = None
+    id: str = None
 
     def __bool__(self) -> bool:
         return not self.disabled

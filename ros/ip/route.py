@@ -1,5 +1,5 @@
 from attr import dataclass, field
-from typing import Literal, Optional
+from typing import Literal
 
 
 @dataclass
@@ -11,12 +11,12 @@ class Route:
     suppress_hw_offload: bool = False
     distance: int = 1
     scope: int = 30
-    target_scope: Optional[int] = None
-    vrf_interface: Optional[str] = None
-    pref_src: Optional[str] = None
-    vpn: Optional[bool] = None
-    comment: Optional[str] = None
-    disabled: Optional[bool] = None
+    target_scope: int = None
+    vrf_interface: str = None
+    pref_src: str = None
+    vpn: bool = None
+    comment: str = None
+    disabled: bool = None
     immediate_gw: str = field(on_setattr=None, default=None)
     active: bool = field(on_setattr=None, default=None)
     dynamic: bool = field(on_setattr=None, default=None)

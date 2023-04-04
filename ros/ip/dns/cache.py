@@ -1,5 +1,4 @@
 from attr import dataclass
-from typing import Optional
 
 from ._literals import DNSType
 
@@ -11,4 +10,4 @@ class DNSCache:
     static: bool
     ttl: str
     type: DNSType
-    data: Optional[str] = None
+    data: str = None

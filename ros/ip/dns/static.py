@@ -1,4 +1,3 @@
-from typing import Optional
 from attr import dataclass
 
 from ._literals import DNSType
@@ -10,22 +9,22 @@ class DNSStatic:
     disabled: bool
     ttl: str
     dynamic: bool = False
-    address: Optional[str] = None
-    cname: Optional[str] = None
-    comment: Optional[str] = None
-    forward_to: Optional[str] = None
-    ipv6_address: Optional[str] = None
-    name: Optional[str] = None
-    ns: Optional[str] = None
-    mx_preference: Optional[str] = None
-    mx_exchange: Optional[str] = None
-    regexp: Optional[str] = None
-    srv_priority: Optional[int] = None
-    srv_weight: Optional[int] = None
-    srv_port: Optional[int] = None
-    srv_target: Optional[str] = None
-    text: Optional[str] = None
-    type: Optional[DNSType] = None
+    address: str = None
+    cname: str = None
+    comment: str = None
+    forward_to: str = None
+    ipv6_address: str = None
+    name: str = None
+    ns: str = None
+    mx_preference: str = None
+    mx_exchange: str = None
+    regexp: str = None
+    srv_priority: int = None
+    srv_weight: int = None
+    srv_port: int = None
+    srv_target: str = None
+    text: str = None
+    type: DNSType = None
 
     def __bool__(self) -> bool:
         return not self.disabled
