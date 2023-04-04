@@ -1,5 +1,5 @@
 from ros import Ros, QueueModule
-from ros.queue import InterfaceQueue, SimpleQueue
+from ros.queue import InterfaceQueue, SimpleQueue, QueueTree
 
 
 class TestQueue:
@@ -13,3 +13,7 @@ class TestQueue:
     def test_queue_simple(self, ros: Ros):
         for i in ros.queue.simple():
             assert isinstance(i, SimpleQueue)
+
+    def test_queue_tree(self, ros: Ros):
+        for i in ros.queue.tree():
+            assert isinstance(i, QueueTree)
