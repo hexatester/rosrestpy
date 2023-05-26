@@ -25,9 +25,9 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.8"
 attrs = ">=21.0.0,<=23.0.0"
-requests = "^2.28.1"
 cattrs = ">=21.0.0,<=23.0.0"
 ujson = {version = "^5.5.0", optional = true}
+requests = ">=2.31.0"
 
 [tool.poetry.extras]
 ujson = ["ujson"]
