@@ -1,17 +1,20 @@
 from typing import List, Literal, Union
 
-from ros._base import BaseModule
+from ros._base import BaseModule, BaseProps
 from ros._literals import AnyLiteral, IPProtocol, MACProtocol, PortLiteral
 
 from .bandwith_server import BandwithServer
 from .bandwith_test import BandwithTest
 from .ip_scan import IPScan
+from .netwatch import Netwatch
 from .ping import Ping
 from .torch import Torch
 from .traceroute import Traceroute
 
 
 class ToolModule(BaseModule):
+    _netwatch: BaseProps[Netwatch] = None
+
     @property
     def bandwith_server(self) -> BandwithServer:
         return self.ros.get_as(self.url + "/bandwidth-server", BandwithServer)
@@ -78,6 +81,12 @@ class ToolModule(BaseModule):
         if freeze_frame_interval:
             data["freeze-frame-interval"] = freeze_frame_interval
         return self.ros.post_as(self.url + "/ip-scan", List[IPScan], data)
+
+    @property
+    def netwatch(self):
+        if not self._netwatch:
+            self._netwatch = BaseProps(self.ros, "/tool/netwatch", Netwatch)
+        return self._netwatch
 
     def torch(
         self,
