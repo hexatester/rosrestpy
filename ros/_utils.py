@@ -38,7 +38,7 @@ def clean_filters(d: Dict[str, Any]) -> dict:
 def clean_before_put(d: Dict[str, Any]) -> dict:
     if not d:
         return d
-    d.pop("id")
+    d.pop("id", None)
     nd = dict()
     for k, v in d.items():
         if "_" in k:
