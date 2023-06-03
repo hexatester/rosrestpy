@@ -3,7 +3,13 @@ from typing import Literal
 
 AddDefaultRoute = Literal["yes", "no", "special-classless"]
 Status = Literal[
-    "bound", "error", "rebinding...", "requesting...", "searching...", "stopped"
+    "bound",
+    "error",
+    "rebinding...",
+    "requesting...",
+    "searching...",
+    "stopped",
+    "renewing...",
 ]
 
 
