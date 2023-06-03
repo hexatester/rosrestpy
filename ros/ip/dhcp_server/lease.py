@@ -23,19 +23,20 @@ class DHCPLease:
     address_lists: str = None
     comment: str = None
     disabled: bool = False
-    copy_from: str = None
     # Active
-    active_address: str = field(on_setattr=None, default=None)
-    active_client_id: str = field(on_setattr=None, default=None)
-    active_mac_address: str = field(on_setattr=None, default=None)
-    active_server: str = field(on_setattr=None, default=None)
-    blocked: bool = field(on_setattr=None, default=None)
-    dynamic: bool = field(on_setattr=None, default=None)
-    expires_after: str = field(on_setattr=None, default=None)
-    host_name: str = field(on_setattr=None, default=None)
-    last_seen: str = field(on_setattr=None, default=None)
-    radius: str = field(on_setattr=None, default=None)
-    status: str = field(on_setattr=None, default=None)
+    active_address: str = None
+    active_client_id: str = None
+    active_mac_address: str = None
+    active_server: str = None
+    blocked: bool = None
+    dynamic: bool = None
+    expires_after: str = None
+    host_name: str = None
+    last_seen: str = None
+    radius: str = None
+    status: str = None
+    id: str = None
+    copy_from: str = None
 
     def __bool__(self) -> bool:
         return not self.disabled
