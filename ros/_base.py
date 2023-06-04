@@ -18,6 +18,10 @@ class BaseModule:
             cname = self.__class__.__name__.lower()
             self.filename = "/" + cname.replace("module", "")
 
+    @property
+    def url(self) -> str:
+        return self.filename
+
 
 PR = TypeVar("PR", bound=object)
 
