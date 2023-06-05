@@ -25,26 +25,18 @@ def clean_data(d: Dict[str, Any]) -> dict:
     return data
 
 
-def clean_filters(d: Dict[str, Any]) -> dict:
+def clean_filters(d: Dict[str, Any]) -> Dict[str, Any]:
     if not d:
         return d
-    nd = dict()
-    for k, v in d.items():
-        k = k.replace("_", "-")
-        nd[k] = v
-    return nd
+    translation_table = str.maketrans("_", "-")
+    return {k.translate(translation_table): v for k, v in d.items()}
 
 
 def clean_before_put(d: Dict[str, Any]) -> dict:
     if not d:
         return d
-    d.pop("id", None)
-    nd = dict()
-    for k, v in d.items():
-        if "_" in k:
-            k = k.replace("_", "-")
-        if v != None:
-            nd[k] = v
+    nd = {k.replace("_", "-"): v for k, v in d.items() if v is not None}
+    nd.pop("id", None)
     return nd
 
 
