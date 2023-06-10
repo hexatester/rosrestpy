@@ -48,6 +48,11 @@ new_queue = SimpleQueue(name="Test", target="192.168.88.0/24", max_limit="10M/10
 new_queue = ros.queue.simple.add(new_queue)
 print(new_queue)
 
+# Updating /simple/queue
+test_queue = ros.queue.simple(name="Test")[0]
+new_test_queue = ros.queue.simple.set(test_queue, {"comment": "Test comment"})
+print(new_test_queue)
+
 # Using /tool/bandwith-test
 bw_tests = ros.tool.bandwith_test("172.16.0.1", "3s", "admin", direction="both")
 result_bw_test = bw_tests[-1]
