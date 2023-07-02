@@ -8,6 +8,7 @@ Action = Literal[
     "add-dst-to-address-list",
     "add-src-to-address-list",
     "dst-nat",
+    "endpoint-independent-nat",
     "jump",
     "log",
     "masquerade",
