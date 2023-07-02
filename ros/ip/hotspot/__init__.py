@@ -55,7 +55,7 @@ class HotspotModule(BaseProps[HotspotServer]):
         return self._profile
 
     @property
-    def service_port(self) -> BaseProps[HotspotProfile]:
+    def service_port(self) -> BaseProps[HotspotServicePort]:
         if not self._service_port:
             self._service_port = BaseProps(
                 self.ros, "/ip/hotspot/service-port", HotspotServicePort
