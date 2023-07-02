@@ -8,6 +8,7 @@ from .dhcp_relay import DHCPRelay
 from .dhcp_server import DHCPServerModule, DHCPServer
 from .dns import DNS
 from .firewall import IPFirewallModule
+from .hotspot import HotspotModule, HotspotServer
 from .route import Route
 from .setting import Setting
 
@@ -15,6 +16,7 @@ from .setting import Setting
 class IPModule(BaseModule):
     _dhcp_server: DHCPServerModule = None
     _firewall: IPFirewallModule = None
+    _hotspot: HotspotModule = None
 
     _address: BaseProps[Address] = None
     _arp: BaseProps[ARP] = None
@@ -69,6 +71,12 @@ class IPModule(BaseModule):
         if not self._firewall:
             self._firewall = IPFirewallModule(self.ros, "/ip/firewall")
         return self._firewall
+
+    @property
+    def hotspot(self) -> HotspotModule:
+        if not self._hotspot:
+            self._hotspot = HotspotModule(self.ros, "/ip/hotspot", HotspotServer)
+        return self._hotspot
 
     @property
     def route(self) -> BaseProps[Route]:

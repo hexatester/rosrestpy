@@ -8,6 +8,7 @@ from ros.ip.firewall import (
     IPFirewallMangle,
     IPFirewallNAT,
 )
+from ros.ip.hotspot import HotspotModule, HotspotServer
 
 
 class TestIP:
@@ -82,3 +83,12 @@ class TestIPFirewall:
     def test_firewall_nat(self, ros: Ros):
         for i in ros.ip.firewall.nat():
             assert isinstance(i, IPFirewallNAT)
+
+
+class TestHotspot:
+    def test_hotspot(self, ros: Ros):
+        assert isinstance(ros.ip.hotspot, HotspotModule)
+
+    def test_hotspot_list(self, ros: Ros):
+        for i in ros.ip.hotspot():
+            assert isinstance(i, HotspotServer)
