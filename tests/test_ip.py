@@ -18,6 +18,7 @@ from ros.ip.hotspot import (
     HotspotHost,
     HotspotIPBinding,
     HotspotServicePort,
+    HotspotCookie,
 )
 from ros.ip.hotspot.user import HotspotUserModule, HotspotUser, HotspotUserProfile
 from ros.ip.hotspot.walled_garden import (
@@ -150,3 +151,7 @@ class TestHotspot:
     def test_walled_garden_ip(self, ros: Ros):
         for i in ros.ip.hotspot.walled_garden.ip():
             assert isinstance(i, HotspotWalledGardenIP)
+
+    def test_cookie(self, ros: Ros):
+        for i in ros.ip.hotspot.cookie():
+            assert isinstance(i, HotspotCookie)

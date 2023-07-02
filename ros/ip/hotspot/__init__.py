@@ -1,5 +1,6 @@
 from ros._base import BaseProps
 from .active import HotspotActive
+from .cookie import HotspotCookie
 from .host import HotspotHost
 from .hotspot import HotspotServer
 from .ip_binding import HotspotIPBinding
@@ -11,6 +12,7 @@ from .walled_garden import HotspotWalledGardenModule, HotspotWalledGarden
 
 class HotspotModule(BaseProps[HotspotServer]):
     _active: BaseProps[HotspotActive] = None
+    _cookie: BaseProps[HotspotCookie] = None
     _host: BaseProps[HotspotHost] = None
     _ip_binding: BaseProps[HotspotIPBinding] = None
     _user: HotspotUserModule = None
@@ -25,6 +27,14 @@ class HotspotModule(BaseProps[HotspotServer]):
             self._active._create = False
             self._active._write = False
         return self._active
+
+    @property
+    def cookie(self) -> BaseProps[HotspotCookie]:
+        if not self._cookie:
+            self._cookie = BaseProps(self.ros, "/ip/hotspot/cookie", HotspotCookie)
+            self._cookie._create = False
+            self._cookie._write = False
+        return self._cookie
 
     @property
     def host(self) -> BaseProps[HotspotHost]:
