@@ -4,7 +4,7 @@
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/rosrestpy)](https://pypi.org/project/rosrestpy/)
 [![LICENSE](https://img.shields.io/github/license/hexatester/rosrestpy)](https://github.com/hexatester/rosrestpy/blob/main/LICENSE)
 
-RouterOS v7 REST API python module
+Mikrotik's RouterOS v7 REST API python module
 
 ## RouterOS v7 REST API Support
 
