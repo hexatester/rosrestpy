@@ -42,3 +42,7 @@ class HotspotProfile:
     radius_interim_update: str = None
     nas_port_type: NASPortLiteral = "wireless-802.11"
     copy_from: str = None
+    id: str = None
+
+    def __str__(self) -> str:
+        return self.name
