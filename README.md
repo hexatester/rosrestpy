@@ -8,6 +8,8 @@ RouterOS v7 REST API python module
 
 ## RouterOS v7 REST API Support
 
+[Check Here for API Support](https://github.com/hexatester/rosrestpy/blob/main/TODO.md).
+
 Not all types and methods of the RouterOS v7 REST API are supported, yet.
 Finding any bugs? Please [Create Issue](https://github.com/hexatester/rosrestpy/issues)
 
