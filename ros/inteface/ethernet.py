@@ -23,19 +23,19 @@ class InterfaceEthernet:
     name: str
     orig_mac_address: str
     running: bool
-    rx_broadcast: int
     rx_bytes: int
     rx_fcs_error: int
     rx_flow_control: str
-    rx_fragment: int
-    rx_jabber: int
-    rx_multicast: int
     rx_pause: int
-    tx_broadcast: int
     tx_bytes: int
     tx_flow_control: str
-    tx_multicast: int
-    tx_pause: int
+    rx_broadcast: int = None
+    rx_fragment: int = None
+    rx_jabber: int = None
+    rx_multicast: int = None
+    tx_broadcast: int = None
+    tx_multicast: int = None
+    tx_pause: int = None
     advertise: str = None
     full_duplex: bool = None
     speed: str = None
