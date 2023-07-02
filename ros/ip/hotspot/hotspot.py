@@ -14,6 +14,10 @@ class HotspotServer:
     addresses_per_mac: Union[int, str] = None
     copy_from: str = None
     disabled: bool = None
+    https: bool = False
+    proxy_status: str = None
+    id: str = None
+    invalid: bool = None
 
     def __str__(self) -> str:
         return self.name
