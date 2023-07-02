@@ -154,23 +154,23 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "platformdirs"
-version = "3.5.1"
+version = "3.8.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-docs = ["furo (>=2023.3.27)", "proselint (>=0.13)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)", "sphinx (>=6.2.1)"]
-test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "pytest (>=7.3.1)"]
+docs = ["furo (>=2023.5.20)", "proselint (>=0.13)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)", "sphinx (>=7.0.1)"]
+test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.10)", "pytest (>=7.3.1)"]
 
 [[package]]
 name = "pluggy"
-version = "1.0.0"
+version = "1.2.0"
 description = "plugin and hook calling mechanisms for python"
 category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.extras]
 dev = ["pre-commit", "tox"]
@@ -178,7 +178,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pytest"
-version = "7.3.1"
+version = "7.4.0"
 description = "pytest: simple powerful testing with Python"
 category = "dev"
 optional = false
@@ -193,7 +193,7 @@ pluggy = ">=0.12,<2.0"
 tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
 
 [package.extras]
-testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
+testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
 
 [[package]]
 name = "python-dotenv"
@@ -234,7 +234,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "types-requests"
-version = "2.31.0.0"
+version = "2.31.0.1"
 description = "Typing stubs for requests"
 category = "dev"
 optional = false
@@ -253,7 +253,7 @@ python-versions = "*"
 
 [[package]]
 name = "typing-extensions"
-version = "4.6.2"
+version = "4.7.1"
 description = "Backported and Experimental Type Hints for Python 3.7+"
 category = "dev"
 optional = false
@@ -261,15 +261,15 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "ujson"
-version = "5.7.0"
+version = "5.8.0"
 description = "Ultra fast JSON encoder and decoder for Python"
 category = "main"
 optional = true
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 
 [[package]]
 name = "urllib3"
-version = "2.0.2"
+version = "2.0.3"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 category = "main"
 optional = false
