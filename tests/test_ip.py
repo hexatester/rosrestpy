@@ -102,49 +102,51 @@ class TestIPFirewall:
 
 
 class TestHotspot:
-    def test_hotspot(self, ros: Ros):
+    def test_module(self, ros: Ros):
         assert isinstance(ros.ip.hotspot, HotspotModule)
 
-    def test_hotspot_list(self, ros: Ros):
+    def test_server(self, ros: Ros):
         for i in ros.ip.hotspot():
             assert isinstance(i, HotspotServer)
 
-    def test_hotspot_profile(self, ros: Ros):
+    def test_profile(self, ros: Ros):
         for i in ros.ip.hotspot.profile():
             assert isinstance(i, HotspotProfile)
 
-    def test_hotspot_user(self, ros: Ros):
+    def test_user_module(self, ros: Ros):
         assert isinstance(ros.ip.hotspot.user, HotspotUserModule)
 
-    def test_hotspot_user_list(self, ros: Ros):
+    def test_users(self, ros: Ros):
         for i in ros.ip.hotspot.user():
             assert isinstance(i, HotspotUser)
 
-    def test_hotspot_user_profile(self, ros: Ros):
+    def test_user_profile(self, ros: Ros):
         for i in ros.ip.hotspot.user.profile():
             assert isinstance(i, HotspotUserProfile)
 
-    def test_hotspot_active(self, ros: Ros):
+    def test_active(self, ros: Ros):
         for i in ros.ip.hotspot.active():
             assert isinstance(i, HotspotActive)
 
-    def test_hotspot_host(self, ros: Ros):
+    def test_host(self, ros: Ros):
         for i in ros.ip.hotspot.host():
             assert isinstance(i, HotspotHost)
 
-    def test_hotspot_ip_binding(self, ros: Ros):
+    def test_ip_binding(self, ros: Ros):
         for i in ros.ip.hotspot.ip_binding():
             assert isinstance(i, HotspotIPBinding)
 
-    def test_hotspot_service_port(self, ros: Ros):
+    def test_service_port(self, ros: Ros):
         for i in ros.ip.hotspot.service_port():
             assert isinstance(i, HotspotServicePort)
 
-    def test_hotspot_walled_garden(self, ros: Ros):
+    def test_walled_garden_module(self, ros: Ros):
         assert isinstance(ros.ip.hotspot.walled_garden, HotspotWalledGardenModule)
+
+    def test_walled_gardens(self, ros: Ros):
         for i in ros.ip.hotspot.walled_garden():
             assert isinstance(i, HotspotWalledGarden)
 
-    def test_hotspot_walled_garden_ip(self, ros: Ros):
+    def test_walled_garden_ip(self, ros: Ros):
         for i in ros.ip.hotspot.walled_garden.ip():
             assert isinstance(i, HotspotWalledGardenIP)
