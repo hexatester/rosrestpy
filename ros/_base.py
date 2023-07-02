@@ -69,7 +69,7 @@ class BaseProps(Generic[PR]):
         return self.ros.put_as(self.filename, self.cl, data)
 
     def delete(self, o: PR):
-        assert self._write and self._delete, "Not writeable"
+        assert self._delete, "Not writeable"
         return self.remove(o)
 
     def _disabled(self, o: PR, s: bool) -> PR:
