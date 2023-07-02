@@ -4,6 +4,7 @@ from .host import HotspotHost
 from .hotspot import HotspotServer
 from .ip_binding import HotspotIPBinding
 from .profile import HotspotProfile
+from .service_port import HotspotServicePort
 from .user import HotspotUserModule, HotspotUser
 
 
@@ -13,6 +14,7 @@ class HotspotModule(BaseProps[HotspotServer]):
     _ip_binding: BaseProps[HotspotIPBinding] = None
     _user: HotspotUserModule = None
     _profile: BaseProps[HotspotProfile] = None
+    _service_port: BaseProps[HotspotServicePort] = None
 
     @property
     def active(self) -> BaseProps[HotspotActive]:
@@ -50,12 +52,23 @@ class HotspotModule(BaseProps[HotspotServer]):
             self._profile = BaseProps(self.ros, "/ip/hotspot/profile", HotspotProfile)
         return self._profile
 
+    @property
+    def service_port(self) -> BaseProps[HotspotProfile]:
+        if not self._service_port:
+            self._service_port = BaseProps(
+                self.ros, "/ip/hotspot/service-port", HotspotServicePort
+            )
+            self._service_port._delete = False
+        return self._service_port
+
 
 __all__ = [
     "HotspotActive",
     "HotspotHost",
+    "HotspotIPBinding",
     "HotspotProfile",
     "HotspotServer",
+    "HotspotServicePort",
     "HotspotUser",
     "HotspotModule",
 ]
