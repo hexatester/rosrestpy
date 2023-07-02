@@ -6,7 +6,7 @@ from .ip_binding import HotspotIPBinding
 from .profile import HotspotProfile
 from .service_port import HotspotServicePort
 from .user import HotspotUserModule, HotspotUser
-from .walled_garden import HotspotWalledGarden
+from .walled_garden import HotspotWalledGardenModule, HotspotWalledGarden
 
 
 class HotspotModule(BaseProps[HotspotServer]):
@@ -16,7 +16,7 @@ class HotspotModule(BaseProps[HotspotServer]):
     _user: HotspotUserModule = None
     _profile: BaseProps[HotspotProfile] = None
     _service_port: BaseProps[HotspotServicePort] = None
-    _walled_garden: BaseProps[HotspotWalledGarden] = None
+    _walled_garden: HotspotWalledGardenModule = None
 
     @property
     def active(self) -> BaseProps[HotspotActive]:
@@ -64,9 +64,9 @@ class HotspotModule(BaseProps[HotspotServer]):
         return self._service_port
 
     @property
-    def walled_garden(self) -> BaseProps[HotspotWalledGarden]:
+    def walled_garden(self) -> HotspotWalledGardenModule:
         if not self._walled_garden:
-            self._walled_garden = BaseProps(
+            self._walled_garden = HotspotWalledGardenModule(
                 self.ros, "/ip/hotspot/walled-garden", HotspotWalledGarden
             )
         return self._walled_garden

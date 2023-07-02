@@ -18,9 +18,13 @@ from ros.ip.hotspot import (
     HotspotHost,
     HotspotIPBinding,
     HotspotServicePort,
-    HotspotWalledGarden,
 )
 from ros.ip.hotspot.user import HotspotUserModule, HotspotUser, HotspotUserProfile
+from ros.ip.hotspot.walled_garden import (
+    HotspotWalledGardenModule,
+    HotspotWalledGarden,
+    HotspotWalledGardenIP,
+)
 
 
 class TestIP:
@@ -137,5 +141,10 @@ class TestHotspot:
             assert isinstance(i, HotspotServicePort)
 
     def test_hotspot_walled_garden(self, ros: Ros):
+        assert isinstance(ros.ip.hotspot.walled_garden, HotspotWalledGardenModule)
         for i in ros.ip.hotspot.walled_garden():
             assert isinstance(i, HotspotWalledGarden)
+
+    def test_hotspot_walled_garden_ip(self, ros: Ros):
+        for i in ros.ip.hotspot.walled_garden.ip():
+            assert isinstance(i, HotspotWalledGardenIP)
