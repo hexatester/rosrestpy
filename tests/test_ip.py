@@ -8,7 +8,13 @@ from ros.ip.firewall import (
     IPFirewallMangle,
     IPFirewallNAT,
 )
-from ros.ip.hotspot import HotspotModule, HotspotProfile, HotspotServer
+from ros.ip.hotspot import (
+    HotspotModule,
+    HotspotProfile,
+    HotspotServer,
+    HotspotUserModule,
+    HotspotUser,
+)
 
 
 class TestIP:
@@ -96,3 +102,10 @@ class TestHotspot:
     def test_hotspot_profile(self, ros: Ros):
         for i in ros.ip.hotspot.profile():
             assert isinstance(i, HotspotProfile)
+
+    def test_hotspot_user(self, ros: Ros):
+        assert isinstance(ros.ip.hotspot.user, HotspotUserModule)
+
+    def test_hotspot_user_list(self, ros: Ros):
+        for i in ros.ip.hotspot.user():
+            assert isinstance(i, HotspotUser)
