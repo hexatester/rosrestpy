@@ -14,6 +14,7 @@ from ros.ip.hotspot import (
     HotspotServer,
     HotspotUserModule,
     HotspotUser,
+    HotspotActive,
 )
 from ros.ip.hotspot.user import HotspotUserModule, HotspotUser, HotspotUserProfile
 
@@ -114,3 +115,7 @@ class TestHotspot:
     def test_hotspot_user_profile(self, ros: Ros):
         for i in ros.ip.hotspot.user.profile():
             assert isinstance(i, HotspotUserProfile)
+
+    def test_hotspot_active(self, ros: Ros):
+        for i in ros.ip.hotspot.active():
+            assert isinstance(i, HotspotActive)
