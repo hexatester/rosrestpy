@@ -1,5 +1,6 @@
 from ros._base import BaseProps
 from .active import HotspotActive
+from .host import HotspotHost
 from .hotspot import HotspotServer
 from .profile import HotspotProfile
 from .user import HotspotUserModule, HotspotUser
@@ -7,6 +8,7 @@ from .user import HotspotUserModule, HotspotUser
 
 class HotspotModule(BaseProps[HotspotServer]):
     _active: BaseProps[HotspotActive] = None
+    _host: BaseProps[HotspotHost] = None
     _user: HotspotUserModule = None
     _profile: BaseProps[HotspotProfile] = None
 
@@ -17,6 +19,14 @@ class HotspotModule(BaseProps[HotspotServer]):
             self._active._create = False
             self._active._write = False
         return self._active
+
+    @property
+    def host(self) -> BaseProps[HotspotHost]:
+        if not self._host:
+            self._host = BaseProps(self.ros, "/ip/hotspot/host", HotspotHost)
+            self._host._create = False
+            self._host._write = False
+        return self._host
 
     @property
     def user(self) -> HotspotUserModule:
@@ -33,6 +43,7 @@ class HotspotModule(BaseProps[HotspotServer]):
 
 __all__ = [
     "HotspotActive",
+    "HotspotHost",
     "HotspotProfile",
     "HotspotServer",
     "HotspotUser",
