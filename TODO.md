@@ -58,7 +58,7 @@
 - [x] dhcp-server
 - [x] dns
 - [x] firewall
-- [ ] hotspot
+- [x] hotspot
 - [ ] ipsec
 - [ ] kid-control
 - [ ] neighbor
