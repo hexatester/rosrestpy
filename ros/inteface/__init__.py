@@ -3,6 +3,7 @@ from typing import Any, List
 from ros._base import BaseModule, BaseProps
 
 from .bridge import BridgeModule, Bridge, BridgeMsti, BridgePort, BridgeVlan
+from .eoip import EoIP
 from .ethernet import InterfaceEthernet
 from .interface import Interface
 from .list import InterfaceList, InterfaceListMember, InterfaceListModule
@@ -10,6 +11,7 @@ from .list import InterfaceList, InterfaceListMember, InterfaceListModule
 
 class InterfaceModule(BaseModule):
     _brigde: BridgeModule = None
+    _eoip: BaseProps[EoIP] = None
     _ethernet: BaseProps[InterfaceEthernet] = None
     _list: InterfaceListModule = None
 
@@ -27,6 +29,12 @@ class InterfaceModule(BaseModule):
         if not self._list:
             self._list = InterfaceListModule(self.ros, "/interface/list", InterfaceList)
         return self._list
+
+    @property
+    def eoip(self) -> BaseProps[EoIP]:
+        if not self._eoip:
+            self._eoip = BaseProps(self.ros, "/interface/eoip", EoIP)
+        return self._eoip
 
     @property
     def ethernet(self) -> BaseProps[InterfaceEthernet]:
