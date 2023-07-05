@@ -5,6 +5,7 @@ from ros.inteface.ethernet import InterfaceEthernet
 from ros.inteface.list import InterfaceListModule, InterfaceList, InterfaceListMember
 from ros.inteface.veth import Veth
 from ros.inteface.vlan import Vlan
+from ros.inteface.vrrp import Vrrp
 from ros.inteface.wireguard import WireguardModule, Wireguard
 
 
@@ -72,6 +73,12 @@ class TestVlan:
     def test_vlan(self, ros: Ros):
         for item in ros.interface.vlan():
             assert isinstance(item, Vlan)
+
+
+class TestVrrp:
+    def test_vrrp(self, ros: Ros):
+        for item in ros.interface.vrrp():
+            assert isinstance(item, Vrrp)
 
 
 class TestWireguard:

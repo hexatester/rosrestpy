@@ -43,7 +43,7 @@
 - [x] veth
 - [x] vlan
 - [ ] vpls
-- [ ] vrrp
+- [x] vrrp
 - [ ] vxlan
 - [ ] wireguard
 - [ ] wireless
