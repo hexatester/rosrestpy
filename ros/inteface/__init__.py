@@ -9,6 +9,7 @@ from .interface import Interface
 from .list import InterfaceList, InterfaceListMember, InterfaceListModule
 from .veth import Veth
 from .vlan import Vlan
+from .wireguard import WireguardModule, Wireguard
 
 
 class InterfaceModule(BaseModule):
@@ -18,6 +19,7 @@ class InterfaceModule(BaseModule):
     _list: InterfaceListModule = None
     _veth: BaseProps[Veth] = None
     _vlan: BaseProps[Vlan] = None
+    _wireguard: WireguardModule = None
 
     def __call__(self, **kwds: Any):
         return self.print(**kwds)
@@ -61,6 +63,14 @@ class InterfaceModule(BaseModule):
         if not self._vlan:
             self._vlan = BaseProps(self.ros, "/interface/vlan", Vlan)
         return self._vlan
+
+    @property
+    def wireguard(self) -> WireguardModule:
+        if not self._wireguard:
+            self._wireguard = WireguardModule(
+                self.ros, "/interface/wireguard", Wireguard
+            )
+        return self._wireguard
 
     def print(self, **kwds: Any) -> List[Interface]:
         return self.ros.get_as(self.url, List[Interface], kwds)
