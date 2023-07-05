@@ -41,7 +41,7 @@
 - [ ] sstp-client
 - [ ] sstp-server
 - [x] veth
-- [ ] vlan
+- [x] vlan
 - [ ] vpls
 - [ ] vrrp
 - [ ] vxlan

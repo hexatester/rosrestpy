@@ -8,6 +8,7 @@ from .ethernet import InterfaceEthernet
 from .interface import Interface
 from .list import InterfaceList, InterfaceListMember, InterfaceListModule
 from .veth import Veth
+from .vlan import Vlan
 
 
 class InterfaceModule(BaseModule):
@@ -16,6 +17,7 @@ class InterfaceModule(BaseModule):
     _ethernet: BaseProps[InterfaceEthernet] = None
     _list: InterfaceListModule = None
     _veth: BaseProps[Veth] = None
+    _vlan: BaseProps[Vlan] = None
 
     def __call__(self, **kwds: Any):
         return self.print(**kwds)
@@ -53,6 +55,12 @@ class InterfaceModule(BaseModule):
         if not self._veth:
             self._veth = BaseProps(self.ros, "/interface/veth", Veth)
         return self._veth
+
+    @property
+    def vlan(self) -> BaseProps[Vlan]:
+        if not self._vlan:
+            self._vlan = BaseProps(self.ros, "/interface/vlan", Vlan)
+        return self._vlan
 
     def print(self, **kwds: Any) -> List[Interface]:
         return self.ros.get_as(self.url, List[Interface], kwds)

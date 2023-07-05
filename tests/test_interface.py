@@ -4,6 +4,7 @@ from ros.inteface.eoip import EoIP
 from ros.inteface.ethernet import InterfaceEthernet
 from ros.inteface.list import InterfaceListModule, InterfaceList, InterfaceListMember
 from ros.inteface.veth import Veth
+from ros.inteface.vlan import Vlan
 
 
 class TestInterface:
@@ -64,3 +65,9 @@ class TestVeth:
     def test_veth(self, ros: Ros):
         for item in ros.interface.veth():
             assert isinstance(item, Veth)
+
+
+class TestVlan:
+    def test_vlan(self, ros: Ros):
+        for item in ros.interface.vlan():
+            assert isinstance(item, Vlan)
