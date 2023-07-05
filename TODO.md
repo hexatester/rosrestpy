@@ -40,7 +40,7 @@
 - [ ] pptp-server
 - [ ] sstp-client
 - [ ] sstp-server
-- [ ] veth
+- [x] veth
 - [ ] vlan
 - [ ] vpls
 - [ ] vrrp

@@ -3,6 +3,7 @@ from ros.inteface.bridge import BridgeModule, Bridge, BridgeMsti, BridgePort, Br
 from ros.inteface.eoip import EoIP
 from ros.inteface.ethernet import InterfaceEthernet
 from ros.inteface.list import InterfaceListModule, InterfaceList, InterfaceListMember
+from ros.inteface.veth import Veth
 
 
 class TestInterface:
@@ -57,3 +58,9 @@ class TestList:
     def test_member(self, ros: Ros):
         for item in ros.interface.list.member():
             assert isinstance(item, InterfaceListMember)
+
+
+class TestVeth:
+    def test_veth(self, ros: Ros):
+        for item in ros.interface.veth():
+            assert isinstance(item, Veth)

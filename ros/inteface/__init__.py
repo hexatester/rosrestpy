@@ -7,6 +7,7 @@ from .eoip import EoIP
 from .ethernet import InterfaceEthernet
 from .interface import Interface
 from .list import InterfaceList, InterfaceListMember, InterfaceListModule
+from .veth import Veth
 
 
 class InterfaceModule(BaseModule):
@@ -14,6 +15,7 @@ class InterfaceModule(BaseModule):
     _eoip: BaseProps[EoIP] = None
     _ethernet: BaseProps[InterfaceEthernet] = None
     _list: InterfaceListModule = None
+    _veth: BaseProps[Veth] = None
 
     def __call__(self, **kwds: Any):
         return self.print(**kwds)
@@ -45,6 +47,12 @@ class InterfaceModule(BaseModule):
             self._ethernet._create = False
             self._ethernet._delete = False
         return self._ethernet
+
+    @property
+    def veth(self) -> BaseProps[Veth]:
+        if not self._veth:
+            self._veth = BaseProps(self.ros, "/interface/veth", Veth)
+        return self._veth
 
     def print(self, **kwds: Any) -> List[Interface]:
         return self.ros.get_as(self.url, List[Interface], kwds)
