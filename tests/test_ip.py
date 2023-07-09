@@ -20,6 +20,7 @@ from ros.ip.hotspot import (
     HotspotServicePort,
     HotspotCookie,
 )
+from ros.ip.pool import IPPool
 from ros.ip.hotspot.user import HotspotUserModule, HotspotUser, HotspotUserProfile
 from ros.ip.hotspot.walled_garden import (
     HotspotWalledGardenModule,
@@ -155,3 +156,9 @@ class TestHotspot:
     def test_cookie(self, ros: Ros):
         for i in ros.ip.hotspot.cookie():
             assert isinstance(i, HotspotCookie)
+
+
+class TestIPPool:
+    def test_pool(self, ros: Ros):
+        for i in ros.ip.pool():
+            assert isinstance(i, IPPool)

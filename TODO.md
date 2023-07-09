@@ -63,7 +63,7 @@
 - [ ] kid-control
 - [ ] neighbor
 - [ ] packing
-- [ ] pool
+- [x] pool
 - [ ] proxy
 - [x] route
 - [ ] service
