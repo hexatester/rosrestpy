@@ -9,6 +9,7 @@ from .dhcp_server import DHCPServerModule, DHCPServer
 from .dns import DNS
 from .firewall import IPFirewallModule
 from .hotspot import HotspotModule, HotspotServer
+from .neighbor import IPNeighbor
 from .pool import IPPool
 from .route import Route
 from .setting import Setting
@@ -24,6 +25,7 @@ class IPModule(BaseModule):
     _dhcp_client: BaseProps[DHCPClient] = None
     _dhcp_relay: BaseProps[DHCPRelay] = None
     _pool: BaseProps[IPPool] = None
+    _neighbor: BaseProps[IPNeighbor] = None
     _route: BaseProps[Route] = None
 
     @property
@@ -79,6 +81,15 @@ class IPModule(BaseModule):
         if not self._hotspot:
             self._hotspot = HotspotModule(self.ros, "/ip/hotspot", HotspotServer)
         return self._hotspot
+
+    @property
+    def neighbor(self) -> BaseProps[IPNeighbor]:
+        if not self._neighbor:
+            self._neighbor = BaseProps(self.ros, "/ip/neighbor", IPNeighbor)
+            self._neighbor._delete = False
+            self._neighbor._write = False
+            self._neighbor._disable = False
+        return self._neighbor
 
     @property
     def pool(self) -> BaseProps[IPPool]:

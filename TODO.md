@@ -61,7 +61,7 @@
 - [x] hotspot
 - [ ] ipsec
 - [ ] kid-control
-- [ ] neighbor
+- [x] neighbor
 - [ ] packing
 - [x] pool
 - [ ] proxy
