@@ -51,6 +51,7 @@ class BaseProps(Generic[PR]):
     filename: str
     cl: Type[PR]
     _create: bool = True
+    _disable: bool = True
     _delete: bool = True
     _write: bool = True
 
@@ -79,6 +80,7 @@ class BaseProps(Generic[PR]):
         )
 
     def disable(self, o: PR) -> PR:
+        assert self._disable, "Not allow disable"
         return self._disabled(o, True)
 
     def enable(self, o: PR) -> PR:
