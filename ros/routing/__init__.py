@@ -1,12 +1,20 @@
 from ros._base import BaseModule, BaseProps
 
+from .id import RoutingId
 from .rule import RoutingRule
 from .table import RoutingTable
 
 
 class RoutingModule(BaseModule):
+    _id: BaseProps[RoutingId] = None
     _rule: BaseProps[RoutingRule] = None
     _table: BaseProps[RoutingTable] = None
+
+    @property
+    def id(self):
+        if not self._id:
+            self._id = BaseProps(self.ros, "/routing/id", RoutingId)
+        return self._id
 
     @property
     def rule(self):

@@ -1,5 +1,5 @@
 from ros import Ros, RoutingModule
-from ros.routing import RoutingRule, RoutingTable
+from ros.routing import RoutingId, RoutingRule, RoutingTable
 
 
 class TestRouting:
@@ -7,13 +7,19 @@ class TestRouting:
         assert isinstance(ros.routing, RoutingModule)
 
 
+class TestRoutingId:
+    def test_routing_id(self, ros: Ros):
+        for i in ros.routing.id():
+            assert isinstance(i, RoutingId)
+
+
 class TestRoutingRule:
-    def test_routing(self, ros: Ros):
+    def test_rule(self, ros: Ros):
         for i in ros.routing.rule():
             assert isinstance(i, RoutingRule)
 
 
 class TestRoutingTable:
-    def test_routing(self, ros: Ros):
+    def test_table(self, ros: Ros):
         for i in ros.routing.table():
             assert isinstance(i, RoutingTable)
