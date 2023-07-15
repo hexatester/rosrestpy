@@ -1,12 +1,14 @@
 from ros._base import BaseModule, BaseProps
 
 from .id import RoutingId
+from .nexthop import Nexthop
 from .rule import RoutingRule
 from .table import RoutingTable
 
 
 class RoutingModule(BaseModule):
     _id: BaseProps[RoutingId] = None
+    _nexthop: BaseProps[Nexthop] = None
     _rule: BaseProps[RoutingRule] = None
     _table: BaseProps[RoutingTable] = None
 
@@ -15,6 +17,12 @@ class RoutingModule(BaseModule):
         if not self._id:
             self._id = BaseProps(self.ros, "/routing/id", RoutingId)
         return self._id
+
+    @property
+    def nexthop(self):
+        if not self._nexthop:
+            self._nexthop = BaseProps(self.ros, "/routing/nexthop", Nexthop)
+        return self._nexthop
 
     @property
     def rule(self):
@@ -29,4 +37,4 @@ class RoutingModule(BaseModule):
         return self._table
 
 
-__all__ = ["RoutingModule", "RoutingTable"]
+__all__ = ["RoutingId", "Nexthop", "RoutingModule", "RoutingTable"]

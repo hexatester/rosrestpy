@@ -1,5 +1,5 @@
 from ros import Ros, RoutingModule
-from ros.routing import RoutingId, RoutingRule, RoutingTable
+from ros.routing import RoutingId, Nexthop, RoutingRule, RoutingTable
 
 
 class TestRouting:
@@ -11,6 +11,12 @@ class TestRoutingId:
     def test_routing_id(self, ros: Ros):
         for i in ros.routing.id():
             assert isinstance(i, RoutingId)
+
+
+class TestNexthop:
+    def test_nexthop(self, ros: Ros):
+        for i in ros.routing.nexthop():
+            assert isinstance(i, Nexthop)
 
 
 class TestRoutingRule:
