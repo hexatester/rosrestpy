@@ -12,6 +12,7 @@ from .hotspot import HotspotModule, HotspotServer
 from .neighbor import IPNeighbor
 from .pool import IPPool
 from .route import Route
+from .service import Service
 from .setting import Setting
 from .vrf import Vrf
 
@@ -28,6 +29,7 @@ class IPModule(BaseModule):
     _pool: BaseProps[IPPool] = None
     _neighbor: BaseProps[IPNeighbor] = None
     _route: BaseProps[Route] = None
+    _service: BaseProps[Service] = None
     _vrf: BaseProps[Vrf] = None
 
     @property
@@ -107,6 +109,14 @@ class IPModule(BaseModule):
         return self._route
 
     @property
+    def service(self) -> BaseProps[Service]:
+        if not self._service:
+            self._service = BaseProps(self.ros, "/ip/service", Service)
+            self._service._create = False
+            self._service._delete = False
+        return self._service
+
+    @property
     def setting(self) -> Setting:
         return self.ros.get_as("/ip/setting", Setting)
 
@@ -127,6 +137,7 @@ __all__ = [
     "DHCPServer",
     "DNS",
     "Route",
+    "Service",
     "Setting",
     "Vrf",
 ]

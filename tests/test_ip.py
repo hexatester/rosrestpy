@@ -22,6 +22,7 @@ from ros.ip.hotspot import (
 )
 from ros.ip.neighbor import IPNeighbor
 from ros.ip.pool import IPPool
+from ros.ip.service import Service
 from ros.ip.hotspot.user import HotspotUserModule, HotspotUser, HotspotUserProfile
 from ros.ip.hotspot.walled_garden import (
     HotspotWalledGardenModule,
@@ -164,6 +165,12 @@ class TestIPNeighbor:
     def test_neighbor(self, ros: Ros):
         for i in ros.ip.neighbor():
             assert isinstance(i, IPNeighbor)
+
+
+class TestService:
+    def test_service(self, ros: Ros):
+        for i in ros.ip.service():
+            assert isinstance(i, Service)
 
 
 class TestIPPool:

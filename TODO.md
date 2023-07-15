@@ -66,7 +66,7 @@
 - [x] pool
 - [ ] proxy
 - [x] route
-- [ ] service
+- [x] service
 - [x] settings
 - [ ] smb
 - [ ] socks
