@@ -9,6 +9,7 @@ from .dhcp_server import DHCPServerModule, DHCPServer
 from .dns import DNS
 from .firewall import IPFirewallModule
 from .hotspot import HotspotModule, HotspotServer
+from .kid_control import KidControlModule, KidControl
 from .neighbor import IPNeighbor
 from .pool import IPPool
 from .route import Route
@@ -26,6 +27,7 @@ class IPModule(BaseModule):
     _arp: BaseProps[ARP] = None
     _dhcp_client: BaseProps[DHCPClient] = None
     _dhcp_relay: BaseProps[DHCPRelay] = None
+    _kid_control: KidControlModule = None
     _pool: BaseProps[IPPool] = None
     _neighbor: BaseProps[IPNeighbor] = None
     _route: BaseProps[Route] = None
@@ -87,6 +89,14 @@ class IPModule(BaseModule):
         return self._hotspot
 
     @property
+    def kid_control(self) -> KidControlModule:
+        if not self._kid_control:
+            self._kid_control = KidControlModule(
+                self.ros, "/ip/kid-control", KidControl
+            )
+        return self._kid_control
+
+    @property
     def neighbor(self) -> BaseProps[IPNeighbor]:
         if not self._neighbor:
             self._neighbor = BaseProps(self.ros, "/ip/neighbor", IPNeighbor)
@@ -136,6 +146,7 @@ __all__ = [
     "DHCPRelay",
     "DHCPServer",
     "DNS",
+    "KidControl",
     "Route",
     "Service",
     "Setting",

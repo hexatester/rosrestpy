@@ -20,6 +20,7 @@ from ros.ip.hotspot import (
     HotspotServicePort,
     HotspotCookie,
 )
+from ros.ip.kid_control import Device, KidControlModule, KidControl
 from ros.ip.neighbor import IPNeighbor
 from ros.ip.pool import IPPool
 from ros.ip.service import Service
@@ -165,6 +166,19 @@ class TestIPNeighbor:
     def test_neighbor(self, ros: Ros):
         for i in ros.ip.neighbor():
             assert isinstance(i, IPNeighbor)
+
+
+class TestKidControl:
+    def test_module(self, ros: Ros):
+        assert isinstance(ros.ip.kid_control, KidControlModule)
+
+    def test_kid_control(self, ros: Ros):
+        for i in ros.ip.kid_control():
+            assert isinstance(i, KidControl)
+
+    def test_device(self, ros: Ros):
+        for i in ros.ip.kid_control.device():
+            assert isinstance(i, Device)
 
 
 class TestService:

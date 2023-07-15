@@ -60,7 +60,7 @@
 - [x] firewall
 - [x] hotspot
 - [ ] ipsec
-- [ ] kid-control
+- [x] kid-control
 - [x] neighbor
 - [ ] packing
 - [x] pool
