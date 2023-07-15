@@ -28,6 +28,7 @@ from ros.ip.hotspot.walled_garden import (
     HotspotWalledGarden,
     HotspotWalledGardenIP,
 )
+from ros.ip.vrf import Vrf
 
 
 class TestIP:
@@ -169,3 +170,9 @@ class TestIPPool:
     def test_pool(self, ros: Ros):
         for i in ros.ip.pool():
             assert isinstance(i, IPPool)
+
+
+class TestVrf:
+    def test_vrf(self, ros: Ros):
+        for i in ros.ip.vrf():
+            assert isinstance(i, Vrf)

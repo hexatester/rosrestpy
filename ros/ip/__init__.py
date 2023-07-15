@@ -13,6 +13,7 @@ from .neighbor import IPNeighbor
 from .pool import IPPool
 from .route import Route
 from .setting import Setting
+from .vrf import Vrf
 
 
 class IPModule(BaseModule):
@@ -27,6 +28,7 @@ class IPModule(BaseModule):
     _pool: BaseProps[IPPool] = None
     _neighbor: BaseProps[IPNeighbor] = None
     _route: BaseProps[Route] = None
+    _vrf: BaseProps[Vrf] = None
 
     @property
     def address(self):
@@ -108,6 +110,12 @@ class IPModule(BaseModule):
     def setting(self) -> Setting:
         return self.ros.get_as("/ip/setting", Setting)
 
+    @property
+    def vrf(self) -> BaseProps[Vrf]:
+        if not self._vrf:
+            self._vrf = BaseProps(self.ros, "/ip/vrf", Vrf)
+        return self._vrf
+
 
 __all__ = [
     "Address",
@@ -120,4 +128,5 @@ __all__ = [
     "DNS",
     "Route",
     "Setting",
+    "Vrf",
 ]

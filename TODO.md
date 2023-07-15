@@ -74,7 +74,7 @@
 - [ ] tftp
 - [ ] traffic-flow
 - [ ] upnp
-- [ ] vrf
+- [x] vrf
 
 ## PPP
 
