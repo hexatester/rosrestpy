@@ -93,7 +93,7 @@
 
 ## Routing
 
-- [ ] bfd
+- [x] bfd
 - [ ] bgp
 - [ ] fantasy
 - [ ] filter

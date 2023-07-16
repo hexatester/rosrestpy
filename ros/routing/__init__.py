@@ -1,5 +1,6 @@
 from ros._base import BaseModule, BaseProps
 
+from .bfd import BFDModule
 from .id import RoutingId
 from .nexthop import Nexthop
 from .rule import RoutingRule
@@ -7,10 +8,17 @@ from .table import RoutingTable
 
 
 class RoutingModule(BaseModule):
+    _bfd: BFDModule = None
     _id: BaseProps[RoutingId] = None
     _nexthop: BaseProps[Nexthop] = None
     _rule: BaseProps[RoutingRule] = None
     _table: BaseProps[RoutingTable] = None
+
+    @property
+    def bfd(self):
+        if not self._bfd:
+            self._bfd = BFDModule(self.ros, "/routing/bfd")
+        return self._bfd
 
     @property
     def id(self):
