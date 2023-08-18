@@ -202,6 +202,11 @@ class Ros(BaseRos):
         return self.interface.bridge
 
     @property
+    def wireguard(self):
+        """/interface/wireguard"""
+        return self.interface.wireguard
+
+    @property
     def interface(self):
         """/interface"""
         if not self._interface:
