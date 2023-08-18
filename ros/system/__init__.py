@@ -29,6 +29,7 @@ class SystemModule(BaseModule):
         if not self._history:
             self._history = BaseProps(self.ros, "/system/history", History)
             self._history._write = False
+            self._history._delete = False
         return self._history
 
     @property
@@ -43,7 +44,7 @@ class SystemModule(BaseModule):
     def logging(self):
         if not self._logging:
             self._logging = BaseProps(self.ros, "/system/logging", Logging)
-            self._logging._write = False
+            self._logging._create = False
         return self._logging
 
     @property
@@ -54,6 +55,8 @@ class SystemModule(BaseModule):
     def package(self) -> PackageModule:
         if not self._package:
             self._package = PackageModule(self.ros, "/system/package", Package)
+            self._package._create = False
+            self._package._write = False
         return self._package
 
     @property
