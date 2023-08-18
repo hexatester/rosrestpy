@@ -18,7 +18,7 @@ class Netwatch:
     disabled: bool = False
     http_codes: str = None
     port: int = None
-    packet_interval: float = None
+    packet_interval: str = None
     packet_count: int = None
     packet_size: int = None
     certificate: str = None
