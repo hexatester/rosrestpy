@@ -168,7 +168,7 @@
 - [ ] mac-telnet
 - [x] ping
 - [ ] ping-speed
-- [ ] profile
+- [x] profile
 - [ ] snmp-get
 - [ ] snmp-walk
 - [ ] speed-test

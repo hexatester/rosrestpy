@@ -8,6 +8,7 @@ from .bandwith_test import BandwithTest
 from .ip_scan import IPScan
 from .netwatch import Netwatch
 from .ping import Ping
+from .profile import Profile
 from .torch import Torch
 from .traceroute import Traceroute
 
@@ -46,6 +47,14 @@ class ToolModule(BaseModule):
         if ttl > 0:
             data["ttl"] = ttl
         return self.ros.post_as("/ping", List[Ping], data)
+
+    def profile(
+        self,
+        cpu: Literal["total", "all"] = "total",
+        duration: str = "5s",
+    ) -> List[Profile]:
+        data = {"cpu": cpu, "duration": duration}
+        return self.ros.post_as("/tool/profile", List[Profile], data)
 
     def bandwith_test(
         self,
