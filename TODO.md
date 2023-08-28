@@ -132,7 +132,7 @@
 - [x] resource
 - [x] routerboard
 - [ ] scheduler
-- [ ] script
+- [x] script
 - [ ] upgrade
 - [ ] watchdog
 - [ ] check-installation
