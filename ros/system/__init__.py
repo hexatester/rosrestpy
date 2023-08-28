@@ -9,6 +9,7 @@ from .note import Note
 from .package import Package, PackageModule
 from .resource import Resource
 from .routerboard import RouterBOARD
+from .script import Script, ScriptModule
 
 
 class SystemModule(BaseModule):
@@ -16,6 +17,7 @@ class SystemModule(BaseModule):
     _history: BaseProps[History] = None
     _logging: BaseProps[Logging] = None
     _package: PackageModule = None
+    _script: ScriptModule = None
 
     @property
     def health(self):
@@ -67,6 +69,12 @@ class SystemModule(BaseModule):
     def routerboard(self) -> RouterBOARD:
         return self.ros.get_as("/system/routerboard", RouterBOARD)
 
+    @property
+    def script(self) -> ScriptModule:
+        if not self._script:
+            self._script = ScriptModule(self.ros, "/system/script", Script)
+        return self._script
+
     def ssh_exec(
         self,
         address: str,
@@ -89,6 +97,7 @@ __all__ = [
     "Logging",
     "Note",
     "Resource",
+    "Script",
     "RouterBOARD",
     "SystemModule",
 ]

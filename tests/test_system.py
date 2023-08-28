@@ -1,6 +1,7 @@
 from ros import Ros, SystemModule
 from ros.system import Health, History, Identity, License, Note, Resource, RouterBOARD
 from ros.system.package import PackageModule, Package, Update
+from ros.system.script import ScriptModule, Environment, Job, Script
 
 
 class TestSystem:
@@ -62,3 +63,20 @@ class TestPackageUpdate:
             new_update: Update = ros.system.package.update.print()
             assert new_update.channel == "stable"
         ros.system.package.update.set(channel=old_update.channel)
+
+
+class TestScript:
+    def test_script(self, ros: Ros):
+        assert isinstance(ros.system.script, ScriptModule)
+
+    def test_script_print(self, ros: Ros):
+        for i in ros.system.script():
+            assert isinstance(i, Script)
+
+    def test_environment_print(self, ros: Ros):
+        for i in ros.system.script.environment():
+            assert isinstance(i, Environment)
+
+    def test_job_print(self, ros: Ros):
+        for i in ros.system.script.job():
+            assert isinstance(i, Job)
