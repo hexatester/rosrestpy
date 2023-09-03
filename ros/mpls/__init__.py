@@ -1,12 +1,12 @@
 from ros._base import BaseModule, BaseProps
 
 from .interface import MPLSInterface
-from .ldp import LDP
+from .ldp import MPLSLDP, LDPInstance
 
 
 class MPLSModule(BaseModule):
     _interface: BaseProps[MPLSInterface] = None
-    _ldp: BaseProps[LDP] = None
+    _ldp: MPLSLDP = None
 
     @property
     def interface(self):
@@ -17,5 +17,5 @@ class MPLSModule(BaseModule):
     @property
     def ldp(self):
         if not self._ldp:
-            self._ldp = BaseProps(self.ros, "/mpls/ldp", LDP)
+            self._ldp = MPLSLDP(self.ros, "/mpls/ldp", LDPInstance)
         return self._ldp

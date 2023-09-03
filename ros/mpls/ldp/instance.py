@@ -2,7 +2,7 @@ from attr import dataclass
 
 
 @dataclass
-class LDP:
+class LDPInstance:
     lsr_id: str
     path_vector_limit: str = None
     hop_limit: str = None
