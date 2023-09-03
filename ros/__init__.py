@@ -1,6 +1,7 @@
 __version__ = "0.10.0"
 from .inteface import InterfaceModule
 from .ip import IPModule
+from .mpls import MPLSModule
 from .ppp import PPPModule
 from .queue import QueueModule
 from .routing import RoutingModule
@@ -18,6 +19,7 @@ __all__ = [
     "Error",
     "InterfaceModule",
     "IPModule",
+    "MPLSModule",
     "PPPModule",
     "QueueModule",
     "RoutingModule",

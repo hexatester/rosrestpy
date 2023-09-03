@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Type, TypeVar
 from . import (
     InterfaceModule,
     IPModule,
+    MPLSModule,
     PPPModule,
     QueueModule,
     RoutingModule,
@@ -176,6 +177,7 @@ class BaseRos:
 class Ros(BaseRos):
     _interface: InterfaceModule = None
     _ip: IPModule = None
+    _mpls: MPLSModule = None
     _ppp: PPPModule = None
     _queue: QueueModule = None
     _routing: RoutingModule = None
@@ -219,6 +221,13 @@ class Ros(BaseRos):
         if not self._ip:
             self._ip = IPModule(self)
         return self._ip
+
+    @property
+    def mpls(self):
+        """/mpls"""
+        if not self._mpls:
+            self._mpls = MPLSModule(self)
+        return self._mpls
 
     @property
     def ppp(self):
