@@ -2,6 +2,7 @@ from ros import Ros, MPLSModule
 from ros.mpls import MPLSLDP, MPLSInterface
 from ros.mpls.ldp import (
     LDPAcceptFilter,
+    LDPAdvertiseFilter,
     LDPInstance,
     LDPInterface,
     LDPLocalMapping,
@@ -26,6 +27,10 @@ class TestLDP:
     def test_accept_filter(self, ros: Ros):
         for i in ros.mpls.ldp.accept_filter():
             assert isinstance(i, LDPAcceptFilter)
+
+    def test_advertise_filter(self, ros: Ros):
+        for i in ros.mpls.ldp.advertise_filter():
+            assert isinstance(i, LDPAdvertiseFilter)
 
     def test_interface(self, ros: Ros):
         for i in ros.mpls.ldp.interface():
