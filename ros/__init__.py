@@ -1,4 +1,4 @@
-__version__ = "0.10.0"
+__version__ = "0.11.0"
 from .inteface import InterfaceModule
 from .ip import IPModule
 from .mpls import MPLSModule
