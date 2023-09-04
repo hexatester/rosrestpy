@@ -1,6 +1,12 @@
 from ros import Ros, MPLSModule
 from ros.mpls import MPLSLDP, MPLSInterface
-from ros.mpls.ldp import LDPInstance, LDPInterface, LDPLocalMapping, LDPNeighbor
+from ros.mpls.ldp import (
+    LDPInstance,
+    LDPInterface,
+    LDPLocalMapping,
+    LDPNeighbor,
+    LDPRemoteMapping,
+)
 
 
 class TestMPLS:
@@ -27,6 +33,10 @@ class TestLDP:
     def test_neighbor(self, ros: Ros):
         for i in ros.mpls.ldp.neighbor():
             assert isinstance(i, LDPNeighbor)
+
+    def test_remote_mapping(self, ros: Ros):
+        for i in ros.mpls.ldp.remote_mapping():
+            assert isinstance(i, LDPRemoteMapping)
 
 
 class TestInterface:
