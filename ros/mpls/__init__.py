@@ -1,14 +1,16 @@
-from ros._base import BaseModule, BaseProps
+from ros._base import BaseModule, BaseProps, BaseProp
 
 from .forwarding_table import MPLSForwardingTable
 from .interface import MPLSInterface
 from .ldp import MPLSLDP, LDPInstance
+from .settings import MPLSSettings
 
 
 class MPLSModule(BaseModule):
     _forwarding_table: BaseProps[MPLSForwardingTable] = None
     _interface: BaseProps[MPLSInterface] = None
     _ldp: MPLSLDP = None
+    _settings: BaseProp[MPLSSettings] = None
 
     @property
     def forwarding_table(self):
@@ -32,3 +34,9 @@ class MPLSModule(BaseModule):
         if not self._ldp:
             self._ldp = MPLSLDP(self.ros, "/mpls/ldp", LDPInstance)
         return self._ldp
+
+    @property
+    def settings(self):
+        if not self._settings:
+            self._settings = BaseProp(self.ros, "/mpls/settings", MPLSSettings)
+        return self._settings

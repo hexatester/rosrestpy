@@ -1,5 +1,5 @@
 from ros import Ros, MPLSModule
-from ros.mpls import MPLSForwardingTable, MPLSLDP, MPLSInterface
+from ros.mpls import MPLSForwardingTable, MPLSLDP, MPLSInterface, MPLSSettings
 from ros.mpls.ldp import (
     LDPAcceptFilter,
     LDPAdvertiseFilter,
@@ -59,3 +59,8 @@ class TestInterface:
     def test_interface(self, ros: Ros):
         for i in ros.mpls.interface():
             assert isinstance(i, MPLSInterface)
+
+
+class TestSettings:
+    def test_settings(self, ros: Ros):
+        assert isinstance(ros.mpls.settings(), MPLSSettings)
