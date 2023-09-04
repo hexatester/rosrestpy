@@ -1,5 +1,6 @@
 from ros._base import BaseProps
 
+from .accept_filter import LDPAcceptFilter
 from .instance import LDPInstance
 from .interface import LDPInterface
 from .local_mapping import LDPLocalMapping
@@ -8,10 +9,19 @@ from .remote_mapping import LDPRemoteMapping
 
 
 class MPLSLDP(BaseProps[LDPInstance]):
+    _accept_filter: BaseProps[LDPAcceptFilter] = None
     _interface: BaseProps[LDPInterface] = None
     _neighbor: BaseProps[LDPNeighbor] = None
     _local_mapping: BaseProps[LDPLocalMapping] = None
     _remote_mapping: BaseProps[LDPLocalMapping] = None
+
+    @property
+    def accept_filter(self):
+        if not self._accept_filter:
+            self._accept_filter = BaseProps(
+                self.ros, "/mpls/ldp/accept-filter", LDPAcceptFilter
+            )
+        return self._accept_filter
 
     @property
     def interface(self):
