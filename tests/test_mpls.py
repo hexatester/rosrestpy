@@ -1,5 +1,5 @@
 from ros import Ros, MPLSModule
-from ros.mpls import MPLSLDP, MPLSInterface
+from ros.mpls import MPLSForwardingTable, MPLSLDP, MPLSInterface
 from ros.mpls.ldp import (
     LDPAcceptFilter,
     LDPAdvertiseFilter,
@@ -9,6 +9,12 @@ from ros.mpls.ldp import (
     LDPNeighbor,
     LDPRemoteMapping,
 )
+
+
+class TestForwardingTable:
+    def test_forwarding_table(self, ros: Ros):
+        for i in ros.mpls.forwarding_table():
+            assert isinstance(i, MPLSForwardingTable)
 
 
 class TestMPLS:
