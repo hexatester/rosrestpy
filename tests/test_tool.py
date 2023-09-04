@@ -13,6 +13,7 @@ class TestNetwatch:
         for i in ros.tool.netwatch():
             assert isinstance(i, Netwatch)
 
+
 class TestProfile:
     def test_profile(self, ros: Ros):
         for i in ros.tool.profile():
