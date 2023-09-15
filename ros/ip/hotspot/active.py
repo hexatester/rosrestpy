@@ -10,8 +10,8 @@ class HotspotActive:
     mac_address: str
     login_by: str
     uptime: str
-    session_time_left: str
     keepalive_timeout: str
+    session_time_left: str = None
     comment: str = None
     radius: bool = False
     bytes_in: int = 0
