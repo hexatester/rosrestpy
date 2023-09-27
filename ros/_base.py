@@ -54,13 +54,14 @@ class BaseProps(Generic[PR]):
     _disable: bool = True
     _delete: bool = True
     _write: bool = True
+    _read: bool = True
 
     def __call__(self, **kwds: Any) -> List[PR]:
         return self.print(**kwds)
 
     @staticmethod
     def _getid(o: PR):
-        assert hasattr(o, "id")
+        assert hasattr(o, "id"), f"{o} didnt have id from the router"
         return getattr(o, "id")
 
     def add(self, o: PR) -> PR:
@@ -80,13 +81,14 @@ class BaseProps(Generic[PR]):
         )
 
     def disable(self, o: PR) -> PR:
-        assert self._disable, "Not allow disable"
+        assert self._disable, "Not allowed to disable"
         return self._disabled(o, True)
 
     def enable(self, o: PR) -> PR:
         return self._disabled(o, False)
 
     def print(self, **kwds: Any) -> List[PR]:
+        assert self._read, "Not readable"
         return self.ros.get_as(self.filename, List[self.cl], kwds)
 
     def remove(self, o: PR):
