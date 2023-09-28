@@ -2,6 +2,7 @@ from attr import define
 
 from ros._base import BaseModule, BaseProps
 
+from .address_list import IPAddressList
 from .connection import IPConnection
 from .filter import IPFirewallFilter
 from .mangle import IPFirewallMangle
@@ -12,10 +13,19 @@ from .nat import IPFirewallNAT
 class IPFirewallModule:
     ros: BaseModule
     filename: str
+    _address_list: BaseProps[IPAddressList] = None
     _connection: BaseProps[IPConnection] = None
     _filter: BaseProps[IPFirewallFilter] = None
     _mangle: BaseProps[IPFirewallMangle] = None
     _nat: BaseProps[IPFirewallNAT] = None
+
+    @property
+    def address_list(self) -> BaseProps[IPAddressList]:
+        if not self._address_list:
+            self._address_list = BaseProps(
+                self.ros, "/ip/firewall/address-list", IPAddressList
+            )
+        return self._address_list
 
     @property
     def connection(self) -> BaseProps[IPConnection]:

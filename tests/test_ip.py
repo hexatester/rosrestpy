@@ -4,6 +4,7 @@ from ros.ip.dhcp_server import DHCPServer, DHCPNetwork, DHCPLease
 from ros.ip.dns import DNS, DNSCache, DNSStatic
 from ros.ip.firewall import (
     IPFirewallModule,
+    IPAddressList,
     IPFirewallFilter,
     IPFirewallMangle,
     IPFirewallNAT,
@@ -105,6 +106,10 @@ class TestIPFirewall:
     def test_firewall_nat(self, ros: Ros):
         for i in ros.ip.firewall.nat():
             assert isinstance(i, IPFirewallNAT)
+
+    def test_firewall_address_list(self, ros: Ros):
+        for i in ros.ip.firewall.address_list():
+            assert isinstance(i, IPAddressList)
 
 
 class TestHotspot:
