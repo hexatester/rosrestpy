@@ -1,5 +1,6 @@
 from attr import dataclass
-from typing import Literal
+from typing import Literal, Union
+from ros._base import BaseProps
 
 QueuePriority = Literal["0", "1", "2", "3", "4", "5", "6", "7", "8"]
 
@@ -30,3 +31,16 @@ class QueueTree:
 
     def __str__(self) -> str:
         return self.name
+
+
+class QueueTreeModule(BaseProps[QueueTree]):
+    def reset(self, queue: Union[QueueTree, str]):
+        rid = queue.id if isinstance(queue, QueueTree) else queue
+        self.ros.post_as("/queue/tree/reset", None, {".id": rid})
+
+    def reset_counters(self, queue: Union[QueueTree, str]):
+        rid = queue.id if isinstance(queue, QueueTree) else queue
+        self.ros.post_as("/queue/tree/reset-counters", None, {".id": rid})
+
+    def reset_counters_all(self):
+        self.ros.post_as("/queue/tree/reset-counters-all", None)

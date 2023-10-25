@@ -2,14 +2,14 @@ from ros._base import BaseModule, BaseProps
 
 from .interface import InterfaceQueue
 from .simple import SimpleQueue, SimpleQueueModule
-from .tree import QueueTree
+from .tree import QueueTree, QueueTreeModule
 from .type import QueueType
 
 
 class QueueModule(BaseModule):
     _interface: BaseProps[InterfaceQueue] = None
     _simple: SimpleQueueModule = None
-    _tree: BaseProps[QueueTree] = None
+    _tree: QueueTreeModule = None
     _type: BaseProps[QueueType] = None
 
     @property
@@ -27,7 +27,7 @@ class QueueModule(BaseModule):
     @property
     def tree(self):
         if not self._tree:
-            self._tree = BaseProps(self.ros, "/queue/tree", QueueTree)
+            self._tree = QueueTreeModule(self.ros, "/queue/tree", QueueTree)
         return self._tree
 
     @property
