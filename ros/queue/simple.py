@@ -1,4 +1,6 @@
 from attr import dataclass, field
+from typing import Union
+from ros._base import BaseProps
 
 
 @dataclass
@@ -58,3 +60,22 @@ class SimpleQueue:
 
     def __bool__(self) -> bool:
         return not self.disabled
+
+
+class SimpleQueueModule(BaseProps[SimpleQueue]):
+    def reset(self, queue: Union[SimpleQueue, str]):
+        rid = queue.id if isinstance(queue, SimpleQueue) else queue
+        self.ros.post_as("/queue/simple/reset", None, {".id": rid})
+
+    def reset_counters(self, queue: Union[SimpleQueue, str]):
+        rid = queue.id if isinstance(queue, SimpleQueue) else queue
+        self.ros.post_as("/queue/simple/reset-counters", None, {".id": rid})
+
+    def reset_counters_all(self):
+        self.ros.post_as("/queue/simple/reset-counters-all", None)
+
+    def move(self, queue: Union[SimpleQueue, str], destination: str):
+        rid = queue.id if isinstance(queue, SimpleQueue) else queue
+        self.ros.post_as(
+            "/queue/simple/move", None, {".id": rid, "destination": destination}
+        )
