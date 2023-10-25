@@ -3,7 +3,7 @@
 - [ ] [Interface](#interface)
 - [ ] [IP](#ip)
 - [ ] [PPP](#ppp)
-- [ ] [Queue](#queue)
+- [x] [Queue](#queue)
 - [ ] [Routing](#routing)
 - [ ] [System](#system)
 - [ ] [Tool](#tool)
@@ -90,7 +90,7 @@
 - [x] simple
 - [x] tree
 - [x] type
-- [ ] reset
+- [x] reset
 
 ## Routing
 
