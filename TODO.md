@@ -89,7 +89,8 @@
 - [x] interface
 - [x] simple
 - [x] tree
-- [ ] type
+- [x] type
+- [ ] reset
 
 ## Routing
 
