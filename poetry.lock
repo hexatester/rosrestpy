@@ -58,7 +58,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "charset-normalizer"
-version = "3.2.0"
+version = "3.3.1"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
 category = "main"
 optional = false
@@ -138,7 +138,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "packaging"
-version = "23.1"
+version = "23.2"
 description = "Core utilities for Python packages"
 category = "dev"
 optional = false
@@ -154,7 +154,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "platformdirs"
-version = "3.10.0"
+version = "3.11.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 category = "dev"
 optional = false
@@ -178,7 +178,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "pytest"
-version = "7.4.2"
+version = "7.4.3"
 description = "pytest: simple powerful testing with Python"
 category = "dev"
 optional = false
@@ -234,22 +234,14 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "types-requests"
-version = "2.31.0.6"
+version = "2.31.0.10"
 description = "Typing stubs for requests"
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
-types-urllib3 = "*"
-
-[[package]]
-name = "types-urllib3"
-version = "1.26.25.14"
-description = "Typing stubs for urllib3"
-category = "dev"
-optional = false
-python-versions = "*"
+urllib3 = ">=2"
 
 [[package]]
 name = "typing-extensions"
@@ -269,7 +261,7 @@ python-versions = ">=3.8"
 
 [[package]]
 name = "urllib3"
-version = "2.0.5"
+version = "2.0.7"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 category = "main"
 optional = false
@@ -311,7 +303,6 @@ python-dotenv = []
 requests = []
 tomli = []
 types-requests = []
-types-urllib3 = []
 typing-extensions = []
 ujson = []
 urllib3 = []
