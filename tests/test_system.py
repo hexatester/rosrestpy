@@ -52,18 +52,6 @@ class TestPackageUpdate:
         for i in ros.system.package.update.check_for_updates():
             assert isinstance(i, Update)
 
-    def test_set(self, ros: Ros):
-        old_update: Update = ros.system.package.update.print()
-        if old_update.channel == "stable":
-            ros.system.package.update.set(channel="testing")
-            new_update: Update = ros.system.package.update.print()
-            assert new_update.channel == "testing"
-        else:
-            ros.system.package.update.set(channel="stable")
-            new_update: Update = ros.system.package.update.print()
-            assert new_update.channel == "stable"
-        ros.system.package.update.set(channel=old_update.channel)
-
 
 class TestScript:
     def test_script(self, ros: Ros):

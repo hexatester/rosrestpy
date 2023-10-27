@@ -62,6 +62,40 @@ Notes on converting data from python type to REST API
 - `id` property will ble changed to `.id`
 - All property with `-` will be replaced with `_`
 
+## Base classes usage
+
+Base (`ros._base`) usage
+
+### Baseprop
+
+This class have implementtation for .print and .set methods for implementing specific command that only return single object, such as `/ip/cloud`.
+
+```python
+from ros._base import BaseProp
+
+class Cloud:
+    ddns_enabled: bool
+    # ...
+
+ip_cloud = BaseProp(ros, "/ip/cloud", Cloud)
+ip_cloud.print()
+```
+
+### Baseprops
+
+This class have implementtation for .add, .delete, .disable, .enable, .print, .remove, .set, and .unset methods for implementing specific command that return multiple objects, such as `/queue/simple`.
+
+```python
+from ros._base import BaseProps
+
+class QueueSimple:
+    name: str
+    # ...
+
+ip_cloud = BaseProps(ros, "/queue/simple", QueueSimple)
+ip_cloud.print()
+```
+
 ## Adding doctypes or documentation
 
 Not yet a priority, but we welcome pull request.
