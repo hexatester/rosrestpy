@@ -29,12 +29,15 @@ import logging
 
 # Initiate Ros object
 ros = Ros("https://192.168.88.1/", "admin", "")
-# Set Logging Level
+# Set Default logging level
 ros.loglevel=logging.DEBUG
+
+# Add a custom log message (logging.INFO is optional to override default)
+ros.logger.log_message('Starting Ros Check', logging.INFO)
 
 # Check cpu load
 if ros.system.resource.cpu_load > 90:
-    print(f"{ros.system.identity}'s CPU > 90%")
+    ros.logger.log_message(f"{ros.system.identity}'s CPU > 90%", logging.WARN)
 
 # Print all interface name
 for interface in ros.interface():
@@ -44,7 +47,7 @@ for interface in ros.interface():
 queues = ros.queue.simple(name="Hotspot")
 if len(queues) == 1:
     queue = queues[0]
-    print(f"Usage {queue.bytes}")
+    ros.logger.log_message(f"Usage {queue.bytes}")
 
 # Adding new /simple/queue
 from ros.queue import SimpleQueue
