@@ -43,7 +43,7 @@ class BaseRos:
     filename: str = "rest"
     url: str = ""
     _loglevel: int = logging.INFO
-    _logger: SysLogger = None
+    _logger: SysLogger = SysLogger(__name__, _loglevel)
 
     def __attrs_post_init__(self) -> None:
         if not self.server.endswith("/"):
