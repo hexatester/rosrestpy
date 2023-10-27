@@ -1,4 +1,4 @@
-__version__ = "0.11.2"
+__version__ = "0.12.0"
 from .inteface import InterfaceModule
 from .ip import IPModule
 from .mpls import MPLSModule
@@ -11,11 +11,12 @@ from .user import UserModule
 
 from .error import Error
 from .log import Log
-
+from .logger import SysLogger
 
 from .ros import Ros
 
 __all__ = [
+    "SysLogger",
     "Error",
     "InterfaceModule",
     "IPModule",

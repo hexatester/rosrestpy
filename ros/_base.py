@@ -6,7 +6,8 @@ if TYPE_CHECKING:
     from ros.ros import Ros
 
 from ._utils import clean_before_put
-
+from .logger import SysLogger
+import logging
 
 @define
 class BaseModule:
@@ -55,9 +56,23 @@ class BaseProps(Generic[PR]):
     _delete: bool = True
     _write: bool = True
     _read: bool = True
+    _loglevel: logging = None #logging.INFO
+    _logger: SysLogger = None #SysLogger(__name__.lower(), _loglevel)
 
     def __call__(self, **kwds: Any) -> List[PR]:
         return self.print(**kwds)
+
+#    @property
+#    def logger(self):
+        return self._logger.syslogger
+
+#    @property
+#    def loglevel(self):
+        return self._logger.loglevel
+
+#    @loglevel.setter
+#    def loglevel(self, loglevel: logging):
+#        self._logger.loglevel = loglevel
 
     @staticmethod
     def _getid(o: PR):
@@ -93,7 +108,7 @@ class BaseProps(Generic[PR]):
 
     def remove(self, o: PR):
         assert self._write, "Not writeable"
-        self.ros.session.delete(self.filename + f"/{self._getid(o)}")
+        self.ros.delete_as(self.filename + f"/{self._getid(o)}")
 
     def set(self, o: PR, nw: Dict[str, Any]):
         assert self._write, "Not writeable"
