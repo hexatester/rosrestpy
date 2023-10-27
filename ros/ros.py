@@ -42,6 +42,7 @@ class BaseRos:
     secure: object = False
     filename: str = "rest"
     url: str = ""
+    # Logger Instance
     _loglevel: int = logging.INFO
     _logger: SysLogger = SysLogger(__name__, _loglevel)
 
@@ -57,8 +58,6 @@ class BaseRos:
 
     @property
     def logger(self):
-        if not self._logger:
-            self._logger = SysLogger(self.__class__.__name__, self._loglevel)
         return self._logger
 
     @property
@@ -81,13 +80,15 @@ class BaseRos:
 
         response.raise_for_status()
 
-    def log_apistatus(self, data: object) -> bool:
+    def log_apistatus(self, data: object) -> Any:
         """
         API errors could be considered soft
         """
         if data and "error" in data:
-            self.logger.log_message(_converter.structure(data, Error), logging.WARN)
-            return True
+            status = _converter.structure(data, Error)
+            self.logger.log_message(status, logging.WARN)
+            return status
+
         return False
 
     def get_as(self, filename: str, cl: Type[T], filters: Dict[str, Any] = None) -> T:
