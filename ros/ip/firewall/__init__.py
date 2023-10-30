@@ -55,6 +55,7 @@ class IPFirewallModule:
 
 
 __all__ = [
+    "IPAddressList",
     "IPConnection",
     "IPFirewallFilter",
     "IPFirewallMangle",

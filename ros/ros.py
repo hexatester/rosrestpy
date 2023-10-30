@@ -4,10 +4,14 @@ except ImportError:
     import json  # type: ignore[no-redef]
 from attr import define
 from requests import Session
+from requests.exceptions import ConnectionError, HTTPError
 from requests.auth import HTTPBasicAuth
 from typing import Any, Dict, List, Type, TypeVar
 
+import logging
+
 from . import (
+    SysLogger,
     InterfaceModule,
     IPModule,
     MPLSModule,
@@ -35,9 +39,12 @@ class BaseRos:
     username: str
     password: str
     session: Session = Session()
-    secure: bool = False
+    secure: object = False
     filename: str = "rest"
     url: str = ""
+    # Logger Instance
+    _loglevel: int = logging.INFO
+    _logger: SysLogger = SysLogger(__name__, _loglevel)
 
     def __attrs_post_init__(self) -> None:
         if not self.server.endswith("/"):
@@ -47,6 +54,42 @@ class BaseRos:
         self.session.verify = self.secure
         self.password = ""
         self.url = self.server + self.filename
+        self.logger.new_session()
+
+    @property
+    def logger(self):
+        return self._logger
+
+    @property
+    def loglevel(self):
+        return self.logger.loglevel
+
+    @loglevel.setter
+    def loglevel(self, loglevel: int):
+        self._loglevel = loglevel
+        self.logger.syslogger.setLevel(loglevel)
+
+    def log_request(self, url: str, filename: str):
+        self.logger.log_message(f'API Call: {url + filename}', logging.INFO)
+
+    def log_httpstatus(self, response: object = None):
+        if response.request:
+            self.logger.log_message(f'HTTP Request: {response.request}', logging.DEBUG)
+        if response:
+            self.logger.log_message(f'HTTP Status: {response.status_code}', logging.DEBUG)
+
+        response.raise_for_status()
+
+    def log_apistatus(self, data: object) -> Any:
+        """
+        API errors could be considered soft
+        """
+        status = False
+        if data and "error" in data:
+            status = _converter.structure(data, Error)
+            self.logger.log_message(f'API status {status}', logging.WARN)
+
+        return status
 
     def get_as(self, filename: str, cl: Type[T], filters: Dict[str, Any] = None) -> T:
         """To get the records.
@@ -63,27 +106,74 @@ class BaseRos:
         Returns:
             T: Object of cl
         """
-        res = self.session.get(
-            self.url + filename,
-            params=clean_filters(filters),
-            verify=self.secure,
-        )
-        odata = json.loads(res.text)
-        data: Any = clean_data(odata)
-        if data and "error" in data:
-            raise _converter.structure(data, Error)
+        odata: Any = None
+        data: Any = []
         try:
-            return _converter.structure(data, cl)
+            self.log_request(self.url, filename)
+            res = self.session.get(
+                self.url + filename,
+                params=clean_filters(filters),
+                verify=self.secure,
+            )
+
+            odata = res.json()
+            data = clean_data(odata)
+            status = self.log_apistatus(data)
+            if status:
+                return status
+
+            self.log_httpstatus(res)
+
+        except (ConnectionError, HTTPError) as e:
+            self.logger.log_message(e, logging.ERROR)
+            return  None
         except Exception as e:
+            self.logger.log_message(e, logging.CRITICAL)
             raise e
 
-    def post_as(
-        self,
-        filename: str,
-        cl: Type[T],
-        json_: Any = None,
-        data: Any = None,
-    ) -> T:
+        return _converter.structure(data, cl)
+
+    def delete_as(self, filename: str, json_: Any = None, data: Any = None) -> Any:
+        """To delete the records.
+
+        Args:
+            filename (str): Path
+            json_ (Any, optional): data to be sent in json format. Defaults to None.
+            data (Any, optional): data to be sent in form format. Defaults to None.
+
+        Raises:
+            _converter.structure: Error parser
+            e: Exception
+
+        Returns:
+            None
+        """
+        odata: Any = None
+        data: Any = []
+        try:
+            self.log_request(self.url, filename)
+            res = self.session.delete(self.url + filename)
+
+            if res.text:
+                odata = res.json()
+                data = clean_data(odata)
+
+            status = self.log_apistatus(data)
+            if status:
+                return status
+
+            self.log_httpstatus(res)
+
+        except (ConnectionError, HTTPError) as e:
+            self.logger.log_message(e, logging.ERROR)
+            return False
+        except Exception as e:
+            self.logger.log_message(e, logging.CRITICAL)
+            raise e
+
+        return True
+
+    def post_as(self, filename: str,  cl: Type[T], json_: Any = None, data: Any = None) -> T:
         """Universal method to get access to all console commands.
 
         Args:
@@ -98,24 +188,33 @@ class BaseRos:
         Returns:
             T: Object of cl
         """
-        res = self.session.post(
-            self.url + filename,
-            data=data,
-            json=json_,
-        )
-        odata = json.loads(res.text)
-        data = clean_data(odata)
-        if data and "error" in data:
-            raise _converter.structure(data, Error)
+        odata: str = None
+        data: Any = []
+        try:
+            self.log_request(self.url, filename)
+            res = self.session.post(
+                self.url + filename,
+                data=data,
+                json=json_,
+            )
+            odata = res.json()
+            data = clean_data(odata)
+            status = self.log_apistatus(data)
+            if status:
+                return status
+
+            self.log_httpstatus(res)
+
+        except (ConnectionError, HTTPError) as e:
+            self.logger.log_message(e, logging.ERROR)
+            return
+        except Exception as e:
+            self.logger.log_message(e, logging.CRITICAL)
+            raise e
+
         return _converter.structure(data, cl)
 
-    def patch_as(
-        self,
-        filename: str,
-        cl: Type[T],
-        json_: Any = None,
-        data: Any = None,
-    ) -> T:
+    def patch_as(self, filename: str, cl: Type[T], json_: Any = None, data: Any = None) -> T:
         """To update a single record.
 
         Args:
@@ -130,24 +229,34 @@ class BaseRos:
         Returns:
             T: Object of cl
         """
-        res = self.session.patch(
-            self.url + filename,
-            data=data,
-            json=json_,
-        )
-        odata = json.loads(res.text)
-        data = clean_data(odata)
-        if data and "error" in data:
-            raise _converter.structure(data, Error)
+        odata: str = None
+        data: Any = []
+        try:
+            self.log_request(self.url, filename)
+            res = self.session.patch(
+                self.url + filename,
+                data=data,
+                json=json_,
+            )
+
+            odata = res.json()
+            data = clean_data(odata)
+            status = self.log_apistatus(data)
+            if status:
+                return status
+
+            self.log_httpstatus(res)
+
+        except (ConnectionError, HTTPError) as e:
+            self.logger.log_message(e, logging.ERROR)
+            return
+        except Exception as e:
+            self.logger.log_message(e, logging.CRITICAL)
+            raise e
+
         return _converter.structure(data, cl)
 
-    def put_as(
-        self,
-        filename: str,
-        cl: Type[T],
-        json_: Any = None,
-        data: Any = None,
-    ) -> T:
+    def put_as(self, filename: str, cl: Type[T], json_: Any = None, data: Any = None) -> T:
         """To create a new record.
 
         Args:
@@ -162,15 +271,31 @@ class BaseRos:
         Returns:
             T: Object of cl
         """
-        res = self.session.put(
-            self.url + filename,
-            data=data,
-            json=json_,
-        )
-        odata = json.loads(res.text)
-        data = clean_data(odata)
-        if data and "error" in data:
-            raise _converter.structure(data, Error)
+        odata: str = None
+        data: Any = []
+        try:
+            self.log_request(self.url, filename)
+            res = self.session.put(
+                self.url + filename,
+                data=data,
+                json=json_,
+            )
+
+            odata = res.json()
+            data = clean_data(odata)
+            status = self.log_apistatus(data)
+            if status:
+                return status
+
+            self.log_httpstatus(res)
+
+        except (ConnectionError, HTTPError) as e:
+            self.logger.log_message(e, logging.ERROR)
+            return
+        except Exception as e:
+            self.logger.log_message(e, logging.CRITICAL)
+            raise e
+
         return _converter.structure(data, cl)
 
 
