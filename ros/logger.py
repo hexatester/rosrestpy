@@ -89,7 +89,7 @@ class SysLogger:
 
 	@property
 	def console_format(self) -> str:
-		return '%(asctime)s | %(name)s.%(module)-12s | %(levelname)s - %(message)s'
+		return '%(asctime)s | %(name)s.%(module)-10s | %(levelname)s - %(message)s'
 
 	@property
 	def syslog_format(self) -> str:

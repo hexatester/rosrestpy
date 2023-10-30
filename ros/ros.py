@@ -52,7 +52,7 @@ class BaseRos:
         # Authentication to the REST API is performed via HTTP Basic Auth.
         self.session.auth = HTTPBasicAuth(self.username, self.password)
         self.session.verify = self.secure
-        # self.password = ""
+        self.password = ""
         self.url = self.server + self.filename
         self.logger.new_session()
 
@@ -84,12 +84,12 @@ class BaseRos:
         """
         API errors could be considered soft
         """
+        status = False
         if data and "error" in data:
             status = _converter.structure(data, Error)
-            self.logger.log_message(status, logging.WARN)
-            return status
+            self.logger.log_message(f'API status {status}', logging.WARN)
 
-        return False
+        return status
 
     def get_as(self, filename: str, cl: Type[T], filters: Dict[str, Any] = None) -> T:
         """To get the records.
@@ -118,21 +118,22 @@ class BaseRos:
 
             odata = res.json()
             data = clean_data(odata)
-            if self.log_apistatus(data):
-                return
+            status = self.log_apistatus(data)
+            if status:
+                return status
 
             self.log_httpstatus(res)
 
         except (ConnectionError, HTTPError) as e:
             self.logger.log_message(e, logging.ERROR)
-            return
+            return  None
         except Exception as e:
             self.logger.log_message(e, logging.CRITICAL)
             raise e
 
         return _converter.structure(data, cl)
 
-    def delete_as(self, filename: str, json_: Any = None, data: Any = None) -> bool:
+    def delete_as(self, filename: str, json_: Any = None, data: Any = None) -> Any:
         """To delete the records.
 
         Args:
@@ -157,8 +158,9 @@ class BaseRos:
                 odata = res.json()
                 data = clean_data(odata)
 
-            if self.log_apistatus(data):
-                return False
+            status = self.log_apistatus(data)
+            if status:
+                return status
 
             self.log_httpstatus(res)
 
@@ -197,8 +199,9 @@ class BaseRos:
             )
             odata = res.json()
             data = clean_data(odata)
-            if self.log_apistatus(data):
-                return
+            status = self.log_apistatus(data)
+            if status:
+                return status
 
             self.log_httpstatus(res)
 
@@ -238,8 +241,9 @@ class BaseRos:
 
             odata = res.json()
             data = clean_data(odata)
-            if self.log_apistatus(data):
-                return
+            status = self.log_apistatus(data)
+            if status:
+                return status
 
             self.log_httpstatus(res)
 
@@ -279,8 +283,9 @@ class BaseRos:
 
             odata = res.json()
             data = clean_data(odata)
-            if self.log_apistatus(data):
-                return
+            status = self.log_apistatus(data)
+            if status:
+                return status
 
             self.log_httpstatus(res)
 
