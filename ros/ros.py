@@ -1,8 +1,10 @@
+import logging
+
 try:
     import ujson as json
 except ImportError:
     import json  # type: ignore[no-redef]
-from attr import define
+from attr import define, fields_dict
 from requests import Session
 from requests.auth import HTTPBasicAuth
 from typing import Any, Dict, List, Type, TypeVar
@@ -27,6 +29,7 @@ from ._utils import clean_data, clean_filters, make_converter
 _converter = make_converter()
 
 T = TypeVar("T", bound=object)
+logger = logging.getLogger(__name__)
 
 
 @define
@@ -38,6 +41,7 @@ class BaseRos:
     secure: bool = False
     filename: str = "rest"
     url: str = ""
+    check_props: bool = False
 
     def __attrs_post_init__(self) -> None:
         if not self.server.endswith("/"):
@@ -47,6 +51,17 @@ class BaseRos:
         self.session.verify = self.secure
         self.password = ""
         self.url = self.server + self.filename
+
+    def check(self, data: Any, cl: Type[T]):
+        if not isinstance(data, dict):
+            return
+        keys = list()
+        for key in data:
+            if key not in fields_dict(cl):
+                keys.append(key)
+        if keys:
+            logger.debug(f"{keys} not in {cl} with data={data}")
+            return
 
     def get_as(self, filename: str, cl: Type[T], filters: Dict[str, Any] = None) -> T:
         """To get the records.
@@ -70,6 +85,8 @@ class BaseRos:
         )
         odata = json.loads(res.text)
         data: Any = clean_data(odata)
+        if self.check_props:
+            self.check(data, cl)
         if data and "error" in data:
             raise _converter.structure(data, Error)
         try:
