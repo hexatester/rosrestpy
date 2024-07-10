@@ -7,8 +7,8 @@ class BFDConfiguration:
     interfaces: str = None
     addresses: str = None
     address_list: str = None
-    min_rx: float = None
-    min_tx: float = None
+    min_rx: str = None
+    min_tx: str = None
     multiplier: int = None
     comment: str = None
     disabled: bool = False
