@@ -55,6 +55,10 @@ test_queue = ros.queue.simple(name="Test")[0]
 new_test_queue = ros.queue.simple.set(test_queue, {"comment": "Test comment"})
 print(new_test_queue)
 
+# Deleting /simple/queue
+test_queue = ros.queue.simple(name="Test")[0]
+ros.queue.simple.delete(test_queue)
+
 # Using /tool/bandwith-test
 bw_tests = ros.tool.bandwith_test("172.16.0.1", "3s", "admin", direction="both")
 result_bw_test = bw_tests[-1]
