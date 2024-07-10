@@ -23,6 +23,11 @@ class DNS:
     servers: str
     use_doh_server: str
     verify_doh_cert: bool
+    address_list_extra_time: str = None
+    doh_max_concurrent_queries: int = None
+    doh_max_server_connections: int = None
+    doh_timeout: str = None
+    vrf: str = None
     _ros: Optional["Ros"] = None
 
     def cache(self, **kwds) -> List[DNSCache]:

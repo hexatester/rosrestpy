@@ -20,3 +20,4 @@ class Resource:
     cpu_frequency: int = None
     write_sect_since_reboot: int = None
     write_sect_total: int = None
+    factory_software: str = None

@@ -7,3 +7,4 @@ class PPPAAA:
     interim_update: str
     use_circuit_id_in_nas_port_id: bool
     use_radius: bool
+    enable_ipv6_accounting: bool = None

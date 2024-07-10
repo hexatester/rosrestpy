@@ -8,6 +8,7 @@ class Cloud:
     update_time: bool = None
     public_address: str = None
     status: str = None
+    back_to_home_vpn: str = None
 
     def __bool__(self) -> bool:
         return not self.ddns_enabled
