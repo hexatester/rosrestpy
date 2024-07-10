@@ -11,11 +11,12 @@ from .user import UserModule
 
 from .error import Error
 from .log import Log
-
+from .logger import SysLogger
 
 from .ros import Ros
 
 __all__ = [
+    "SysLogger",
     "Error",
     "InterfaceModule",
     "IPModule",
