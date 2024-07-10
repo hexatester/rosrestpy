@@ -93,7 +93,7 @@ class BaseProps(Generic[PR]):
 
     def remove(self, o: PR):
         assert self._write, "Not writeable"
-        self.ros.session.delete(self.filename + f"/{self._getid(o)}")
+        return self.ros.delete_as(self.filename + f"/{self._getid(o)}")
 
     def set(self, o: PR, nw: Dict[str, Any]):
         assert self._write, "Not writeable"

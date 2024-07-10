@@ -190,6 +190,10 @@ class BaseRos:
             raise _converter.structure(data, Error)
         return _converter.structure(data, cl)
 
+    def delete_as(self, filename: str):
+        res = self.session.delete(filename)
+        return res.ok
+
 
 class Ros(BaseRos):
     _interface: InterfaceModule = None
