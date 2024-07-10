@@ -1,3 +1,4 @@
+import logging
 import os
 from pytest import fixture
 from dotenv import load_dotenv
@@ -5,6 +6,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from ros import Ros
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 @fixture
@@ -24,4 +27,4 @@ def password():
 
 @fixture
 def ros(server: str, username: str, password: str):
-    return Ros(server, username, password)
+    return Ros(server, username, password, check_props=True)
